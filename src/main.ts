@@ -4,6 +4,8 @@ import { renderHero } from "@/sections/hero";
 import { renderAbout } from "@/sections/about";
 import { renderStations } from "@/sections/stations";
 import { renderSolutions } from "@/sections/solutions";
+import { renderCalculator } from "@/sections/calculator";
+import { renderCompareTeaser } from "@/sections/compareTeaser";
 import { renderProduct } from "@/sections/product";
 import { renderReviews } from "@/sections/reviews";
 import { renderRisk, renderQuizOverlay } from "@/sections/risk";
@@ -16,6 +18,7 @@ import { initProductCarousel } from "@/features/productCarousel";
 import { initReviewsCarousel } from "@/features/reviewsCarousel";
 import { initRiskQuiz } from "@/features/riskQuiz";
 import { initOcmMap } from "@/features/map/ocmMap";
+import { initCalculator } from "@/features/calculator";
 
 import { qs } from "@/lib/dom";
 
@@ -28,6 +31,8 @@ function bootstrap(): void {
     renderAbout(),
     renderStations(),
     renderSolutions(),
+    renderCalculator(),
+    renderCompareTeaser(),
     renderProduct(),
     renderReviews(),
     renderRisk(),
@@ -44,6 +49,7 @@ function bootstrap(): void {
   initReviewsCarousel();
   initRiskQuiz();
   initOcmMap();
+  initCalculator();
 }
 
 bootstrap();

@@ -1,0 +1,131 @@
+{
+  "currency": "TRY",
+  "lastUpdated": "2026-06-16T12:12:15+03:00",
+  "operators": [
+    {
+      "id": "trugo",
+      "name": "Trugo",
+      "url": "https://trugo.com.tr/price",
+      "source": "scraped",
+      "fetchedAt": "2026-06-16T12:11:37+03:00",
+      "tariffs": [
+        {
+          "type": "AC",
+          "label": "AC",
+          "pricePerKwh": 9.95
+        },
+        {
+          "type": "DC",
+          "label": "DC",
+          "pricePerKwh": 14.98
+        }
+      ]
+    },
+    {
+      "id": "zes",
+      "name": "ZES",
+      "url": "https://zes.net/tr/fiyatlandirma",
+      "source": "scraped",
+      "fetchedAt": "2026-06-16T12:11:43+03:00",
+      "tariffs": [
+        {
+          "type": "AC",
+          "label": "AC",
+          "pricePerKwh": 9.99
+        },
+        {
+          "type": "DC",
+          "label": "DC",
+          "pricePerKwh": 12.99
+        },
+        {
+          "type": "DC",
+          "label": "DC (hızlı)",
+          "pricePerKwh": 16.49
+        }
+      ]
+    },
+    {
+      "id": "voltrun",
+      "name": "Voltrun",
+      "url": "https://www.voltrun.com/tr/tarifeler",
+      "source": "scraped",
+      "fetchedAt": "2026-06-16T12:11:53+03:00",
+      "tariffs": [
+        {
+          "type": "AC",
+          "label": "AC",
+          "pricePerKwh": 9.9
+        },
+        {
+          "type": "DC",
+          "label": "DC",
+          "pricePerKwh": 12.9
+        }
+      ]
+    },
+    {
+      "id": "tesla",
+      "name": "Tesla Supercharger",
+      "url": "https://www.tesla.com/tr_tr/support/charging/supercharger/fees",
+      "source": "manual",
+      "fetchedAt": "2026-06-16T12:11:58+03:00",
+      "note": "Supercharger kWh fiyatı lokasyona/zamana göre değişir; manuel referans değerler.",
+      "tariffs": [
+        {
+          "type": "DC",
+          "label": "Supercharger (üye olmayan)",
+          "pricePerKwh": 11.5
+        },
+        {
+          "type": "DC",
+          "label": "Supercharger (üyelik)",
+          "pricePerKwh": 9.9
+        }
+      ]
+    },
+    {
+      "id": "shell",
+      "name": "Shell Recharge",
+      "url": "https://www.shell.com.tr/suruculer/shell-recharge-turkiye/fiyat-tarifesi.html",
+      "source": "scraped",
+      "fetchedAt": "2026-06-16T12:12:03+03:00",
+      "tariffs": [
+        {
+          "type": "AC",
+          "label": "AC",
+          "pricePerKwh": 11.99
+        },
+        {
+          "type": "DC",
+          "label": "DC",
+          "pricePerKwh": 13.5
+        },
+        {
+          "type": "DC",
+          "label": "DC (hızlı)",
+          "pricePerKwh": 15.99
+        }
+      ]
+    },
+    {
+      "id": "wat",
+      "name": "Wat Mobilite",
+      "url": "https://www.watmobilite.com/cozumler/kamusal-alanlar#guncel-fiyat-ve-tarifeler",
+      "source": "scraped",
+      "fetchedAt": "2026-06-16T12:12:08+03:00",
+      "tariffs": [
+        {
+          "type": "AC",
+          "label": "AC",
+          "pricePerKwh": 10.99
+        },
+        {
+          "type": "DC",
+          "label": "DC",
+          "pricePerKwh": 14.49
+        }
+      ]
+    }
+  ]
+}

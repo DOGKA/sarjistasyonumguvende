@@ -1,0 +1,261 @@
+/* ============================================ ARAÇ KARŞILAŞTIRMA (07) */
+.cmp{
+  padding:0 0 80px;
+  background:var(--paper);
+  min-height:100vh;
+  --ev-green:#15a85a;
+  --ev-green-ink:#0c7a40;
+  --ev-green-soft:#e9f7ef;
+  --ev-green-line:#c4e9d3;
+}
+
+/* ------------------------------------------------------------- üst nav */
+.cmp-nav{background:var(--black);color:#fff;}
+.cmp-nav__row{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding-top:22px;padding-bottom:22px;
+}
+.cmp-nav__logo{font-weight:700;font-size:16px;letter-spacing:-.02em;}
+.cmp-nav__links{display:flex;gap:6px;}
+.cmp-nav__links a{
+  font-size:13px;font-weight:500;opacity:.82;
+  padding:8px 14px;border-radius:30px;transition:.2s;
+}
+.cmp-nav__links a:hover{opacity:1;background:rgba(255,255,255,.1);}
+.cmp-nav__back{
+  font-size:13px;font-weight:600;
+  background:#fff;color:var(--black);
+  padding:10px 18px;border-radius:30px;
+  display:inline-flex;align-items:center;gap:8px;
+}
+
+/* -------------------------------------------------------------- başlık */
+.cmp .section-head{padding-top:34px;}
+.cmp__head{
+  display:grid;grid-template-columns:1.2fr 1fr;gap:40px;
+  align-items:flex-end;margin-bottom:30px;
+  padding-top:24px;border-top:1px solid var(--line);
+}
+.cmp__head h1{font-size:clamp(34px,5vw,62px);font-weight:700;letter-spacing:-.03em;}
+.cmp__head-sub{display:flex;flex-direction:column;gap:14px;padding-bottom:6px;}
+.cmp__head-sub p{max-width:460px;font-size:15px;color:var(--muted);}
+.cmp__updated{
+  font-size:12px;font-weight:600;color:var(--ink);
+  background:var(--white);border:1px solid var(--line);
+  border-radius:30px;padding:7px 14px;align-self:flex-start;
+}
+
+/* --------------------------------------------------------------- tablo */
+.cmp__board-wrap{
+  overflow-x:auto;
+  border:1px solid var(--line);border-radius:14px;
+  background:var(--white);
+  scrollbar-width:thin;
+}
+.cmp__board{min-width:760px;}
+.cmp__board-skeleton{padding:40px;font-size:14px;color:var(--muted);text-align:center;}
+
+.cmp__row{
+  display:grid;
+  grid-template-columns:minmax(170px,1.05fr) repeat(3,minmax(150px,1fr));
+  border-top:1px solid var(--line);
+}
+.cmp__row:first-child{border-top:none;}
+.cmp__row:nth-child(even){background:#fafafa;}
+
+/* başlık satırı (seçiciler) — koyu/neon hero şeridi */
+.cmp__row--head{
+  position:sticky;top:0;z-index:2;
+  background:
+    radial-gradient(120% 90% at 50% -10%,#1c241d 0%,#0d0f0e 55%),#0b0c0b;
+  border-bottom:1px solid #000;
+}
+.cmp__corner{
+  display:flex;flex-direction:column;justify-content:flex-end;gap:4px;
+  padding:18px 18px 18px;
+}
+.cmp__corner-title{font-size:14px;font-weight:700;color:#fff;}
+.cmp__corner-sub{font-size:11px;color:#8a8f88;}
+
+/* araç sütun kartı (koyu, cam efektli) */
+.cmp-col{
+  position:relative;
+  border-left:1px solid rgba(255,255,255,.07);
+  padding:16px 14px 16px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.cmp-col::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--accent,#5ad11d);
+  box-shadow:0 0 18px 1px var(--accent,#5ad11d);
+}
+.cmp-col.is-empty::before{opacity:.25;box-shadow:none;}
+
+/* sahne: araç görseli + menzil rozeti */
+.cmp-col__stage{
+  position:relative;
+  border-radius:14px;
+  background:
+    radial-gradient(80% 70% at 50% 30%,color-mix(in srgb,var(--accent) 26%,transparent) 0%,transparent 70%),
+    linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01));
+  border:1px solid rgba(255,255,255,.08);
+  padding:14px 12px 10px;overflow:hidden;
+}
+.cmp-col.is-empty .cmp-col__stage{filter:grayscale(1) brightness(.7);opacity:.7;}
+.cmp-col__car{width:100%;height:auto;display:block;}
+.cmp-col__car-body{stroke:var(--accent,#5ad11d);stroke-width:1.4;stroke-opacity:.55;}
+.cmp-col__car-glass{fill:rgba(255,255,255,.14);}
+.cmp-col__car-glow{fill:var(--accent,#5ad11d);opacity:.26;}
+.cmp-col__car-wheel circle{fill:#0a0a0a;stroke:rgba(255,255,255,.35);stroke-width:1.4;}
+.cmp-col__car-hub{fill:var(--accent,#5ad11d) !important;stroke:none !important;opacity:.85;}
+.cmp-col__stat{
+  position:absolute;left:12px;bottom:9px;
+  font-size:11px;color:#aeb3ab;
+}
+.cmp-col__stat b{font-size:15px;font-weight:700;color:#fff;letter-spacing:-.02em;}
+.cmp-col__stat--empty{color:#5a5f58;}
+
+.cmp-col__title{display:flex;flex-direction:column;gap:2px;min-height:38px;}
+.cmp-col__brand{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent,#5ad11d);}
+.cmp-col__brand--empty{color:#7d827b;}
+.cmp-col__model{font-size:15px;font-weight:600;color:#fff;line-height:1.2;}
+.cmp-col__model--empty{font-size:12px;font-weight:500;color:#8a8f88;}
+.cmp-col__clear{
+  position:absolute;top:10px;right:10px;z-index:3;
+  width:24px;height:24px;border-radius:50%;cursor:pointer;
+  border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.4);color:#cfd3cc;
+  font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center;
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:.15s;
+}
+.cmp-col__clear:hover{border-color:var(--accent,#5ad11d);color:#fff;}
+.cmp-col__selects{display:flex;flex-direction:column;gap:8px;}
+.cmp-col__select{position:relative;}
+.cmp-col__select::after{
+  content:"";position:absolute;right:12px;top:50%;width:6px;height:6px;
+  border-right:1.5px solid #9aa097;border-bottom:1.5px solid #9aa097;
+  transform:translateY(-65%) rotate(45deg);pointer-events:none;
+}
+.cmp-col__select select{
+  width:100%;font-family:inherit;font-size:13px;color:#fff;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:9px;
+  padding:9px 30px 9px 11px;cursor:pointer;appearance:none;-webkit-appearance:none;
+  transition:.15s;
+}
+.cmp-col__select select option{color:#161616;background:#fff;}
+.cmp-col__select select:focus{outline:none;border-color:var(--accent,#5ad11d);}
+.cmp-col__select select:disabled{color:#8a8f88;background:rgba(255,255,255,.03);cursor:not-allowed;}
+
+/* bölüm başlığı satırı */
+.cmp__group{
+  display:block;
+  background:var(--ink);
+  padding:9px 18px;
+}
+.cmp__group span{
+  font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;
+}
+
+/* özellik etiketi (sol sütun) */
+.cmp__label{
+  display:flex;flex-direction:column;gap:2px;justify-content:center;
+  padding:16px 18px;
+}
+.cmp__label-text{font-size:13px;font-weight:600;color:var(--ink);}
+.cmp__label-hint{font-size:11px;color:var(--muted);}
+.cmp__label-unit{font-size:11px;color:var(--muted);font-weight:600;}
+
+/* değer hücresi */
+.cmp__cell{
+  position:relative;
+  border-left:1px solid var(--line);
+  padding:16px 14px;
+  display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;
+}
+.cmp__val{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-.02em;}
+.cmp__unit{font-size:11px;color:var(--muted);font-weight:600;}
+.cmp__cell--na{color:var(--muted);}
+.cmp__na{font-size:18px;color:#bdbdb6;}
+.cmp__cell--text{align-items:center;}
+.cmp__text{font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.35;}
+
+.cmp__cell.is-best{background:var(--ev-green-soft);}
+.cmp__cell.is-best .cmp__val{color:var(--ev-green-ink);}
+.cmp__best-tag{
+  flex-basis:100%;
+  font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--ev-green-ink);
+}
+
+/* açıklama */
+.cmp__legend{
+  display:flex;align-items:center;gap:9px;
+  margin-top:18px;font-size:12.5px;color:var(--muted);
+}
+.cmp__legend-dot{
+  width:13px;height:13px;border-radius:4px;flex:none;
+  background:var(--ev-green-soft);border:1px solid var(--ev-green-line);
+}
+
+@media (max-width:760px){
+  .cmp__head{grid-template-columns:1fr;gap:18px;align-items:flex-start;}
+  .cmp-nav__links{display:none;}
+}
+
+/* ============================== KARŞILAŞTIRMA YÖNLENDİRME (ana sayfa) */
+.cmp-teaser{background:var(--black);color:#fff;padding:72px 0;border-bottom:1px solid var(--line-dark);}
+.cmp-teaser__inner{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;
+}
+.cmp-teaser__eyebrow{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--quiz-accent);margin-bottom:18px;
+}
+.cmp-teaser__text h2{font-weight:800;font-size:clamp(30px,4.4vw,54px);letter-spacing:-.035em;line-height:1;}
+.cmp-teaser__text p{font-size:15px;color:var(--muted-dark);margin:18px 0 28px;max-width:460px;}
+.cmp-teaser__btns{display:flex;gap:14px;flex-wrap:wrap;}
+
+.cmp-teaser__cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative;
+  padding:18px 0 0;
+  transition:transform .2s;
+}
+.cmp-teaser__cards:hover{transform:translateY(-3px);}
+
+/* her kart = 3D sahne çerçevesi: marka/model üstte, araç altta zemine basar */
+.cmp-teaser__card{
+  position:relative;
+  min-height:218px;
+  display:flex;flex-direction:column;justify-content:flex-start;
+  padding:14px;border-radius:15px;
+  border:1px solid var(--line-dark);
+  /* üst aksan — kartın yuvarlatılmış köşelerini radius ile tam sarar */
+  border-top:3px solid var(--accent);
+  background:
+    radial-gradient(82% 46% at 50% 84%,color-mix(in srgb,var(--accent) 32%,transparent) 0%,transparent 74%),
+    linear-gradient(180deg,#1f1f1f,#101010);
+  overflow:visible;
+}
+.cmp-teaser__card--mid{transform:translateY(-16px);}
+
+/* araç görseli — altta, zemine düz basar; önü çerçeveden hafif taşar */
+.cmp-teaser__car{
+  position:absolute;z-index:2;pointer-events:none;
+  width:224%;height:auto;
+  left:50%;bottom:-27%;
+  transform:translateX(-52%);
+  filter:drop-shadow(0 13px 12px rgba(0,0,0,.62));
+}
+.cmp-teaser__card--mid .cmp-teaser__car{width:230%;bottom:-28%;}
+
+/* metin bloğu — kartın üstünde */
+.cmp-teaser__meta{
+  position:relative;z-index:3;
+  display:flex;flex-direction:column;gap:3px;
+}
+.cmp-teaser__meta span{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);}
+.cmp-teaser__meta b{font-size:18px;font-weight:700;line-height:1.1;}
+.cmp-teaser__meta i{font-size:13px;color:var(--muted-dark);font-style:normal;}
+
+@media (max-width:860px){
+  .cmp-teaser__inner{grid-template-columns:1fr;gap:34px;}
+}

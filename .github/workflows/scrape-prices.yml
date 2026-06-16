@@ -1,0 +1,43 @@
+name: Günlük şarj tarifesi güncelle
+
+on:
+  schedule:
+    # Her gün 05:00 UTC (Türkiye saati ~08:00)
+    - cron: "0 5 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Depoyu çek
+        uses: actions/checkout@v4
+
+      - name: Node kurulumu
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Bağımlılıkları yükle
+        run: npm ci
+
+      - name: Playwright tarayıcısını kur
+        run: npx playwright install --with-deps chromium
+
+      - name: Tarifeleri topla
+        run: node scripts/scrape-prices.mjs
+
+      - name: Değişiklikleri commit'le
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ -n "$(git status --porcelain public/data/charging-prices.json)" ]]; then
+            git add public/data/charging-prices.json
+            git commit -m "chore: günlük şarj tarifeleri güncellendi"
+            git push
+          else
+            echo "Değişiklik yok."
+          fi

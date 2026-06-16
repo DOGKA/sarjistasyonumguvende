@@ -209,21 +209,82 @@ export function initRiskQuiz(): void {
     const score = computeScore();
     const r = resultFor(score);
     setProgress("");
+
+    // ---- Dairesel gösterge geometrisi (270° yay, alt tarafta boşluk) ----
+    const R = 86;            // yay yarıçapı
+    const CX = 110;
+    const C = 2 * Math.PI * R;
+    const SWEEP = 0.75;      // 270° / 360°
+    const trackLen = C * SWEEP;
+    const progLen = C * SWEEP * (score / 100);
+
+    // İbre (knob) konumu
+    const knobDeg = 135 + (score / 100) * 270;
+    const knobRad = (knobDeg * Math.PI) / 180;
+    const kx = CX + R * Math.cos(knobRad);
+    const ky = CX + R * Math.sin(knobRad);
+
+    // Kadran çentikleri
+    const TICKS = 41;
+    let ticksHtml = "";
+    for (let i = 0; i < TICKS; i++) {
+      const a = (135 + (i / (TICKS - 1)) * 270) * (Math.PI / 180);
+      const major = i % 5 === 0;
+      const r1 = 103;
+      const r2 = major ? 94 : 98;
+      const x1 = CX + r1 * Math.cos(a);
+      const y1 = CX + r1 * Math.sin(a);
+      const x2 = CX + r2 * Math.cos(a);
+      const y2 = CX + r2 * Math.sin(a);
+      const lit = i / (TICKS - 1) <= score / 100;
+      ticksHtml +=
+        `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" ` +
+        `class="quiz-gauge__tick${lit ? " is-lit" : ""}${major ? " is-major" : ""}" />`;
+    }
+
+    const gaugeSvg =
+      `<svg class="quiz-gauge__svg" viewBox="0 0 220 220" aria-hidden="true">` +
+        `<defs>` +
+          `<linearGradient id="qg-grad" x1="0%" y1="100%" x2="100%" y2="0%">` +
+            `<stop offset="0%" stop-color="currentColor" stop-opacity=".35"/>` +
+            `<stop offset="100%" stop-color="currentColor" stop-opacity="1"/>` +
+          `</linearGradient>` +
+          `<filter id="qg-glow" x="-50%" y="-50%" width="200%" height="200%">` +
+            `<feGaussianBlur stdDeviation="4" result="b"/>` +
+            `<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>` +
+          `</filter>` +
+        `</defs>` +
+        `<g class="quiz-gauge__ticks">${ticksHtml}</g>` +
+        `<circle class="quiz-gauge__track" cx="${CX}" cy="${CX}" r="${R}" ` +
+          `transform="rotate(135 ${CX} ${CX})" stroke-dasharray="${trackLen.toFixed(1)} ${(C - trackLen).toFixed(1)}" />` +
+        `<circle class="quiz-gauge__prog" cx="${CX}" cy="${CX}" r="${R}" ` +
+          `transform="rotate(135 ${CX} ${CX})" stroke-dasharray="0 ${C.toFixed(1)}" filter="url(#qg-glow)" />` +
+        `<circle class="quiz-gauge__knob" cx="${kx.toFixed(1)}" cy="${ky.toFixed(1)}" r="9" />` +
+      `</svg>`;
+
     stage!.innerHTML =
       `<div class="quiz-result ${r.cls}">` +
-        `<div class="quiz-result__badge">${r.emoji}</div>` +
-        `<div class="quiz-result__score">${score}<small>/100</small></div>` +
+        `<div class="quiz-gauge">` +
+          gaugeSvg +
+          `<div class="quiz-gauge__center">` +
+            `<span class="quiz-gauge__eyebrow">Risk Skoru</span>` +
+            `<span class="quiz-result__score">${score}<small>/100</small></span>` +
+          `</div>` +
+        `</div>` +
         `<div class="quiz-result__label">${esc(r.label)}</div>` +
         `<p class="quiz-result__desc">${esc(r.desc)}</p>` +
-        '<div class="quiz-result__bar"><i style="width:0%;background:currentColor;"></i></div>' +
         '<div class="quiz-result__actions">' +
           '<a class="quiz-result__cta" href="#iletisim">Teklif Al</a>' +
           '<button type="button" class="quiz-result__retry">Testi Tekrarla</button>' +
         "</div>" +
       "</div>";
 
-    const bar = stage!.querySelector<HTMLElement>(".quiz-result__bar i");
-    if (bar) requestAnimationFrame(() => (bar.style.width = `${score}%`));
+    const prog = stage!.querySelector<SVGCircleElement>(".quiz-gauge__prog");
+    if (prog) {
+      requestAnimationFrame(() => {
+        prog.style.strokeDasharray = `${progLen.toFixed(1)} ${(C - progLen).toFixed(1)}`;
+      });
+    }
 
     const cta = stage!.querySelector<HTMLAnchorElement>(".quiz-result__cta");
     if (cta) cta.addEventListener("click", () => closeQuiz());

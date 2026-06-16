@@ -1,0 +1,127 @@
+{
+  "note": "Türkiye'de yaygın 11 marka ve elektrikli model verileri. Değerler üretici WLTP/teknik özelliklerinden derlenmiştir; bilgilendirme amaçlıdır. Yeni model eklemek için ilgili markanın 'models' dizisine bir kayıt ekleyin.",
+  "brands": [
+    {
+      "id": "tesla",
+      "name": "Tesla",
+      "color": "#e31937",
+      "models": [
+        { "model": "Model 3", "variant": "RWD", "usableBatteryKwh": 57.5, "avgConsumptionKwhPer100km": 13.2, "maxAcKw": 11, "maxDcKw": 170, "wltpRangeKm": 513, "powerHp": 283, "accel0to100s": 6.1, "topSpeedKph": 201, "weightKg": 1765, "trunkL": 561, "seats": 5, "screenInch": 15.4, "camera": "Çevre (8 kamera)", "adas": "Autopilot (S2)" },
+        { "model": "Model 3", "variant": "Long Range AWD", "usableBatteryKwh": 75, "avgConsumptionKwhPer100km": 14, "maxAcKw": 11, "maxDcKw": 250, "wltpRangeKm": 629, "powerHp": 498, "accel0to100s": 4.4, "topSpeedKph": 201, "weightKg": 1844, "trunkL": 561, "seats": 5, "screenInch": 15.4, "camera": "Çevre (8 kamera)", "adas": "Autopilot (S2)" },
+        { "model": "Model 3", "variant": "Performance", "usableBatteryKwh": 75, "avgConsumptionKwhPer100km": 15.5, "maxAcKw": 11, "maxDcKw": 250, "wltpRangeKm": 528, "powerHp": 460, "accel0to100s": 3.1, "topSpeedKph": 262, "weightKg": 1851, "trunkL": 561, "seats": 5, "screenInch": 15.4, "camera": "Çevre (8 kamera)", "adas": "Autopilot (S2)" },
+        { "model": "Model Y", "variant": "RWD", "usableBatteryKwh": 60, "avgConsumptionKwhPer100km": 15, "maxAcKw": 11, "maxDcKw": 170, "wltpRangeKm": 455, "powerHp": 299, "accel0to100s": 6.9, "topSpeedKph": 217, "weightKg": 1909, "trunkL": 854, "seats": 5, "screenInch": 15.4, "camera": "Çevre (8 kamera)", "adas": "Autopilot (S2)" },
+        { "model": "Model Y", "variant": "Long Range AWD", "usableBatteryKwh": 75, "avgConsumptionKwhPer100km": 16, "maxAcKw": 11, "maxDcKw": 250, "wltpRangeKm": 565, "powerHp": 514, "accel0to100s": 5.0, "topSpeedKph": 217, "weightKg": 1979, "trunkL": 854, "seats": 5, "screenInch": 15.4, "camera": "Çevre (8 kamera)", "adas": "Autopilot (S2)" },
+        { "model": "Model S", "variant": "Dual Motor", "usableBatteryKwh": 95, "avgConsumptionKwhPer100km": 18, "maxAcKw": 11, "maxDcKw": 250, "wltpRangeKm": 634, "powerHp": 670, "accel0to100s": 3.2, "topSpeedKph": 250, "weightKg": 2069, "trunkL": 793, "seats": 5, "screenInch": 17, "camera": "Çevre (8 kamera)", "adas": "Autopilot (S2)" },
+        { "model": "Model X", "variant": "Dual Motor", "usableBatteryKwh": 95, "avgConsumptionKwhPer100km": 20, "maxAcKw": 11, "maxDcKw": 250, "wltpRangeKm": 576, "powerHp": 670, "accel0to100s": 3.9, "topSpeedKph": 250, "weightKg": 2455, "trunkL": 1060, "seats": 6, "screenInch": 17, "camera": "Çevre (8 kamera)", "adas": "Autopilot (S2)" }
+      ]
+    },
+    {
+      "id": "togg",
+      "name": "Togg",
+      "color": "#0a2c5a",
+      "models": [
+        { "model": "T10X", "variant": "V1 RWD Standart Menzil", "usableBatteryKwh": 52.4, "avgConsumptionKwhPer100km": 14.5, "maxAcKw": 11, "maxDcKw": 180, "wltpRangeKm": 314, "powerHp": 218, "accel0to100s": 7.6, "topSpeedKph": 185, "weightKg": 1700, "trunkL": 350, "seats": 5, "screenInch": 12.3, "camera": "360°", "adas": "Seviye 2" },
+        { "model": "T10X", "variant": "V2 RWD Uzun Menzil", "usableBatteryKwh": 88.5, "avgConsumptionKwhPer100km": 15.5, "maxAcKw": 11, "maxDcKw": 180, "wltpRangeKm": 523, "powerHp": 218, "accel0to100s": 7.8, "topSpeedKph": 185, "weightKg": 1800, "trunkL": 350, "seats": 5, "screenInch": 12.3, "camera": "360°", "adas": "Seviye 2" },
+        { "model": "T10F", "variant": "V2 RWD Uzun Menzil", "usableBatteryKwh": 88.5, "avgConsumptionKwhPer100km": 14.8, "maxAcKw": 11, "maxDcKw": 180, "wltpRangeKm": 600, "powerHp": 218, "accel0to100s": 7.9, "topSpeedKph": 185, "weightKg": 1850, "trunkL": 400, "seats": 5, "screenInch": 12.3, "camera": "360°", "adas": "Seviye 2" }
+      ]
+    },
+    {
+      "id": "bmw",
+      "name": "BMW",
+      "color": "#1c69d4",
+      "models": [
+        { "model": "i4", "variant": "eDrive40", "usableBatteryKwh": 81.3, "avgConsumptionKwhPer100km": 16.1, "maxAcKw": 11, "maxDcKw": 205, "wltpRangeKm": 590, "powerHp": 340, "accel0to100s": 5.7, "topSpeedKph": 190, "weightKg": 2125, "trunkL": 470, "seats": 5, "screenInch": 14.9, "camera": "Geri / 360° (ops)", "adas": "Driving Assistant (S2)" },
+        { "model": "i4", "variant": "M50", "usableBatteryKwh": 81.3, "avgConsumptionKwhPer100km": 18, "maxAcKw": 11, "maxDcKw": 205, "wltpRangeKm": 521, "powerHp": 544, "accel0to100s": 3.9, "topSpeedKph": 225, "weightKg": 2290, "trunkL": 470, "seats": 5, "screenInch": 14.9, "camera": "360°", "adas": "Driving Assistant Pro" },
+        { "model": "iX1", "variant": "eDrive20", "usableBatteryKwh": 64.7, "avgConsumptionKwhPer100km": 16.3, "maxAcKw": 11, "maxDcKw": 130, "wltpRangeKm": 475, "powerHp": 204, "accel0to100s": 8.6, "topSpeedKph": 170, "weightKg": 1960, "trunkL": 490, "seats": 5, "screenInch": 10.7, "camera": "Geri / 360° (ops)", "adas": "Driving Assistant" },
+        { "model": "iX3", "variant": "", "usableBatteryKwh": 74, "avgConsumptionKwhPer100km": 18.5, "maxAcKw": 11, "maxDcKw": 150, "wltpRangeKm": 460, "powerHp": 286, "accel0to100s": 6.8, "topSpeedKph": 180, "weightKg": 2185, "trunkL": 510, "seats": 5, "screenInch": 12.3, "camera": "360°", "adas": "Driving Assistant" },
+        { "model": "i5", "variant": "eDrive40", "usableBatteryKwh": 81.2, "avgConsumptionKwhPer100km": 16.5, "maxAcKw": 11, "maxDcKw": 205, "wltpRangeKm": 582, "powerHp": 340, "accel0to100s": 6.0, "topSpeedKph": 193, "weightKg": 2195, "trunkL": 490, "seats": 5, "screenInch": 14.9, "camera": "360°", "adas": "Driving Assistant Pro" },
+        { "model": "iX", "variant": "xDrive50", "usableBatteryKwh": 105.2, "avgConsumptionKwhPer100km": 19.8, "maxAcKw": 11, "maxDcKw": 195, "wltpRangeKm": 630, "powerHp": 523, "accel0to100s": 4.6, "topSpeedKph": 200, "weightKg": 2585, "trunkL": 500, "seats": 5, "screenInch": 14.9, "camera": "360°", "adas": "Driving Assistant Pro" }
+      ]
+    },
+    {
+      "id": "mercedes",
+      "name": "Mercedes-Benz",
+      "color": "#00a19b",
+      "models": [
+        { "model": "EQA", "variant": "250", "usableBatteryKwh": 66.5, "avgConsumptionKwhPer100km": 16.5, "maxAcKw": 11, "maxDcKw": 100, "wltpRangeKm": 526, "powerHp": 190, "accel0to100s": 8.6, "topSpeedKph": 160, "weightKg": 2040, "trunkL": 340, "seats": 5, "screenInch": 10.25, "camera": "Geri / 360° (ops)", "adas": "Sürüş Asistanı (S2)" },
+        { "model": "EQB", "variant": "300 4MATIC", "usableBatteryKwh": 66.5, "avgConsumptionKwhPer100km": 18.5, "maxAcKw": 11, "maxDcKw": 100, "wltpRangeKm": 423, "powerHp": 228, "accel0to100s": 8.0, "topSpeedKph": 160, "weightKg": 2175, "trunkL": 495, "seats": 7, "screenInch": 10.25, "camera": "360°", "adas": "Sürüş Asistanı (S2)" },
+        { "model": "EQE", "variant": "350+", "usableBatteryKwh": 90.6, "avgConsumptionKwhPer100km": 16.5, "maxAcKw": 11, "maxDcKw": 170, "wltpRangeKm": 639, "powerHp": 292, "accel0to100s": 6.4, "topSpeedKph": 210, "weightKg": 2355, "trunkL": 430, "seats": 5, "screenInch": 12.8, "camera": "360°", "adas": "Sürüş Asistanı Plus" },
+        { "model": "EQS", "variant": "450+", "usableBatteryKwh": 107.8, "avgConsumptionKwhPer100km": 16.5, "maxAcKw": 11, "maxDcKw": 200, "wltpRangeKm": 717, "powerHp": 333, "accel0to100s": 6.2, "topSpeedKph": 210, "weightKg": 2480, "trunkL": 610, "seats": 5, "screenInch": 17.7, "camera": "360°", "adas": "Sürüş Asistanı Plus" }
+      ]
+    },
+    {
+      "id": "audi",
+      "name": "Audi",
+      "color": "#bb0a30",
+      "models": [
+        { "model": "Q4 e-tron", "variant": "45", "usableBatteryKwh": 77, "avgConsumptionKwhPer100km": 17, "maxAcKw": 11, "maxDcKw": 175, "wltpRangeKm": 533, "powerHp": 286, "accel0to100s": 6.7, "topSpeedKph": 180, "weightKg": 2135, "trunkL": 520, "seats": 5, "screenInch": 11.6, "camera": "Geri / 360° (ops)", "adas": "Adaptif (S2)" },
+        { "model": "Q6 e-tron", "variant": "quattro", "usableBatteryKwh": 94.9, "avgConsumptionKwhPer100km": 17.5, "maxAcKw": 11, "maxDcKw": 270, "wltpRangeKm": 625, "powerHp": 388, "accel0to100s": 5.9, "topSpeedKph": 210, "weightKg": 2345, "trunkL": 526, "seats": 5, "screenInch": 11.9, "camera": "360°", "adas": "Adaptive cruise assist" },
+        { "model": "Q8 e-tron", "variant": "55 quattro", "usableBatteryKwh": 106, "avgConsumptionKwhPer100km": 21, "maxAcKw": 11, "maxDcKw": 170, "wltpRangeKm": 582, "powerHp": 408, "accel0to100s": 5.6, "topSpeedKph": 200, "weightKg": 2585, "trunkL": 569, "seats": 5, "screenInch": 10.1, "camera": "360°", "adas": "Adaptive cruise assist" },
+        { "model": "e-tron GT", "variant": "quattro", "usableBatteryKwh": 93.4, "avgConsumptionKwhPer100km": 19.6, "maxAcKw": 11, "maxDcKw": 270, "wltpRangeKm": 488, "powerHp": 530, "accel0to100s": 4.1, "topSpeedKph": 245, "weightKg": 2340, "trunkL": 405, "seats": 4, "screenInch": 10.1, "camera": "360°", "adas": "Adaptive cruise assist" }
+      ]
+    },
+    {
+      "id": "volkswagen",
+      "name": "Volkswagen",
+      "color": "#001e50",
+      "models": [
+        { "model": "ID.3", "variant": "Pro", "usableBatteryKwh": 58, "avgConsumptionKwhPer100km": 15.5, "maxAcKw": 11, "maxDcKw": 120, "wltpRangeKm": 426, "powerHp": 204, "accel0to100s": 7.3, "topSpeedKph": 160, "weightKg": 1812, "trunkL": 385, "seats": 5, "screenInch": 12.0, "camera": "Geri / 360° (ops)", "adas": "Travel Assist (S2)" },
+        { "model": "ID.4", "variant": "Pro", "usableBatteryKwh": 77, "avgConsumptionKwhPer100km": 16.5, "maxAcKw": 11, "maxDcKw": 135, "wltpRangeKm": 550, "powerHp": 286, "accel0to100s": 6.7, "topSpeedKph": 180, "weightKg": 2124, "trunkL": 543, "seats": 5, "screenInch": 12.9, "camera": "360°", "adas": "Travel Assist (S2)" },
+        { "model": "ID.5", "variant": "Pro", "usableBatteryKwh": 77, "avgConsumptionKwhPer100km": 16, "maxAcKw": 11, "maxDcKw": 135, "wltpRangeKm": 547, "powerHp": 286, "accel0to100s": 6.7, "topSpeedKph": 180, "weightKg": 2150, "trunkL": 549, "seats": 5, "screenInch": 12.9, "camera": "360°", "adas": "Travel Assist (S2)" },
+        { "model": "ID.7", "variant": "Pro", "usableBatteryKwh": 77, "avgConsumptionKwhPer100km": 14.5, "maxAcKw": 11, "maxDcKw": 175, "wltpRangeKm": 621, "powerHp": 286, "accel0to100s": 6.5, "topSpeedKph": 180, "weightKg": 2170, "trunkL": 532, "seats": 5, "screenInch": 15.0, "camera": "360°", "adas": "Travel Assist (S2)" }
+      ]
+    },
+    {
+      "id": "hyundai",
+      "name": "Hyundai",
+      "color": "#002c5f",
+      "models": [
+        { "model": "Ioniq 5", "variant": "77.4 kWh", "usableBatteryKwh": 74, "avgConsumptionKwhPer100km": 16.7, "maxAcKw": 11, "maxDcKw": 233, "wltpRangeKm": 507, "powerHp": 229, "accel0to100s": 7.4, "topSpeedKph": 185, "weightKg": 2020, "trunkL": 527, "seats": 5, "screenInch": 12.3, "camera": "Çevre görüş (SVM)", "adas": "HDA 2 (S2)" },
+        { "model": "Ioniq 6", "variant": "77.4 kWh", "usableBatteryKwh": 74, "avgConsumptionKwhPer100km": 13.9, "maxAcKw": 11, "maxDcKw": 233, "wltpRangeKm": 614, "powerHp": 229, "accel0to100s": 7.4, "topSpeedKph": 185, "weightKg": 2020, "trunkL": 401, "seats": 5, "screenInch": 12.3, "camera": "Çevre görüş (SVM)", "adas": "HDA 2 (S2)" },
+        { "model": "Kona Electric", "variant": "65.4 kWh", "usableBatteryKwh": 64.8, "avgConsumptionKwhPer100km": 14.7, "maxAcKw": 11, "maxDcKw": 102, "wltpRangeKm": 514, "powerHp": 218, "accel0to100s": 7.8, "topSpeedKph": 172, "weightKg": 1773, "trunkL": 466, "seats": 5, "screenInch": 12.3, "camera": "Çevre görüş (SVM)", "adas": "SmartSense (S2)" }
+      ]
+    },
+    {
+      "id": "kia",
+      "name": "Kia",
+      "color": "#05141f",
+      "models": [
+        { "model": "EV6", "variant": "77.4 kWh", "usableBatteryKwh": 74, "avgConsumptionKwhPer100km": 16.5, "maxAcKw": 11, "maxDcKw": 233, "wltpRangeKm": 528, "powerHp": 229, "accel0to100s": 7.3, "topSpeedKph": 185, "weightKg": 2015, "trunkL": 490, "seats": 5, "screenInch": 12.3, "camera": "Çevre görüş (SVM)", "adas": "HDA 2 (S2)" },
+        { "model": "Niro EV", "variant": "", "usableBatteryKwh": 64.8, "avgConsumptionKwhPer100km": 15.5, "maxAcKw": 11, "maxDcKw": 80, "wltpRangeKm": 460, "powerHp": 204, "accel0to100s": 7.8, "topSpeedKph": 167, "weightKg": 1757, "trunkL": 475, "seats": 5, "screenInch": 10.25, "camera": "Geri / 360° (ops)", "adas": "DriveWise (S2)" },
+        { "model": "EV9", "variant": "99.8 kWh", "usableBatteryKwh": 99.8, "avgConsumptionKwhPer100km": 20.2, "maxAcKw": 11, "maxDcKw": 210, "wltpRangeKm": 563, "powerHp": 384, "accel0to100s": 6.0, "topSpeedKph": 200, "weightKg": 2620, "trunkL": 333, "seats": 7, "screenInch": 12.3, "camera": "Çevre görüş (SVM)", "adas": "HDA 2 (S2)" }
+      ]
+    },
+    {
+      "id": "renault",
+      "name": "Renault",
+      "color": "#ffcc33",
+      "models": [
+        { "model": "Megane E-Tech", "variant": "EV60", "usableBatteryKwh": 60, "avgConsumptionKwhPer100km": 16.1, "maxAcKw": 22, "maxDcKw": 130, "wltpRangeKm": 470, "powerHp": 220, "accel0to100s": 7.4, "topSpeedKph": 160, "weightKg": 1711, "trunkL": 440, "seats": 5, "screenInch": 12.0, "camera": "Geri / 360° (ops)", "adas": "Seviye 2" },
+        { "model": "Scenic E-Tech", "variant": "Long Range", "usableBatteryKwh": 87, "avgConsumptionKwhPer100km": 16.5, "maxAcKw": 22, "maxDcKw": 150, "wltpRangeKm": 625, "powerHp": 220, "accel0to100s": 7.9, "topSpeedKph": 170, "weightKg": 1842, "trunkL": 545, "seats": 5, "screenInch": 12.0, "camera": "360°", "adas": "Seviye 2" },
+        { "model": "5 E-Tech", "variant": "Comfort Range", "usableBatteryKwh": 52, "avgConsumptionKwhPer100km": 14.5, "maxAcKw": 11, "maxDcKw": 100, "wltpRangeKm": 410, "powerHp": 150, "accel0to100s": 8.0, "topSpeedKph": 150, "weightKg": 1450, "trunkL": 326, "seats": 5, "screenInch": 10.1, "camera": "Geri görüş", "adas": "Seviye 2" },
+        { "model": "Zoe", "variant": "R135", "usableBatteryKwh": 52, "avgConsumptionKwhPer100km": 17.2, "maxAcKw": 22, "maxDcKw": 50, "wltpRangeKm": 395, "powerHp": 135, "accel0to100s": 9.5, "topSpeedKph": 140, "weightKg": 1502, "trunkL": 338, "seats": 5, "screenInch": 9.3, "camera": "Geri görüş", "adas": "Şerit takip" }
+      ]
+    },
+    {
+      "id": "byd",
+      "name": "BYD",
+      "color": "#d40028",
+      "models": [
+        { "model": "Atto 3", "variant": "Extended Range", "usableBatteryKwh": 60.5, "avgConsumptionKwhPer100km": 16, "maxAcKw": 11, "maxDcKw": 88, "wltpRangeKm": 420, "powerHp": 204, "accel0to100s": 7.3, "topSpeedKph": 160, "weightKg": 1750, "trunkL": 440, "seats": 5, "screenInch": 12.8, "camera": "360°", "adas": "DiPilot (S2)" },
+        { "model": "Dolphin", "variant": "Comfort", "usableBatteryKwh": 60.4, "avgConsumptionKwhPer100km": 15.9, "maxAcKw": 11, "maxDcKw": 88, "wltpRangeKm": 427, "powerHp": 204, "accel0to100s": 7.0, "topSpeedKph": 160, "weightKg": 1658, "trunkL": 345, "seats": 5, "screenInch": 12.8, "camera": "360°", "adas": "DiPilot (S2)" },
+        { "model": "Seal", "variant": "AWD Excellence", "usableBatteryKwh": 82.5, "avgConsumptionKwhPer100km": 16.5, "maxAcKw": 11, "maxDcKw": 150, "wltpRangeKm": 520, "powerHp": 530, "accel0to100s": 3.8, "topSpeedKph": 180, "weightKg": 2185, "trunkL": 400, "seats": 5, "screenInch": 15.6, "camera": "360°", "adas": "DiPilot (S2)" },
+        { "model": "Han", "variant": "AWD", "usableBatteryKwh": 85.4, "avgConsumptionKwhPer100km": 18, "maxAcKw": 11, "maxDcKw": 120, "wltpRangeKm": 521, "powerHp": 517, "accel0to100s": 3.9, "topSpeedKph": 180, "weightKg": 2200, "trunkL": 410, "seats": 5, "screenInch": 15.6, "camera": "360°", "adas": "DiPilot (S2)" }
+      ]
+    },
+    {
+      "id": "chery",
+      "name": "Chery",
+      "color": "#b3121a",
+      "models": [
+        { "model": "Omoda E5", "variant": "Long Range", "usableBatteryKwh": 61, "avgConsumptionKwhPer100km": 15.5, "maxAcKw": 9.5, "maxDcKw": 80, "wltpRangeKm": 430, "powerHp": 204, "accel0to100s": 7.6, "topSpeedKph": 170, "weightKg": 1710, "trunkL": 378, "seats": 5, "screenInch": 12.3, "camera": "360°", "adas": "Seviye 2" },
+        { "model": "Omoda 5 EV", "variant": "Comfort", "usableBatteryKwh": 61, "avgConsumptionKwhPer100km": 16, "maxAcKw": 9.5, "maxDcKw": 80, "wltpRangeKm": 405, "powerHp": 204, "accel0to100s": 7.8, "topSpeedKph": 170, "weightKg": 1710, "trunkL": 378, "seats": 5, "screenInch": 12.3, "camera": "360°", "adas": "Seviye 2" },
+        { "model": "Jaecoo 7 PHEV", "variant": "SHS", "usableBatteryKwh": 18.3, "avgConsumptionKwhPer100km": 17, "maxAcKw": 6.6, "maxDcKw": 40, "wltpRangeKm": 90, "powerHp": 347, "accel0to100s": 8.5, "topSpeedKph": 180, "weightKg": 1740, "trunkL": 500, "seats": 5, "screenInch": 13.2, "camera": "540° (ops)", "adas": "Seviye 2" }
+      ]
+    }
+  ]
+}

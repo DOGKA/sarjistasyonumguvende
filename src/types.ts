@@ -69,3 +69,88 @@ export interface OcmPoi {
   AddressInfo?: OcmAddressInfo;
   Connections?: OcmConnection[];
 }
+
+/* ----------------------------------------------- ŞARJ MALİYET HESAPLAYICI */
+
+/** Tek bir elektrikli araç modeli (public/data/ev-models.json). */
+export interface EvModel {
+  model: string;
+  /** Donanım/varyant (opsiyonel). */
+  variant?: string;
+  /** Kullanılabilir batarya kapasitesi (kWh). */
+  usableBatteryKwh: number;
+  /** Ortalama tüketim (kWh / 100 km). */
+  avgConsumptionKwhPer100km: number;
+  /** Maksimum AC şarj gücü (kW). */
+  maxAcKw: number;
+  /** Maksimum DC şarj gücü (kW). */
+  maxDcKw: number;
+  /** WLTP menzili (km) — biliniyorsa. */
+  wltpRangeKm?: number;
+
+  /* --- Genişletilmiş teknik özellikler (opsiyonel, karşılaştırma için) --- */
+  /** Motor gücü (HP / PS). */
+  powerHp?: number;
+  /** 0–100 km/s hızlanma (saniye). */
+  accel0to100s?: number;
+  /** Maksimum hız (km/s). */
+  topSpeedKph?: number;
+  /** Boş ağırlık (kg). */
+  weightKg?: number;
+  /** Bagaj hacmi (L). */
+  trunkL?: number;
+  /** Koltuk sayısı. */
+  seats?: number;
+  /** Merkez multimedya ekran boyutu (inç). */
+  screenInch?: number;
+  /** Kamera sistemi açıklaması (örn. "360°"). */
+  camera?: string;
+  /** Sürüş asistanı / ADAS açıklaması. */
+  adas?: string;
+}
+
+/** Bir marka ve modelleri. */
+export interface EvBrand {
+  id: string;
+  name: string;
+  /** Marka vurgu rengi (chip rozeti için). */
+  color?: string;
+  models: EvModel[];
+}
+
+/** ev-models.json kök yapısı. */
+export interface EvModelsData {
+  note?: string;
+  brands: EvBrand[];
+}
+
+/** Şarj tarifesi tipi. */
+export type TariffType = "AC" | "DC";
+
+/** Operatöre ait tek bir tarife kademesi. */
+export interface ChargingTariff {
+  type: TariffType;
+  label: string;
+  pricePerKwh: number;
+}
+
+/** Veri kaynağı: canlı çekildi mi yoksa manuel mi girildi. */
+export type PriceSource = "scraped" | "manual";
+
+/** Tek bir şarj operatörü ve tarifeleri. */
+export interface ChargingOperator {
+  id: string;
+  name: string;
+  url: string;
+  source: PriceSource;
+  fetchedAt?: string;
+  note?: string;
+  tariffs: ChargingTariff[];
+}
+
+/** charging-prices.json kök yapısı. */
+export interface ChargingPricesData {
+  currency: string;
+  lastUpdated: string;
+  operators: ChargingOperator[];
+}

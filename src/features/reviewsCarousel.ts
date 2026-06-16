@@ -1,31 +1,17 @@
 import { qsOpt } from "@/lib/dom";
 import { reviews } from "@/data/reviews";
+import type { Review } from "@/types";
 
-/** Müşteri yorumları carousel (05 — Referanslar). */
+const GAP = 22; // .reviews__track gap (px) — CSS ile eşleşmeli
+const VISIBLE = 2; // aynı anda görünen sütun (her sütun 2 kart)
+
+/** Müşteri yorumları — 2'li (2×2) kayan carousel (05 — Referanslar). */
 export function initReviewsCarousel(): void {
   const grid = qsOpt<HTMLDivElement>("#reviewsGrid");
-  if (!grid) return;
+  const track = qsOpt<HTMLDivElement>("#reviewsTrack");
+  if (!grid || !track) return;
 
-  const review = grid.querySelector<HTMLElement>(".rcard--review");
-  const mini = qsOpt<HTMLElement>("#rvMini");
-  const avatar = qsOpt<HTMLImageElement>("#rvAvatar");
-  const name = qsOpt<HTMLElement>("#rvName");
-  const title = qsOpt<HTMLElement>("#rvTitle");
-  const stars = qsOpt<HTMLElement>("#rvStars");
-  const quote = qsOpt<HTMLElement>("#rvQuote");
-  const miniName = qsOpt<HTMLElement>("#rvMiniName");
-  const miniTitle = qsOpt<HTMLElement>("#rvMiniTitle");
-  const miniAvatar = qsOpt<HTMLImageElement>("#rvMiniAvatar");
   const nextBtn = qsOpt<HTMLButtonElement>("#rvNext");
-
-  if (!review || !mini || !avatar || !name || !title || !stars || !quote ||
-      !miniName || !miniTitle || !miniAvatar) {
-    return;
-  }
-
-  const total = reviews.length;
-  let index = 0;
-  let timer: number | null = null;
 
   function starStr(s: number): string {
     const full = "★★★★★".slice(0, s);
@@ -33,33 +19,93 @@ export function initReviewsCarousel(): void {
     return full + (off ? `<span class="star--off">${"★★★★★".slice(0, off)}</span>` : "");
   }
 
-  function paint(): void {
-    const c = reviews[index];
-    const nx = reviews[(index + 1) % total];
-    avatar!.src = c.img;
-    name!.textContent = c.n;
-    title!.textContent = c.t;
-    stars!.innerHTML = starStr(c.s);
-    stars!.setAttribute("aria-label", `${c.s}/5`);
-    quote!.textContent = `“${c.q}”`;
-    miniName!.textContent = nx.n;
-    miniTitle!.textContent = nx.t;
-    miniAvatar!.src = nx.img;
+  function makeCard(r: Review): HTMLElement {
+    const el = document.createElement("article");
+    el.className = "rcard rcard--review";
+
+    const top = document.createElement("div");
+    top.className = "rcard__top";
+    const reviewer = document.createElement("div");
+    reviewer.className = "reviewer";
+    const img = document.createElement("img");
+    img.className = "avatar avatar--lg";
+    img.src = r.img;
+    img.alt = "Müşteri";
+    img.loading = "lazy";
+    const meta = document.createElement("div");
+    const name = document.createElement("strong");
+    name.textContent = r.n;
+    const title = document.createElement("small");
+    title.textContent = r.t;
+    meta.append(name, title);
+    reviewer.append(img, meta);
+    top.append(reviewer);
+
+    const stars = document.createElement("div");
+    stars.className = "stars";
+    stars.innerHTML = starStr(r.s);
+    stars.setAttribute("aria-label", `${r.s}/5`);
+
+    const quote = document.createElement("p");
+    quote.className = "rcard__quote";
+    quote.textContent = `“${r.q}”`;
+
+    el.append(top, stars, quote);
+    return el;
   }
 
-  function go(i: number): void {
-    index = (i + total) % total;
-    review!.classList.add("is-fading");
-    mini!.classList.add("is-fading");
-    window.setTimeout(() => {
-      paint();
-      review!.classList.remove("is-fading");
-      mini!.classList.remove("is-fading");
-    }, 320);
+  function makePair(a: Review, b: Review | undefined): HTMLElement {
+    const pair = document.createElement("div");
+    pair.className = "reviews__pair";
+    pair.appendChild(makeCard(a));
+    if (b) pair.appendChild(makeCard(b));
+    return pair;
   }
+
+  // Yorumları 2'şerli sütunlara böl
+  const pairs: HTMLElement[] = [];
+  for (let i = 0; i < reviews.length; i += 2) {
+    pairs.push(makePair(reviews[i], reviews[i + 1]));
+  }
+  const realCount = pairs.length;
+  if (!realCount) return;
+
+  pairs.forEach((p) => track.appendChild(p));
+  // Sonsuz döngü için baştaki sütunları sona klonla
+  for (let i = 0; i < Math.min(VISIBLE, realCount); i++) {
+    track.appendChild(pairs[i].cloneNode(true));
+  }
+
+  let index = 0;
+  let step = 0; // bir sütunun kayma mesafesi (genişlik + gap)
+  let timer: number | null = null;
+
+  function measure(): void {
+    const first = track!.firstElementChild as HTMLElement | null;
+    step = first ? first.getBoundingClientRect().width + GAP : 0;
+  }
+
+  function apply(animate: boolean): void {
+    track!.style.transition = animate
+      ? "transform .55s cubic-bezier(.22,.61,.36,1)"
+      : "none";
+    track!.style.transform = `translate3d(${-index * step}px,0,0)`;
+  }
+
+  function next(): void {
+    index += 1;
+    apply(true);
+  }
+
+  track.addEventListener("transitionend", () => {
+    if (index >= realCount) {
+      index -= realCount;
+      apply(false);
+    }
+  });
 
   function start(): void {
-    timer = window.setInterval(() => go(index + 1), 5000);
+    timer = window.setInterval(next, 5000);
   }
   function stop(): void {
     if (timer !== null) {
@@ -67,12 +113,27 @@ export function initReviewsCarousel(): void {
       timer = null;
     }
   }
+  function advance(): void {
+    next();
+    stop();
+    start();
+  }
 
-  if (nextBtn) nextBtn.addEventListener("click", () => { go(index + 1); stop(); start(); });
-  mini.addEventListener("click", () => { go(index + 1); stop(); start(); });
+  if (nextBtn) nextBtn.addEventListener("click", advance);
   grid.addEventListener("mouseenter", stop);
   grid.addEventListener("mouseleave", start);
+  window.addEventListener("resize", () => {
+    measure();
+    apply(false);
+  });
 
-  paint();
+  // Görseller yüklendikçe ölçüyü tazele (yükseklik/oturma değişebilir)
+  measure();
+  apply(false);
+  window.requestAnimationFrame(() => {
+    measure();
+    apply(false);
+  });
+
   start();
 }
