@@ -1,0 +1,47 @@
+/* ====================================================== REVIEWS (05) */
+.reviews{background:var(--gray-bg);padding:70px 0;}
+.reviews__head{
+  display:grid;grid-template-columns:0.4fr 1fr;gap:30px;
+  align-items:center;padding:20px 0 50px;
+}
+.reviews__head h2{font-size:clamp(34px,5vw,60px);font-weight:600;}
+.reviews__grid{
+  display:grid;grid-template-columns:1.1fr 1.2fr 0.42fr;gap:22px;
+  align-items:stretch;
+}
+.rcard{background:var(--white);border-radius:12px;padding:26px;display:flex;flex-direction:column;min-height:430px;}
+.rcard__top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:auto;}
+.rcard__tag{font-size:11px;color:var(--muted);}
+.dots--mini .dot{width:6px;height:6px;background:#d0d0cc;}
+.dots--mini .dot.is-active{background:#222;width:6px;}
+.rate{margin:34px 0;}
+.rate__num{font-size:48px;font-weight:700;letter-spacing:-.03em;display:block;margin-bottom:14px;}
+.rate__num small{font-size:20px;color:var(--muted);font-weight:500;}
+.rate p{font-size:13px;color:var(--muted);max-width:320px;}
+.rcard__bottom{display:flex;align-items:center;justify-content:space-between;}
+.avatars{display:flex;align-items:center;}
+.avatar{width:30px;height:30px;border-radius:50%;border:2px solid #fff;background:var(--mockup);}
+.avatars .avatar:not(:first-child){margin-left:-10px;}
+.avatars__count{
+  margin-left:8px;font-size:11px;font-weight:700;
+  background:var(--black);color:#fff;border-radius:30px;padding:5px 9px;
+}
+.reviewer{display:flex;align-items:center;gap:12px;}
+.reviewer strong{display:block;font-size:14px;}
+.reviewer small{font-size:12px;color:var(--muted);}
+.avatar--lg{width:42px;height:42px;}
+.stars{color:#e8a000;font-size:15px;letter-spacing:2px;margin:30px 0 16px;}
+.rcard__quote{font-size:14.5px;color:#333;margin-bottom:26px;line-height:1.6;}
+.rcard--mini{justify-content:space-between;padding:26px 20px;}
+.reviewer--v{display:flex;flex-direction:column;gap:2px;align-items:flex-start;}
+.reviewer--v strong{font-size:14px;}
+.reviewer--v small{color:var(--muted);font-size:12px;}
+.reviewer--v .avatar{margin-top:auto;width:40px;height:40px;}
+
+/* Reviews — avatar görselleri + carousel */
+img.avatar{object-fit:cover;}
+.reviewer .avatar--lg{object-fit:cover;}
+.stars .star--off{color:#d8d8d2;}
+#rvNext{background:none;border:none;cursor:pointer;font:inherit;padding:0;}
+.rcard--review,.rcard--mini{transition:opacity .35s ease;}
+.rcard--review.is-fading,.rcard--mini.is-fading{opacity:0;}

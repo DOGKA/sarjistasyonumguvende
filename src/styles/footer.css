@@ -1,0 +1,12 @@
+/* ====================================================== FOOTER */
+.footer{background:var(--black);color:var(--muted-dark);padding:0 0 40px;border-top:1px solid var(--line-dark);}
+.footer__row{
+  display:grid;grid-template-columns:0.4fr 1fr;gap:40px;
+  align-items:stretch;font-size:13px;min-height:70px;
+}
+.footer__row > span{display:flex;align-items:center;}
+.footer__links{
+  display:flex;align-items:center;justify-content:flex-end;gap:30px;
+  border-left:1px solid var(--line-dark);padding-left:40px;
+}
+.footer__links a:hover{color:#fff;}

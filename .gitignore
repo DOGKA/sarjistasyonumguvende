@@ -1,15 +1,14 @@
 .DS_Store
 
-# Büyük kaynak medya dosyaları (sitede kullanılmıyor, GitHub 100MB limiti)
-*.mp4
-*.webm
+# Ortam değişkenleri / API anahtarları
+.env
+.env.*
+!.env.example
 
-# Kaynak dökümanlar
-*.docx
-*.pdf
+# Bağımlılıklar ve derleme çıktıları
+node_modules/
+dist/
+*.tsbuildinfo
 
-# Kök dizindeki gevşek görseller (gerekli olanlar site/assets içine kopyalandı)
-/*.jpg
-/*.jpeg
-/*.png
-/*.webp
+# Yerel kaynak materyaller (sitede kullanılmıyor)
+kaynaklar/
