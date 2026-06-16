@@ -115,6 +115,8 @@ export interface EvBrand {
   name: string;
   /** Marka vurgu rengi (chip rozeti için). */
   color?: string;
+  /** Marka logosu görsel yolu (şeffaf PNG). */
+  logo?: string;
   models: EvModel[];
 }
 

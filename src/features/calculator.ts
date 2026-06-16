@@ -117,9 +117,12 @@ export function initCalculator(): void {
       chip.dataset.id = b.id;
       const initials = b.name.replace(/[^A-Za-zÇĞİÖŞÜ]/g, "").slice(0, 2).toUpperCase();
       chip.style.setProperty("--chip", b.color || "#161616");
-      chip.innerHTML =
-        `<span class="calc-chip__badge">${esc(initials)}</span>` +
-        `<span class="calc-chip__name">${esc(b.name)}</span>`;
+      const badge = b.logo
+        ? `<span class="calc-chip__badge calc-chip__badge--logo"><img src="${esc(b.logo)}" alt="${esc(
+            b.name
+          )} logo" loading="lazy" /></span>`
+        : `<span class="calc-chip__badge">${esc(initials)}</span>`;
+      chip.innerHTML = badge + `<span class="calc-chip__name">${esc(b.name)}</span>`;
       chip.addEventListener("click", () => selectBrand(b));
       els.brands!.appendChild(chip);
     });

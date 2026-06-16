@@ -65,6 +65,16 @@
   font-size:11px;font-weight:800;letter-spacing:.02em;color:#fff;
   background:var(--chip,#161616);
 }
+/* logo rozeti — küçük, açık zeminli kutu içinde ortalanmış marka logosu */
+.calc-chip__badge--logo{
+  background:#fff;border:1px solid var(--line);padding:4px;
+}
+.calc-chip__badge--logo img{
+  width:100%;height:100%;object-fit:contain;display:block;
+}
+.calc-chip.is-active .calc-chip__badge--logo{
+  background:#fff;border-color:transparent;
+}
 .calc-chip__name{
   font-size:12px;font-weight:600;color:var(--ink);
   white-space:nowrap;

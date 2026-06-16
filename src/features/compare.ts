@@ -312,29 +312,24 @@ export function initCompare(): void {
           : `<option value="">Önce marka seçin</option>`;
 
         const accent = brand?.color || "#5ad11d";
+        const visual =
+          brand?.logo && model
+            ? `<img class="cmp-col__logo" src="${esc(brand.logo)}" alt="${esc(
+                brand.name
+              )} logo" loading="lazy" />`
+            : CAR_SVG;
         const title = model
           ? `<span class="cmp-col__brand">${esc(brand!.name)}</span><span class="cmp-col__model">${esc(
               modelLabel(model)
             )}</span>`
           : `<span class="cmp-col__brand cmp-col__brand--empty">Araç ${i + 1}</span><span class="cmp-col__model cmp-col__model--empty">Karşılaştırmak için seçin</span>`;
 
-        const range =
-          model && model.wltpRangeKm
-            ? `<span class="cmp-col__stat"><b>${esc(num(model.wltpRangeKm, 0))}</b> km menzil</span>`
-            : `<span class="cmp-col__stat cmp-col__stat--empty">—</span>`;
-
-        const clear = brand
-          ? `<button type="button" class="cmp-col__clear" data-clear="${i}" aria-label="Aracı kaldır">×</button>`
-          : "";
-
         return /* html */ `
           <div class="cmp-col${model ? "" : " is-empty"}" role="columnheader" style="--accent:${esc(
             accent
           )}">
-            ${clear}
             <div class="cmp-col__stage">
-              ${CAR_SVG}
-              ${range}
+              ${visual}
             </div>
             <div class="cmp-col__title">${title}</div>
             <div class="cmp-col__selects">
