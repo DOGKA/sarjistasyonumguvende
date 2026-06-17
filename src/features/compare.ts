@@ -46,6 +46,8 @@ interface SpecDef {
   format?: (v: number) => string;
   /** Metinsel (kıyaslanmayan) özellik değeri. */
   text?: (m: EvModel) => string | null;
+  /** Evet/hayır özelliği — "Var" değeri yeşille vurgulanır. */
+  bool?: (m: EvModel) => boolean | null;
   /** Açıklama (opsiyonel). */
   hint?: string;
 }
@@ -75,6 +77,11 @@ const ROWS: Row[] = [
     better: "high",
     value: (m) => m.topSpeedKph ?? null,
     format: (v) => num(v, 0),
+  },
+  {
+    label: "Çekiş",
+    hint: "Tahrik tipi",
+    text: (m) => m.drivetrain ?? null,
   },
 
   { group: "Batarya & Şarj" },
@@ -137,8 +144,27 @@ const ROWS: Row[] = [
     value: (m) => (m.maxDcKw > 0 ? ((m.usableBatteryKwh * 0.7) / m.maxDcKw) * 60 : null),
     format: (v) => num(v, 0),
   },
+  {
+    label: "Şarj Soketi",
+    hint: "DC bağlantı",
+    text: (m) => m.socketType ?? null,
+  },
+  {
+    label: "Isı Pompası",
+    hint: "Kış menzili",
+    bool: (m) => m.heatPump ?? null,
+  },
+  {
+    label: "V2L",
+    hint: "Araçtan cihaz besleme",
+    bool: (m) => m.v2l ?? null,
+  },
 
   { group: "Boyut & Kullanım" },
+  {
+    label: "Kasa Tipi",
+    text: (m) => m.segment ?? null,
+  },
   {
     label: "Boş Ağırlık",
     unit: "kg",
@@ -158,6 +184,15 @@ const ROWS: Row[] = [
     unit: "kişi",
     value: (m) => m.seats ?? null,
     format: (v) => num(v, 0),
+  },
+
+  { group: "Güvenlik" },
+  {
+    label: "Euro NCAP",
+    hint: "Güvenlik yıldızı",
+    better: "high",
+    value: (m) => m.ncapStars ?? null,
+    format: (v) => "★".repeat(Math.round(v)) + "☆".repeat(Math.max(0, 5 - Math.round(v))),
   },
 
   { group: "Teknoloji & Konfor" },
@@ -361,9 +396,11 @@ export function initCompare(): void {
   }
 
   function renderSpecRow(spec: SpecDef, models: (EvModel | null)[]): string {
-    const cells = spec.text
-      ? renderTextCells(spec, models)
-      : renderNumberCells(spec, models);
+    const cells = spec.bool
+      ? renderBoolCells(spec, models)
+      : spec.text
+        ? renderTextCells(spec, models)
+        : renderNumberCells(spec, models);
 
     return /* html */ `
       <div class="cmp__row" role="row">
@@ -396,7 +433,21 @@ export function initCompare(): void {
           <div class="cmp__cell${isBest ? " is-best" : ""}" role="cell">
             <span class="cmp__val">${esc(fmt)}</span>
             ${spec.unit ? `<span class="cmp__unit">${esc(spec.unit)}</span>` : ""}
-            ${isBest ? '<span class="cmp__best-tag">En iyi</span>' : ""}
+          </div>`;
+      })
+      .join("");
+  }
+
+  function renderBoolCells(spec: SpecDef, models: (EvModel | null)[]): string {
+    return models
+      .map((m) => {
+        const val = m && spec.bool ? spec.bool(m) : null;
+        if (val == null) {
+          return `<div class="cmp__cell cmp__cell--na" role="cell"><span class="cmp__na">—</span></div>`;
+        }
+        return /* html */ `
+          <div class="cmp__cell cmp__cell--text${val ? " is-best" : ""}" role="cell">
+            <span class="cmp__text">${val ? "Var" : "Yok"}</span>
           </div>`;
       })
       .join("");

@@ -10,7 +10,7 @@ export function renderProduct(): string {
         </div>
         <div class="product__title">
           <h2>İhtiyacınıza Uygun<br />Teminat Paketleri</h2>
-          <span class="eyebrow eyebrow--light">04 &nbsp;·&nbsp; Teminatlar</span>
+          <span class="eyebrow eyebrow--light">02 &nbsp;·&nbsp; Teminatlar</span>
         </div>
       </div>
 

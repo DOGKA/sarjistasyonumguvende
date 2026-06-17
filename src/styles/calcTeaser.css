@@ -1,0 +1,56 @@
+/* ===================== MALİYET HESAPLAYICI YÖNLENDİRME (ana sayfa) (05) */
+.calc-teaser{
+  background:var(--black);color:#fff;
+  padding:72px 0;border-bottom:1px solid var(--line-dark);
+}
+.calc-teaser__inner{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;
+}
+
+/* ------------------------------------------------------------- sol metin */
+.calc-teaser__eyebrow{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--quiz-accent);margin-bottom:18px;
+}
+.calc-teaser__text h2{font-weight:800;font-size:clamp(30px,4.4vw,54px);letter-spacing:-.035em;line-height:1;}
+.calc-teaser__text p{font-size:15px;color:var(--muted-dark);margin:18px 0 28px;max-width:440px;}
+.calc-teaser__btns{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* --------------------------------------- sağ "rota kartı" (navigasyon ekranı) */
+.calc-teaser__card{
+  display:block;
+  background:#1c1c1e;
+  border:1px solid #2c2c2e;
+  border-radius:24px;
+  padding:30px 34px;
+  transition:transform .2s ease,border-color .2s ease;
+}
+.calc-teaser__card:hover{transform:translateY(-4px);border-color:#3a3a3c;}
+
+.calc-teaser__card-head{margin-bottom:30px;}
+.calc-teaser__card-title{
+  display:block;font-size:clamp(28px,3.4vw,40px);font-weight:600;
+  letter-spacing:-.02em;line-height:1.05;
+}
+.calc-teaser__card-sub{
+  display:flex;align-items:center;gap:10px;
+  margin-top:8px;font-size:18px;color:#8e8e93;font-weight:500;
+}
+/* zaman / şarj aralığı satırı */
+.calc-teaser__route{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:clamp(26px,3vw,34px);font-weight:400;color:#c7c7cc;
+  letter-spacing:-.01em;margin-bottom:18px;
+}
+
+/* ilerleme çubuğu + ok */
+.calc-teaser__bar{display:flex;align-items:center;height:40px;}
+.calc-teaser__bar-base{flex:1 1 auto;height:6px;border-radius:4px;background:#48484a;}
+.calc-teaser__arrow{width:42px;height:42px;flex:none;margin:0 -2px 0 -6px;}
+.calc-teaser__bar-seg{height:6px;background:var(--c);width:var(--w);flex:none;}
+.calc-teaser__bar-seg:last-child{border-radius:0 4px 4px 0;}
+
+@media (max-width:860px){
+  .calc-teaser__inner{grid-template-columns:1fr;gap:34px;}
+  .calc-teaser__card{padding:26px;}
+}

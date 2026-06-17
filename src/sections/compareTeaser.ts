@@ -18,7 +18,7 @@ export function renderCompareTeaser(): string {
               </span>
               Araçları Karşılaştır
             </a>
-            <a href="#hesaplayici" class="btn btn--ghost">
+            <a href="/hesaplayici.html" class="btn btn--ghost">
               <span class="btn__dot btn__dot--ghost" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
               </span>

@@ -76,9 +76,13 @@ export function initReviewsCarousel(): void {
     track.appendChild(pairs[i].cloneNode(true));
   }
 
+  const DURATION = 550; // .55s — apply() içindeki transition ile eşleşmeli
+
   let index = 0;
   let step = 0; // bir sütunun kayma mesafesi (genişlik + gap)
   let timer: number | null = null;
+  let animating = false; // tek seferde bir kaydırma — hızlı tıklamada taşmayı önler
+  let safety: number | null = null;
 
   function measure(): void {
     const first = track!.firstElementChild as HTMLElement | null;
@@ -92,16 +96,32 @@ export function initReviewsCarousel(): void {
     track!.style.transform = `translate3d(${-index * step}px,0,0)`;
   }
 
-  function next(): void {
-    index += 1;
-    apply(true);
-  }
-
-  track.addEventListener("transitionend", () => {
+  // Kaydırma bittiğinde: klon bölgesine ulaşıldıysa sıçramadan başa sar.
+  function settle(): void {
+    animating = false;
     if (index >= realCount) {
       index -= realCount;
       apply(false);
     }
+  }
+
+  function next(): void {
+    if (animating) return; // animasyon sürerken yeni tıklamayı yok say
+    index += 1;
+    animating = true;
+    apply(true);
+    // transitionend kaçırılırsa (sekme arka planı vb.) güvenlik ağı
+    if (safety !== null) clearTimeout(safety);
+    safety = window.setTimeout(settle, DURATION + 60);
+  }
+
+  track.addEventListener("transitionend", (e: TransitionEvent) => {
+    if (e.target !== track || e.propertyName !== "transform") return;
+    if (safety !== null) {
+      clearTimeout(safety);
+      safety = null;
+    }
+    settle();
   });
 
   function start(): void {

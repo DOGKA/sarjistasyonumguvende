@@ -195,12 +195,8 @@
 .cmp__text{font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.35;}
 
 .cmp__cell.is-best{background:var(--ev-green-soft);}
-.cmp__cell.is-best .cmp__val{color:var(--ev-green-ink);}
-.cmp__best-tag{
-  flex-basis:100%;
-  font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
-  color:var(--ev-green-ink);
-}
+.cmp__cell.is-best .cmp__val,
+.cmp__cell.is-best .cmp__text{color:var(--ev-green-ink);}
 
 /* açıklama */
 .cmp__legend{

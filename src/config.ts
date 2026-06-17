@@ -15,3 +15,12 @@ export const MAP_DEFAULT_ZOOM = 6;
 
 /** İletişim e-postası. */
 export const CONTACT_EMAIL = "info@sarjistasyonumguvende.com";
+
+/* ----------------------------------------------------------------- SUPABASE */
+
+/** Supabase proje URL'i (.env: VITE_SUPABASE_URL). */
+export const SUPABASE_URL: string = import.meta.env.VITE_SUPABASE_URL ?? "";
+
+/** Supabase anon (public) anahtarı (.env: VITE_SUPABASE_ANON_KEY). */
+export const SUPABASE_ANON_KEY: string =
+  import.meta.env.VITE_SUPABASE_ANON_KEY ?? "";

@@ -5,6 +5,8 @@ export function renderFooter(): string {
     <div class="container footer__row">
       <span>© 2025 Şarj İstasyonum Güvende</span>
       <div class="footer__links">
+        <a href="/iletisim.html">İletişim</a>
+        <a href="/#blog">Blog</a>
         <a href="#">Kullanım Koşulları</a>
         <a href="#">Gizlilik Politikası</a>
       </div>

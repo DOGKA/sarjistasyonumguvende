@@ -1,0 +1,153 @@
+import PageHeader from "@/components/PageHeader";
+import StatCard from "@/components/StatCard";
+import SetupNotice from "@/components/SetupNotice";
+import TrendChart, { type TrendPoint } from "@/components/TrendChart";
+import { createClient } from "@/lib/supabase/server";
+import { isSupabaseConfigured } from "@/lib/supabase/config";
+import {
+  IconBell,
+  IconMail,
+  IconShield,
+  IconTrendingUp,
+} from "@/components/icons";
+
+export const dynamic = "force-dynamic";
+
+const DAYS = 14;
+
+function dayKey(d: Date): string {
+  return d.toISOString().slice(0, 10);
+}
+
+export default async function DashboardPage() {
+  if (!isSupabaseConfigured()) {
+    return (
+      <>
+        <PageHeader title="Dashboard" subtitle="Genel analiz ve performans" />
+        <SetupNotice />
+      </>
+    );
+  }
+
+  const supabase = await createClient();
+  const since = new Date();
+  since.setDate(since.getDate() - (DAYS - 1));
+  const sinceIso = new Date(since.toISOString().slice(0, 10)).toISOString();
+
+  const [contactsRes, newContactsRes, riskRes] = await Promise.all([
+    supabase
+      .from("contact_submissions")
+      .select("created_at", { count: "exact" }),
+    supabase
+      .from("contact_submissions")
+      .select("id", { count: "exact", head: true })
+      .eq("status", "new"),
+    supabase.from("risk_results").select("created_at, score"),
+  ]);
+
+  const contacts = contactsRes.data ?? [];
+  const contactsTotal = contactsRes.count ?? contacts.length;
+  const newContacts = newContactsRes.count ?? 0;
+  const risks = riskRes.data ?? [];
+  const risksTotal = risks.length;
+  const avgScore =
+    risksTotal > 0
+      ? Math.round(
+          risks.reduce((s, r) => s + (r.score ?? 0), 0) / risksTotal
+        )
+      : 0;
+
+  // Son 14 günlük trend
+  const buckets = new Map<string, TrendPoint>();
+  for (let i = 0; i < DAYS; i++) {
+    const d = new Date(since);
+    d.setDate(since.getDate() + i);
+    const key = dayKey(d);
+    buckets.set(key, {
+      label: d.toLocaleDateString("tr-TR", { day: "2-digit", month: "2-digit" }),
+      iletisim: 0,
+      risk: 0,
+    });
+  }
+  for (const c of contacts) {
+    const key = (c.created_at as string).slice(0, 10);
+    const b = buckets.get(key);
+    if (b) b.iletisim += 1;
+  }
+  for (const r of risks) {
+    const key = (r.created_at as string).slice(0, 10);
+    const b = buckets.get(key);
+    if (b) b.risk += 1;
+  }
+  const trend = Array.from(buckets.values());
+
+  const recentContacts = contacts.filter(
+    (c) => new Date(c.created_at as string) >= new Date(sinceIso)
+  ).length;
+
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
+  return (
+    <>
+      <PageHeader title="Dashboard" subtitle="Genel analiz ve performans" />
+
+      <div className="space-y-6 p-8">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <StatCard
+            label="Toplam İletişim"
+            value={contactsTotal}
+            hint={`Son ${DAYS} günde ${recentContacts}`}
+            icon={<IconMail />}
+          />
+          <StatCard
+            label="Yeni / Okunmamış"
+            value={newContacts}
+            hint="Yanıt bekleyen"
+            icon={<IconBell />}
+          />
+          <StatCard
+            label="Risk Testi"
+            value={risksTotal}
+            hint="Tamamlanan test"
+            icon={<IconShield />}
+          />
+          <StatCard
+            label="Ortalama Skor"
+            value={`${avgScore}/100`}
+            hint="Tüm testlerin ortalaması"
+            icon={<IconTrendingUp />}
+          />
+        </div>
+
+        <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5">
+          <h2 className="mb-4 text-sm font-medium text-[var(--muted)]">
+            Son {DAYS} gün — günlük aktivite
+          </h2>
+          <TrendChart data={trend} />
+        </div>
+
+        <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-sm font-medium">SEO / Google Analytics</h2>
+            {gaId ? (
+              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1 text-xs text-emerald-300">
+                <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                Etiket bağlı · {gaId}
+              </span>
+            ) : (
+              <span className="rounded-full bg-amber-500/15 px-3 py-1 text-xs text-amber-300">
+                Etiket bağlı değil
+              </span>
+            )}
+          </div>
+          <p className="mt-2 text-sm text-[var(--muted)]">
+            Google Analytics 4 etiketi sitede yüklü; ziyaretçi ve dönüşüm verileri
+            GA4&apos;te toplanıyor. Bu verilerin panel içinde gösterimi (gösterim,
+            tıklama, anahtar kelime, sıralama) Search Console + GA Data API
+            entegrasyonuyla sonraki fazda eklenecek.
+          </p>
+        </div>
+      </div>
+    </>
+  );
+}

@@ -6,7 +6,7 @@ export function renderMission(): string {
       <span class="mission__brand">Şarj İstasyonum Güvende</span>
       <div class="mission__head">
         <h2>Şarj İstasyonu Sigortacılığında<br />Rakamlarla Biz</h2>
-        <span class="eyebrow">06 &nbsp;·&nbsp; Misyonumuz</span>
+        <span class="eyebrow">07 &nbsp;·&nbsp; Misyonumuz</span>
       </div>
 
       <div class="stats">

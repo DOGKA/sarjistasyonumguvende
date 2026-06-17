@@ -12,13 +12,16 @@
   width:100%;height:100%;
   object-fit:cover;
   background:#0c0c0c;
+  /* Kendi GPU katmanına al: üstteki saatin yeniden çizimi videoyu takılatmasın */
+  transform:translateZ(0);
+  will-change:transform;
 }
 .hero__overlay{
   position:absolute;inset:0;z-index:1;
   background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,.15) 35%,rgba(0,0,0,.55) 100%);
 }
 .nav{
-  position:relative;z-index:3;
+  position:relative;z-index:5;
   display:flex;align-items:center;justify-content:space-between;
   gap:24px;
   max-width:var(--maxw);width:100%;margin:0 auto;
@@ -55,7 +58,7 @@
   display:flex;align-items:flex-start;justify-content:space-between;
   gap:30px;
   max-width:var(--maxw);width:100%;margin:0 auto;
-  padding:48px var(--pad) 0;
+  padding:calc(var(--header-h) + 28px) var(--pad) 0;
 }
 .hero__lead{max-width:520px;font-size:clamp(24px,3vw,38px);font-weight:500;line-height:1.18;letter-spacing:-.02em;}
 .hero__device{width:150px;height:210px;border-radius:10px;flex:none;}
@@ -81,4 +84,60 @@
   margin-top:14px;
   font-size:13px;font-weight:500;letter-spacing:.02em;
   color:rgba(255,255,255,.85);
+}
+
+/* ====================================================== HERO HUD (sağ-orta) */
+/* Parite + saat dikey yığın; her ekran boyutunda altlı üstlü aynı hizada. */
+.hero-hud{
+  position:fixed;z-index:30;
+  top:49%;right:var(--pad);transform:translateY(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+  --hud-size:clamp(104px,11vw,140px);
+}
+.hero-hud.is-hidden .rate-select,
+.hero-hud.is-hidden .hero-clock{
+  display:none;
+}
+
+/* Göster/gizle düğmesi */
+.hero-hud__toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.4);
+  background:rgba(0,0,0,.28);color:#fff;cursor:pointer;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  transition:background .2s,transform .05s;
+}
+.hero-hud__toggle:hover{background:rgba(0,0,0,.45);}
+.hero-hud__toggle:active{transform:translateY(1px);}
+.hero-hud__eye{width:18px;height:18px;}
+.hero-hud.is-hidden .hero-hud__eye{opacity:.55;}
+
+/* ---------- Saat HUD'u (yuvarlak; tıkladıkça şehir değişir) ---------- */
+.hero-clock{
+  display:block;
+  width:var(--hud-size);
+  padding:0;border:0;background:none;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .25s ease;
+  /* Ayrı katman: yeniden çizimi alttaki video katmanına yayılmasın */
+  will-change:transform;isolation:isolate;
+}
+.hero-clock:hover{transform:scale(1.04);}
+.hero-clock:active{transform:scale(.98);}
+.hero-clock:focus-visible{outline:2px solid rgba(255,255,255,.8);outline-offset:6px;border-radius:50%;}
+
+.hero-clock__face{
+  display:block;width:100%;aspect-ratio:1;
+  filter:drop-shadow(0 16px 30px rgba(0,0,0,.35));
+}
+.hero-clock__face svg{width:100%;height:100%;display:block;overflow:visible;}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-clock,.hero-clock:hover,.hero-clock:active{transition:none;}
+}
+
+/* Mobil: video başlığını gölgelememesi için HUD'u gizle */
+@media(max-width:900px){
+  .hero-hud{display:none;}
 }

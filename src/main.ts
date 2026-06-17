@@ -1,15 +1,17 @@
 import "./styles/main.css";
 
+import { renderSiteHeader } from "@/sections/siteHeader";
 import { renderHero } from "@/sections/hero";
 import { renderAbout } from "@/sections/about";
 import { renderStations } from "@/sections/stations";
 import { renderSolutions } from "@/sections/solutions";
-import { renderCalculator } from "@/sections/calculator";
+import { renderCalcTeaser } from "@/sections/calcTeaser";
 import { renderCompareTeaser } from "@/sections/compareTeaser";
 import { renderProduct } from "@/sections/product";
 import { renderReviews } from "@/sections/reviews";
 import { renderRisk, renderQuizOverlay } from "@/sections/risk";
 import { renderMission } from "@/sections/mission";
+import { renderBlog } from "@/sections/blog";
 import { renderCta } from "@/sections/cta";
 import { renderFooter } from "@/sections/footer";
 
@@ -18,7 +20,10 @@ import { initProductCarousel } from "@/features/productCarousel";
 import { initReviewsCarousel } from "@/features/reviewsCarousel";
 import { initRiskQuiz } from "@/features/riskQuiz";
 import { initOcmMap } from "@/features/map/ocmMap";
-import { initCalculator } from "@/features/calculator";
+import { initHeroClock } from "@/features/heroClock";
+import { initHeroHud } from "@/features/heroHud";
+import { initRates } from "@/features/rates";
+import { initSiteHeader } from "@/features/siteHeader";
 
 import { qs } from "@/lib/dom";
 
@@ -27,16 +32,18 @@ function bootstrap(): void {
   const app = qs<HTMLDivElement>("#app");
 
   app.innerHTML = [
+    renderSiteHeader({ variant: "overlay", active: "hakkimizda" }),
     renderHero(),
     renderAbout(),
-    renderStations(),
-    renderSolutions(),
-    renderCalculator(),
-    renderCompareTeaser(),
     renderProduct(),
+    renderSolutions(),
+    renderCalcTeaser(),
+    renderStations(),
+    renderCompareTeaser(),
     renderReviews(),
     renderRisk(),
     renderMission(),
+    renderBlog(),
     renderCta(),
     renderFooter(),
   ].join("\n");
@@ -49,7 +56,10 @@ function bootstrap(): void {
   initReviewsCarousel();
   initRiskQuiz();
   initOcmMap();
-  initCalculator();
+  initHeroClock();
+  initHeroHud();
+  initSiteHeader();
+  void initRates();
 }
 
 bootstrap();

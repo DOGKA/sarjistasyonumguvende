@@ -57,6 +57,8 @@ export function initCalculator(): void {
     batteryPct: qsOpt<HTMLElement>("#calcBatteryPct"),
     energy: qsOpt<HTMLElement>("#calcEnergy"),
     range: qsOpt<HTMLElement>("#calcRange"),
+    rangeMeter: qsOpt<HTMLElement>("#calcRangeMeter"),
+    rangeNeedle: qsOpt<HTMLElement>("#calcRangeNeedle"),
     per100: qsOpt<HTMLElement>("#calcPer100"),
     cost: qsOpt<HTMLElement>("#calcCost"),
     costMeta: qsOpt<HTMLElement>("#calcCostMeta"),
@@ -311,6 +313,21 @@ export function initCalculator(): void {
     if (els.range) els.range.textContent = range != null ? num(range, 0) : "—";
     if (els.per100) els.per100.textContent = per100 != null ? num(per100, 0) : "—";
     if (els.cost) els.cost.textContent = cost != null ? tl.format(cost) : "—";
+    updateRangeMeter(range);
+  }
+
+  /** Eklenen menzili "radyo frekans" cetveli üzerinde kayan iğneyle gösterir. */
+  function updateRangeMeter(range: number | null): void {
+    if (!els.rangeNeedle || !els.rangeMeter) return;
+    const off = range == null;
+    els.rangeMeter.classList.toggle("is-off", off);
+    if (off) return;
+    // Tam şarjda eklenen menzil ≈ aracın tam menzili → iğne sağ uca yaklaşır
+    const battery = state.model?.usableBatteryKwh;
+    const scale =
+      state.model?.wltpRangeKm ?? (battery ? battery * 6 : 500);
+    const pos = Math.max(3, Math.min(97, (range / (scale > 0 ? scale : 500)) * 100));
+    els.rangeNeedle.style.setProperty("--range-pos", `${pos.toFixed(1)}%`);
   }
 
   /* ------------------------------------------------- karşılaştırma listesi */

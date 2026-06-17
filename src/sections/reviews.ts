@@ -4,7 +4,7 @@ export function renderReviews(): string {
   <section class="reviews" id="referanslar">
     <div class="container">
       <div class="reviews__head">
-        <span class="eyebrow">05 &nbsp;·&nbsp; Müşterilerimizden</span>
+        <span class="eyebrow">06 &nbsp;·&nbsp; Müşterilerimizden</span>
         <h2>Müşterilerimizin<br />Deneyimleri.</h2>
       </div>
 

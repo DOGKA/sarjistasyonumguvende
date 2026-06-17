@@ -13,11 +13,16 @@ export function renderCalculator(): string {
     return `<line class="${cls}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" />`;
   }).join("");
 
-  // Sağ "radyo" kadranının altındaki frekans çubukları
-  const freqBars = Array.from({ length: 27 }, (_, i) => {
-    const h = i % 4 === 0 ? 14 : 7 + (i % 3) * 2;
-    const hot = i === 17 ? " is-hot" : "";
-    return `<span class="hud__freq-bar${hot}" style="height:${h}px"></span>`;
+  // Sağ "radyo" kadranının altındaki frekans (cetvel) çubukları —
+  // yuvarlağın alt yarısını dolduran kavisli bir cetvel: kenarlara
+  // doğru çubuklar kısalır, ortada uzar (daire şekline uyar).
+  const freqCount = 31;
+  const freqBars = Array.from({ length: freqCount }, (_, i) => {
+    const t = (i / (freqCount - 1)) * 2 - 1; // -1 → +1 (kenarlar / merkez)
+    const arc = Math.sqrt(Math.max(0, 1 - t * t)); // daire kavisi
+    const tick = i % 4 === 0 ? 4 : 0; // her 4'te bir uzun çentik
+    const h = (7 + arc * 22 + tick).toFixed(1);
+    return `<span class="hud__freq-bar" style="height:${h}px"></span>`;
   }).join("");
 
   return /* html */ `
@@ -25,7 +30,7 @@ export function renderCalculator(): string {
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">05 &nbsp;·&nbsp; Maliyet Hesaplayıcı</span>
-        <a href="#harita" class="link-arrow">Şarj Haritası</a>
+        <a href="/#harita" class="link-arrow">Şarj Haritası</a>
       </div>
 
       <div class="calc__head">
@@ -138,7 +143,6 @@ export function renderCalculator(): string {
                 <span class="hud__cost-meta" id="calcCostMeta">Araç ve tarife seçin</span>
               </div>
               <div class="hud__top-stat hud__top-stat--right">
-                <span class="hud__top-label">Birim Maliyet</span>
                 <span class="hud__top-num" id="calcPer100">—</span>
                 <span class="hud__top-unit">₺/100 km</span>
               </div>
@@ -196,7 +200,10 @@ export function renderCalculator(): string {
               <div class="hud__radio">
                 <span class="hud__radio-label">Eklenen Menzil</span>
                 <span class="hud__radio-val"><b id="calcRange">—</b><i>km</i></span>
-                <div class="hud__freq" aria-hidden="true">${freqBars}</div>
+                <div class="hud__freq is-off" id="calcRangeMeter" aria-hidden="true">
+                  <div class="hud__freq-bars">${freqBars}</div>
+                  <span class="hud__freq-needle" id="calcRangeNeedle"></span>
+                </div>
               </div>
             </div>
 

@@ -1,5 +1,8 @@
+import { CLOCK_CITIES, clockSvgMarkup } from "@/sections/worldClocks";
+
 /** HERO — video arka plan, navigasyon ve başlık. */
 export function renderHero(): string {
+  const istanbul = CLOCK_CITIES[0];
   return /* html */ `
   <header class="hero">
     <video class="hero__bg" autoplay loop muted playsinline preload="auto" poster="">
@@ -7,18 +10,24 @@ export function renderHero(): string {
     </video>
     <div class="hero__overlay"></div>
 
-    <nav class="nav">
-      <a href="#" class="nav__logo">Şarj İstasyonum Güvende</a>
-      <ul class="nav__menu">
-        <li><a href="#hakkimizda" class="is-active">Hakkımızda <span class="nav__arrow" aria-hidden="true">→</span></a></li>
-        <li><a href="#harita">Harita</a></li>
-        <li><a href="#cozumler">Çözümler</a></li>
-        <li><a href="#teminatlar">Teminatlar</a></li>
-        <li><a href="#referanslar">Referanslar</a></li>
-        <li><a href="#risk-testi">Risk Testi</a></li>
-      </ul>
-      <a href="#iletisim" class="nav__cta">Teklif Al</a>
-    </nav>
+    <div class="hero-hud" id="heroHud">
+      <button type="button" class="hero-hud__toggle" id="heroHudToggle" aria-pressed="true" aria-label="Paneli gizle">
+        <svg class="hero-hud__eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+
+      <div class="rate-select rate-select--hud" id="rateSelect" hidden>
+        <button type="button" class="rate-select__btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Döviz ve altın kuru — değiştirmek için tıklayın">
+          <span class="rate-select__bg" aria-hidden="true"></span>
+          <span class="rate-select__code">—</span>
+          <span class="rate-select__value">0,00</span>
+        </button>
+        <ul class="rate-select__menu" role="listbox" hidden></ul>
+      </div>
+
+      <button type="button" class="hero-clock" id="heroClock" aria-label="${istanbul.city} saati — şehir değiştirmek için tıklayın">
+        <span class="hero-clock__face">${clockSvgMarkup(istanbul, 99, true)}</span>
+      </button>
+    </div>
 
     <div class="hero__top">
       <p class="hero__lead">Elektrikli araç şarj istasyonlarınız için güvenilir, kapsamlı ve uzman sigorta çözümleri; ev, işyeri ve kamusal alanlar için.</p>

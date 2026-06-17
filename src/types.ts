@@ -14,6 +14,24 @@ export interface Review {
   q: string;
 }
 
+/** Blog yazısı (Blog bölümü — mockup içerik). */
+export interface BlogPost {
+  /** Kategori etiketi (örn. "Design"). */
+  category: string;
+  /** Yazı başlığı. */
+  title: string;
+  /** Kısa özet / giriş paragrafı. */
+  excerpt: string;
+  /** Yayın tarihi (görünen metin). */
+  date: string;
+  /** Tahmini okuma süresi (dakika). */
+  readMin: number;
+  /** Kapak görseli mockup ölçüsü (örn. "1200 × 720"). */
+  dim: string;
+  /** Beğeni/etkileşim sayısı (More Articles listesi rozeti). */
+  likes: number;
+}
+
 /** Risk testi seçeneği: [etiket, puan]. */
 export type QuizOption = [label: string, score: number];
 
@@ -107,6 +125,18 @@ export interface EvModel {
   camera?: string;
   /** Sürüş asistanı / ADAS açıklaması. */
   adas?: string;
+  /** Çekiş tipi (örn. "RWD", "AWD", "FWD"). */
+  drivetrain?: string;
+  /** Şarj soketi tipi (örn. "CCS", "NACS"). */
+  socketType?: string;
+  /** Kasa/segment tipi (örn. "Sedan", "SUV", "Hatchback"). */
+  segment?: string;
+  /** Isı pompası var mı? */
+  heatPump?: boolean;
+  /** V2L (araçtan cihaz besleme) var mı? */
+  v2l?: boolean;
+  /** Euro NCAP güvenlik yıldızı (1–5). */
+  ncapStars?: number;
 }
 
 /** Bir marka ve modelleri. */
@@ -155,4 +185,31 @@ export interface ChargingPricesData {
   currency: string;
   lastUpdated: string;
   operators: ChargingOperator[];
+}
+
+/* ----------------------------------------------------- DÖVİZ / ALTIN KURLARI */
+
+/** Tek bir kur/altın kalemi (public/data/rates.json). */
+export interface RateItem {
+  /** Kısa kod (örn. "USD", "EUR", "GRAM_ALTIN"). */
+  code: string;
+  /** Görünen ad (örn. "Dolar", "Gram Altın"). */
+  name: string;
+  /** Birim/para sembolü (örn. "$", "€", "gr"). */
+  symbol: string;
+  /** Alış (TL) — yoksa null. */
+  buy: number | null;
+  /** Satış / güncel değer (TL). */
+  sell: number;
+}
+
+/** rates.json kök yapısı (TCMB döviz + hesaplanan gram altın). */
+export interface RatesData {
+  /** Verinin ait olduğu tarih (TCMB bülten tarihi, gg.aa.yyyy). */
+  date: string;
+  /** Çekilme zamanı (ISO). */
+  lastUpdated: string;
+  /** Veri kaynağı açıklaması. */
+  source: string;
+  items: RateItem[];
 }

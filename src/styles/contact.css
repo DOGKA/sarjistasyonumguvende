@@ -1,0 +1,111 @@
+/* ================================================== İLETİŞİM SAYFASI */
+.contact{
+  padding:0 0 90px;
+  background:var(--paper);
+  min-height:100vh;
+}
+.contact .section-head{padding-top:34px;}
+
+.contact__grid{
+  display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;
+  align-items:start;
+  padding-top:26px;border-top:1px solid var(--line);
+}
+
+/* ------------------------------------------------------------- sol blok */
+.contact__intro h1{font-size:clamp(34px,4.6vw,58px);font-weight:700;letter-spacing:-.03em;}
+.contact__intro p{
+  margin-top:18px;font-size:15px;color:var(--muted);max-width:420px;line-height:1.6;
+}
+.contact__info{list-style:none;margin-top:32px;display:flex;flex-direction:column;gap:18px;}
+.contact__info li{display:flex;flex-direction:column;gap:3px;}
+.contact__info-label{
+  font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+}
+.contact__info a,.contact__info li span:last-child{font-size:15px;font-weight:600;color:var(--ink);}
+.contact__info a:hover{color:var(--black);text-decoration:underline;}
+
+/* --------------------------------------------------------------- form */
+.contact-form{
+  background:var(--white);border:1px solid var(--line);border-radius:16px;
+  padding:30px;display:flex;flex-direction:column;gap:20px;
+}
+.contact-form__row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.contact-form__field{display:flex;flex-direction:column;gap:8px;}
+.contact-form__field label{
+  font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);
+}
+.contact-form__field label span{color:#d8442e;}
+
+.contact-form input[type=text],
+.contact-form input[type=email],
+.contact-form input[type=tel],
+.contact-form textarea,
+.contact-form__select select{
+  width:100%;font-family:inherit;font-size:14px;color:var(--ink);
+  background:var(--white);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;transition:.15s;appearance:none;-webkit-appearance:none;
+}
+.contact-form textarea{resize:vertical;min-height:120px;line-height:1.5;}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:#a3a39e;}
+.contact-form input:focus,.contact-form textarea:focus,.contact-form__select select:focus{
+  outline:none;border-color:var(--ink);
+}
+
+.contact-form__select{position:relative;}
+.contact-form__select::after{
+  content:"";position:absolute;right:15px;top:50%;width:7px;height:7px;
+  border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);
+  transform:translateY(-65%) rotate(45deg);pointer-events:none;
+}
+.contact-form__select select{padding-right:36px;cursor:pointer;}
+
+/* dosya ekleme alanı */
+.contact-form__file{
+  position:relative;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;
+  padding:22px;border:1.5px dashed var(--line);border-radius:12px;
+  background:#fafafa;transition:.15s;
+}
+.contact-form__file input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.contact-form__file:hover,.contact-form__file.is-drag{border-color:var(--ink);background:#f3f3f1;}
+.contact-form__file.has-file{border-style:solid;border-color:#bdbdb6;background:var(--white);}
+.contact-form__file.is-invalid{border-color:#d8442e;background:#fdf1ef;}
+.contact-form__file-icon{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--ink);color:#fff;
+}
+.contact-form__file-icon svg{width:18px;height:18px;}
+.contact-form__file.is-invalid .contact-form__file-icon{background:#d8442e;}
+.contact-form__file-text{font-size:14px;font-weight:600;color:var(--ink);word-break:break-word;}
+.contact-form__file-hint{font-size:12px;color:var(--muted);}
+.contact-form__file-clear{
+  align-self:flex-start;margin-top:2px;cursor:pointer;
+  font-family:inherit;font-size:12px;font-weight:600;color:var(--muted);
+  background:none;border:none;text-decoration:underline;
+}
+.contact-form__file-clear:hover{color:var(--ink);}
+
+/* onay */
+.contact-form__consent{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:var(--muted);line-height:1.5;cursor:pointer;
+}
+.contact-form__consent input{margin-top:2px;accent-color:var(--ink);width:16px;height:16px;flex:none;}
+.contact-form__consent a{color:var(--ink);font-weight:600;text-decoration:underline;}
+
+/* gönder */
+.contact-form__foot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.btn--dark{background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:inherit;}
+.btn--dark:hover{background:#000;}
+.btn--dark:disabled{opacity:.6;cursor:not-allowed;}
+.contact-form__status{font-size:13px;font-weight:600;}
+.contact-form__status[data-kind=ok]{color:#0c7a40;}
+.contact-form__status[data-kind=error]{color:#d8442e;}
+
+@media (max-width:860px){
+  .contact__grid{grid-template-columns:1fr;gap:32px;}
+  .contact-form__row{grid-template-columns:1fr;}
+  .cmp-nav__links{display:none;}
+}

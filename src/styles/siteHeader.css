@@ -1,0 +1,77 @@
+/* ============================================= ORTAK STICKY ÜST BAŞLIK */
+:root{--header-h:74px;}
+
+.site-header{
+  position:sticky;top:0;z-index:50;width:100%;
+  transition:background .28s ease,box-shadow .28s ease,border-color .28s ease;
+  border-bottom:1px solid transparent;
+}
+.site-header__row{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:16px var(--pad);
+}
+.site-header__logo{font-weight:700;font-size:16px;letter-spacing:-.02em;white-space:nowrap;}
+
+.site-header__menu{
+  display:flex;align-items:center;gap:2px;
+  border-radius:40px;padding:5px;
+  transition:background .28s ease,border-color .28s ease;
+  border:1px solid transparent;
+}
+.site-header__menu a{
+  display:inline-flex;align-items:center;
+  font-size:14px;font-weight:500;opacity:.9;
+  padding:9px 16px;border-radius:30px;transition:.2s;white-space:nowrap;
+}
+.site-header__menu a:hover{opacity:1;}
+.site-header__menu a.is-active{opacity:1;}
+
+.site-header__cta{
+  font-size:13px;font-weight:600;white-space:nowrap;
+  padding:11px 20px;border-radius:30px;transition:.2s;
+}
+
+/* --------------------------------------------------- OVERLAY (ana sayfa) */
+/* Şeffaf başlık hero videosunun üzerine biner; hero yukarı çekilir. */
+.site-header--overlay{
+  color:#fff;background:transparent;
+  margin-bottom:calc(-1 * var(--header-h));
+}
+.site-header--overlay .site-header__menu{
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.18);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.site-header--overlay .site-header__menu a:hover{background:rgba(255,255,255,.12);}
+.site-header--overlay .site-header__menu a.is-active{background:#fff;color:var(--black);}
+.site-header--overlay .site-header__cta{background:#fff;color:var(--black);}
+.site-header--overlay .site-header__cta:hover{background:#f0f0f0;}
+
+/* ----------------------------------------- SOLID (alt sayfalar + scroll) */
+.site-header--solid,
+.site-header.is-scrolled{
+  background:var(--black);color:#fff;
+  border-bottom-color:var(--line-dark);
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+}
+.site-header--solid .site-header__menu,
+.site-header.is-scrolled .site-header__menu{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.14);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.site-header--solid .site-header__menu a:hover,
+.site-header.is-scrolled .site-header__menu a:hover{background:rgba(255,255,255,.12);}
+.site-header--solid .site-header__menu a.is-active,
+.site-header.is-scrolled .site-header__menu a.is-active{background:#fff;color:var(--black);}
+.site-header--solid .site-header__cta,
+.site-header.is-scrolled .site-header__cta{background:#fff;color:var(--black);}
+.site-header--solid .site-header__cta:hover,
+.site-header.is-scrolled .site-header__cta:hover{background:#f0f0f0;}
+
+/* overlay başlık kaydırılınca koyu sticky çubuğa döner (margin korunur) */
+.site-header--overlay.is-scrolled{margin-bottom:calc(-1 * var(--header-h));}
+
+@media (max-width:900px){
+  .site-header__menu{display:none;}
+}

@@ -11,8 +11,6 @@ import {
 } from "./ocmApi";
 import { geocode, geolocate } from "./geo";
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 function chargerIcon(isUser: boolean): L.DivIcon {
   return L.divIcon({
     className: `ocm-pin${isUser ? " ocm-pin--user" : ""}`,
@@ -23,13 +21,23 @@ function chargerIcon(isUser: boolean): L.DivIcon {
   });
 }
 
+/** Google Haritalar yol tarifi bağlantısı (başlangıç = kullanıcının anlık konumu). */
+function directionsUrl(lat: number, lng: number): string {
+  return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`;
+}
+
 function popupHtml(p: OcmPoi): string {
   const conn = poiConnectors(p);
   const addr = poiAddress(p);
+  const ai = p.AddressInfo;
+  const dir = ai ? directionsUrl(ai.Latitude, ai.Longitude) : null;
   return (
     `<strong>${esc(poiTitle(p))}</strong>` +
     (addr ? `<div>${esc(addr)}</div>` : "") +
-    (conn ? `<div style="margin-top:6px;color:#737370">${esc(conn)}</div>` : "")
+    (conn ? `<div style="margin-top:6px;color:#737370">${esc(conn)}</div>` : "") +
+    (dir
+      ? `<a class="ocm-popup__dir" href="${dir}" target="_blank" rel="noopener noreferrer">Yol tarifi ➜</a>`
+      : "")
   );
 }
 
@@ -97,7 +105,6 @@ export function initOcmMap(): void {
 
   // ----------------------------------------------------- EN YAKIN ARAMA
   const form = qsOpt<HTMLFormElement>("#stationSearch");
-  const emailInput = qsOpt<HTMLInputElement>("#stEmail");
   const cityInput = qsOpt<HTMLInputElement>("#stCity");
   const submitBtn = qsOpt<HTMLButtonElement>("#stSubmit");
   const errEl = qsOpt<HTMLElement>("#stError");
@@ -129,22 +136,40 @@ export function initOcmMap(): void {
     pois.forEach((p) => {
       const ai = p.AddressInfo;
       if (!ai) return;
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "st-item";
+      const row = document.createElement("div");
+      row.className = "st-item";
+      row.setAttribute("role", "button");
+      row.tabIndex = 0;
       const dist = typeof ai.Distance === "number" ? `${ai.Distance.toFixed(1)} km` : "";
-      btn.innerHTML =
+      row.innerHTML =
         `<span class="st-item__name">${esc(poiTitle(p))}</span>` +
         (poiAddress(p) ? `<span class="st-item__meta">${esc(poiAddress(p))}</span>` : "") +
         (poiConnectors(p) ? `<span class="st-item__meta">${esc(poiConnectors(p))}</span>` : "") +
-        (dist ? `<span class="st-item__dist">${dist}</span>` : "");
-      btn.addEventListener("click", () => {
+        `<span class="st-item__foot">` +
+        (dist ? `<span class="st-item__dist">${dist}</span>` : "<span></span>") +
+        `<a class="st-item__dir" href="${directionsUrl(
+          ai.Latitude,
+          ai.Longitude
+        )}" target="_blank" rel="noopener noreferrer">Yol tarifi ➜</a>` +
+        `</span>`;
+      const select = (): void => {
         Array.from(listEl.children).forEach((c) => c.classList.remove("is-active"));
-        btn.classList.add("is-active");
+        row.classList.add("is-active");
         map.setView([ai.Latitude, ai.Longitude], 15);
         markersById.get(p.ID)?.openPopup();
+      };
+      row.addEventListener("click", (e) => {
+        // "Yol tarifi" bağlantısına tıklamada seçim/odak tetiklenmesin
+        if ((e.target as HTMLElement).closest(".st-item__dir")) return;
+        select();
       });
-      listEl.appendChild(btn);
+      row.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          select();
+        }
+      });
+      listEl.appendChild(row);
     });
   }
 
@@ -161,16 +186,10 @@ export function initOcmMap(): void {
     }
   }
 
-  if (form && emailInput && cityInput) {
+  if (form && cityInput) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       setError("");
-      const email = emailInput.value.trim();
-      if (!EMAIL_RE.test(email)) {
-        setError("En yakın istasyonu bulmak için lütfen geçerli bir e-posta girin.");
-        emailInput.focus();
-        return;
-      }
 
       const city = cityInput.value.trim();
       setBusy(true);

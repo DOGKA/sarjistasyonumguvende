@@ -2,6 +2,8 @@ import { esc, qsOpt, prefersReducedMotion } from "@/lib/dom";
 import { quizSections, quizIntroLines, quizResultTiers } from "@/data/quiz";
 import type { QuizOption, QuizResultTier } from "@/types";
 import { createRiskBackground } from "./riskBackground";
+import { getSupabase } from "@/lib/supabase";
+import { trackEvent } from "@/features/analytics";
 
 interface FlatQuestion {
   section: number;
@@ -205,9 +207,45 @@ export function initRiskQuiz(): void {
     return quizResultTiers[quizResultTiers.length - 1];
   }
 
+  /** Sonucu (skor + cevap dökümü + lead) Supabase'e kaydeder. */
+  function saveResult(score: number, tier: QuizResultTier): void {
+    const supabase = getSupabase();
+    if (!supabase) return;
+
+    const breakdown = flat.map((item, i) => {
+      const oi = answers[i];
+      const opt = typeof oi === "number" ? item.o[oi] : undefined;
+      return {
+        section: quizSections[item.section]?.name ?? "",
+        question: item.q,
+        answer: opt ? opt[0] : "",
+        points: opt ? opt[1] : 0,
+      };
+    });
+
+    void supabase
+      .from("risk_results")
+      .insert({
+        name: lead.name || null,
+        email: lead.email || null,
+        score,
+        tier: tier.cls,
+        tier_label: tier.label,
+        answers: breakdown,
+        total_questions: TOTAL,
+      })
+      .then(() => {
+        void supabase
+          .from("page_events")
+          .insert({ type: "quiz_complete", path: location.pathname });
+      });
+  }
+
   function renderResult(): void {
     const score = computeScore();
     const r = resultFor(score);
+    saveResult(score, r);
+    trackEvent("quiz_complete", { score, tier: r.cls });
     setProgress("");
 
     // ---- Dairesel gösterge geometrisi (270° yay, alt tarafta boşluk) ----

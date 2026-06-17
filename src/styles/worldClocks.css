@@ -1,0 +1,97 @@
+/* ====================================================== WORLD CLOCKS (07) */
+.wclocks{background:var(--paper);padding:70px 0;}
+
+.wclocks__head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
+  margin-bottom:48px;
+}
+.wclocks__head h2{font-size:clamp(30px,4.2vw,50px);font-weight:600;}
+.wclocks__head p{font-size:14px;color:var(--muted);max-width:380px;}
+
+.wclocks__track{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+}
+
+/* ---------- Tek saat (kartsız) ---------- */
+.wclock{
+  display:flex;align-items:center;justify-content:center;
+}
+.wclock__face{
+  width:100%;max-width:220px;aspect-ratio:1;
+  filter:drop-shadow(0 14px 26px rgba(0,0,0,.10));
+}
+.wclock__face svg{width:100%;height:100%;display:block;overflow:visible;}
+
+/* Harita yüklenene kadar görünen açık zemin */
+.wclock__base{fill:#e9e9e9;}
+
+/* Şehir haritası — siteyle uyumlu gri tonlama.
+   Not: filtre, clip-path'li grupta Chrome'da boyanmadığından image'lara uygulanır. */
+.wclock__map image{filter:grayscale(1) contrast(.92) brightness(1.04);opacity:.9;}
+/* Akreplerin okunması için harita üzerine hafif açıklık katmanı */
+.wclock__veil{fill:var(--white);opacity:.32;}
+
+/* Altıgen çerçeve (haritanın üzerinde, yalnızca kenarlık) */
+.wclock__hex{
+  fill:none;
+  stroke:rgba(0,0,0,.14);
+  stroke-width:1.4;
+}
+
+/* Long shadow — tüm akrep gölgeleri tek grup opaklığıyla birleşir */
+.wclock__shadow{opacity:.16;}
+.wclock__sh{fill:var(--ink);}
+
+/* Akrepler */
+.wclock__hand{stroke-linecap:round;}
+.wclock__hand--h{stroke:var(--ink);stroke-width:3;}
+.wclock__hand--m{stroke:var(--ink);stroke-width:2.2;}
+.wclock__hand--s{stroke:#e0662a;stroke-width:1.2;}
+
+.wclock__pin{fill:var(--white);stroke:var(--ink);stroke-width:1.4;}
+
+/* Altıgen içindeki şehir adı */
+.wclock__label{
+  font-family:"Inter",sans-serif;
+  font-size:7px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;
+  fill:var(--ink);
+  paint-order:stroke;stroke:var(--white);stroke-width:1.6;stroke-linejoin:round;
+}
+
+.wclocks__credit{margin-top:22px;font-size:11px;color:var(--muted);}
+.wclocks__credit a{text-decoration:underline;}
+
+/* ---------- Tablet ---------- */
+@media(max-width:900px){
+  .wclocks{padding:56px 0;}
+  .wclocks__head{flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:32px;}
+  .wclocks__head p{max-width:none;}
+
+  /* Mobil/tablet: parmakla kaydırmalı scroll-snap; sonraki kart kenardan görünür */
+  .wclocks__track{
+    display:flex;
+    grid-template-columns:none;
+    gap:16px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    /* kenarlardan nefes payı, ilk/son kart ortalanabilsin */
+    padding:4px 4px 14px;
+    margin:0 calc(var(--pad) * -1);
+    padding-left:var(--pad);
+    padding-right:var(--pad);
+  }
+  .wclocks__track::-webkit-scrollbar{display:none;}
+  .wclock{
+    flex:0 0 72%;
+    scroll-snap-align:center;
+  }
+}
+
+@media(max-width:560px){
+  .wclock{flex:0 0 80%;}
+}

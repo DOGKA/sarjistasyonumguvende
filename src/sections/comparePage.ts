@@ -1,19 +1,3 @@
-/** Araç karşılaştırma sayfası — üst navigasyon. */
-export function renderCompareNav(): string {
-  return /* html */ `
-  <header class="cmp-nav">
-    <div class="container cmp-nav__row">
-      <a href="/" class="cmp-nav__logo">Şarj İstasyonum Güvende</a>
-      <nav class="cmp-nav__links">
-        <a href="/#hesaplayici">Maliyet Hesaplayıcı</a>
-        <a href="/#harita">Harita</a>
-        <a href="/#teminatlar">Teminatlar</a>
-      </nav>
-      <a href="/" class="cmp-nav__back"><span aria-hidden="true">←</span> Ana sayfa</a>
-    </div>
-  </header>`;
-}
-
 /**
  * 07 — ELEKTRİKLİ ARAÇ KARŞILAŞTIRMA.
  * Hesaplayıcıdaki tüm marka ve modeller; aynı anda 3 araç dikey kıyaslanır.
@@ -25,7 +9,7 @@ export function renderComparePage(): string {
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Araç Karşılaştırma</span>
-        <a href="/#hesaplayici" class="link-arrow">Maliyet Hesaplayıcı</a>
+        <a href="/hesaplayici.html" class="link-arrow">Maliyet Hesaplayıcı</a>
       </div>
 
       <div class="cmp__head">
