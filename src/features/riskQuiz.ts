@@ -245,17 +245,19 @@ export function initRiskQuiz(): void {
     }
 
     // 2) Geri düşüş: doğrudan Supabase (anon). RLS insert politikası gerekir.
-    const supabase = getSupabase();
-    if (!supabase) return;
+    void (async () => {
+      const supabase = await getSupabase();
+      if (!supabase) return;
 
-    void supabase
-      .from("risk_results")
-      .insert(payload)
-      .then(() => {
-        void supabase
-          .from("page_events")
-          .insert({ type: "quiz_complete", path: location.pathname });
-      });
+      void supabase
+        .from("risk_results")
+        .insert(payload)
+        .then(() => {
+          void supabase
+            .from("page_events")
+            .insert({ type: "quiz_complete", path: location.pathname });
+        });
+    })();
   }
 
   function renderResult(): void {

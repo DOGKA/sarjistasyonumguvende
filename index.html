@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WPHMDM83ZX"></script>
+  <!-- Google tag (gtag.js) — ilk etkileşimde/boştayken ertelenmiş yüklenir -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-WPHMDM83ZX');
+    (function(){
+      var loaded=false;
+      function load(){
+        if(loaded) return; loaded=true;
+        var s=document.createElement('script');
+        s.async=true;
+        s.src='https://www.googletagmanager.com/gtag/js?id=G-WPHMDM83ZX';
+        document.head.appendChild(s);
+      }
+      var evs=['scroll','mousemove','touchstart','keydown','pointerdown'];
+      function trigger(){evs.forEach(function(e){window.removeEventListener(e,trigger)});load();}
+      evs.forEach(function(e){window.addEventListener(e,trigger,{passive:true})});
+      window.setTimeout(load,4000);
+    })();
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Şarj İstasyonum Güvende — Elektrikli Araç Şarj İstasyonu Sigortası</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="description" content="Elektrikli araç şarj istasyonlarınız için kapsamlı, güvenilir ve uzman sigorta çözümleri. Yangın, elektronik cihaz, makine kırılması, doğal afet ve siber risk teminatları." />
+  <link rel="preload" as="image" href="/assets/hero-poster.webp" fetchpriority="high" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -21,16 +35,24 @@
 <body>
   <div id="app"></div>
   <script type="module" src="/src/main.ts"></script>
-  <!--Start of Tawk.to Script-->
+  <!--Start of Tawk.to Script — ilk etkileşimde/boştayken ertelenmiş yüklenir-->
   <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/6a3273516667451d4612f859/1jrah4tfp';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
+      var loaded=false;
+      function load(){
+        if(loaded) return; loaded=true;
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/6a3273516667451d4612f859/1jrah4tfp';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','anonymous');
+        s0.parentNode.insertBefore(s1,s0);
+      }
+      var evs=['scroll','mousemove','touchstart','keydown','pointerdown'];
+      function trigger(){evs.forEach(function(e){window.removeEventListener(e,trigger)});load();}
+      evs.forEach(function(e){window.addEventListener(e,trigger,{passive:true})});
+      window.setTimeout(load,5000);
     })();
   </script>
   <!--End of Tawk.to Script-->

@@ -18,7 +18,7 @@ export async function initSiteMedia(): Promise<void> {
   const slots = document.querySelectorAll<HTMLImageElement>("img[data-media]");
   if (slots.length === 0) return;
 
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   if (!supabase) return; // Supabase yok → varsayılan görseller kalır
 
   try {

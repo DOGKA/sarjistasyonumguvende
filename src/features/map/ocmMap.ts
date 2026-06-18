@@ -1,3 +1,4 @@
+import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { esc, qsOpt } from "@/lib/dom";
 import { MAP_DEFAULT_CENTER, MAP_DEFAULT_ZOOM, OCM_API_KEY } from "@/config";

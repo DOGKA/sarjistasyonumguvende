@@ -5,9 +5,7 @@ export function renderHero(): string {
   const istanbul = CLOCK_CITIES[0];
   return /* html */ `
   <header class="hero">
-    <video class="hero__bg" autoplay loop muted playsinline preload="auto" poster="">
-      <source src="https://fusionmarkt.s3.eu-central-1.amazonaws.com/sarjistasyonumguvende/0612.mp4" type="video/mp4" />
-    </video>
+    <video class="hero__bg" loop muted playsinline preload="none" poster="assets/hero-poster.webp" data-src="https://fusionmarkt.s3.eu-central-1.amazonaws.com/sarjistasyonumguvende/0612.mp4"></video>
     <div class="hero__overlay"></div>
 
     <div class="hero-hud" id="heroHud">

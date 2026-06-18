@@ -82,7 +82,7 @@ export function renderContactPage(): string {
 
           <label class="contact-form__consent">
             <input type="checkbox" id="cfConsent" name="consent" required />
-            <span>Kişisel verilerimin <a href="#">Gizlilik Politikası</a> kapsamında işlenmesini onaylıyorum.</span>
+            <span>Kişisel verilerimin <a href="/gizlilik-politikasi.html">Gizlilik Politikası</a> kapsamında işlenmesini onaylıyorum.</span>
           </label>
 
           <div class="contact-form__foot">

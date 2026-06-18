@@ -19,7 +19,6 @@ import { initHeroVideo } from "@/features/heroVideo";
 import { initProductCarousel } from "@/features/productCarousel";
 import { initReviewsCarousel } from "@/features/reviewsCarousel";
 import { initRiskQuiz } from "@/features/riskQuiz";
-import { initOcmMap } from "@/features/map/ocmMap";
 import { initHeroClock } from "@/features/heroClock";
 import { initHeroHud } from "@/features/heroHud";
 import { initRates } from "@/features/rates";
@@ -27,7 +26,36 @@ import { initSiteHeader } from "@/features/siteHeader";
 import { initSiteMedia } from "@/features/siteMedia";
 import { initBlog } from "@/features/blog";
 
-import { qs } from "@/lib/dom";
+import { qs, qsOpt } from "@/lib/dom";
+
+/**
+ * Şarj istasyonu haritasını (Leaflet + ocmMap chunk'ı, ~170 KB) yalnızca
+ * harita bölümü görünüme yaklaştığında tembel yükler. Böylece ilk yükte
+ * harita kodu taşınmaz.
+ */
+function initOcmMapLazy(): void {
+  const mapEl = qsOpt<HTMLElement>("#ocmMap");
+  if (!mapEl) return;
+
+  const load = (): void => {
+    void import("@/features/map/ocmMap").then((m) => m.initOcmMap());
+  };
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          load();
+        }
+      },
+      { rootMargin: "400px" },
+    );
+    io.observe(mapEl);
+  } else {
+    load();
+  }
+}
 
 /** Sayfayı oluştur ve etkileşimleri başlat. */
 function bootstrap(): void {
@@ -57,7 +85,7 @@ function bootstrap(): void {
   initProductCarousel();
   initReviewsCarousel();
   initRiskQuiz();
-  initOcmMap();
+  initOcmMapLazy();
   initHeroClock();
   initHeroHud();
   initSiteHeader();

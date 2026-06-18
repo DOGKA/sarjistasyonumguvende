@@ -1,0 +1,47 @@
+/* ================================================== YASAL METİN SAYFALARI */
+.legal{
+  background:var(--paper);
+  padding:48px 0 90px;
+  min-height:100vh;
+}
+
+/* -------------------------------------------------------------- başlık */
+.legal__head{
+  max-width:760px;
+  padding-bottom:28px;
+  border-bottom:1px solid var(--line);
+}
+.legal__head .eyebrow{display:block;margin-bottom:14px;}
+.legal__title{
+  font-size:clamp(32px,4.4vw,52px);font-weight:700;letter-spacing:-.03em;
+}
+.legal__intro{
+  margin-top:16px;font-size:16px;line-height:1.6;color:var(--muted);
+}
+.legal__updated{
+  margin-top:14px;font-size:13px;font-weight:600;color:var(--muted);
+}
+
+/* -------------------------------------------------------------- gövde */
+.legal__body{
+  max-width:760px;margin-top:36px;
+  font-size:15px;line-height:1.75;color:#2c2c2c;
+}
+.legal__body h2{
+  font-size:21px;font-weight:700;letter-spacing:-.01em;color:var(--ink);
+  margin:38px 0 12px;
+}
+.legal__body h2:first-child{margin-top:0;}
+.legal__body h3{
+  font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 8px;
+}
+.legal__body p{margin:0 0 14px;}
+.legal__body ul,.legal__body ol{margin:0 0 16px;padding-left:22px;}
+.legal__body li{margin:0 0 8px;}
+.legal__body a{color:var(--ink);font-weight:600;text-decoration:underline;}
+.legal__body a:hover{color:var(--black);}
+.legal__body strong{color:var(--ink);font-weight:700;}
+
+@media (max-width:560px){
+  .legal{padding:32px 0 64px;}
+}

@@ -1,5 +1,5 @@
 /* Tüm stil katmanları — kademe (cascade) sırası önemlidir */
-@import "leaflet/dist/leaflet.css";
+/* Leaflet CSS, harita tembel yüklendiğinde ocmMap chunk'ı ile gelir. */
 
 @import "./base.css";
 @import "./siteHeader.css";
@@ -20,4 +20,5 @@
 @import "./risk.css";
 @import "./compare.css";
 @import "./contact.css";
+@import "./legal.css";
 @import "./responsive.css";

@@ -25,6 +25,8 @@ export default defineConfig({
         blog: fileURLToPath(new URL("./blog.html", import.meta.url)),
         calculator: fileURLToPath(new URL("./hesaplayici.html", import.meta.url)),
         contact: fileURLToPath(new URL("./iletisim.html", import.meta.url)),
+        terms: fileURLToPath(new URL("./kullanim-kosullari.html", import.meta.url)),
+        privacy: fileURLToPath(new URL("./gizlilik-politikasi.html", import.meta.url)),
       },
     },
   },

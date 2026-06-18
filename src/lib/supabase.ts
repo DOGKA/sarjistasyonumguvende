@@ -1,21 +1,26 @@
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from "@/config";
 
-let client: SupabaseClient | null = null;
+let clientPromise: Promise<SupabaseClient | null> | null = null;
 
 /**
  * Public site için Supabase istemcisi (anon anahtar).
- * Ortam değişkenleri tanımlı değilse null döner — çağıran taraf
+ *
+ * `@supabase/supabase-js` paketi yalnızca ilk çağrıda dinamik olarak
+ * yüklenir; böylece ana sayfa ilk yükünde ~170 KB JS taşınmaz.
+ * Ortam değişkenleri tanımlı değilse Promise<null> döner — çağıran taraf
  * bu durumda eski (simülasyon) davranışına geri düşebilir.
  */
-export function getSupabase(): SupabaseClient | null {
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;
-  if (!client) {
-    client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      auth: { persistSession: false },
-    });
+export function getSupabase(): Promise<SupabaseClient | null> {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return Promise.resolve(null);
+  if (!clientPromise) {
+    clientPromise = import("@supabase/supabase-js").then(({ createClient }) =>
+      createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: { persistSession: false },
+      }),
+    );
   }
-  return client;
+  return clientPromise;
 }
 
 /** Supabase yapılandırıldı mı? */

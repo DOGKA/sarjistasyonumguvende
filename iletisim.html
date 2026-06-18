@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WPHMDM83ZX"></script>
+  <!-- Google tag (gtag.js) — ilk etkileşimde/boştayken ertelenmiş yüklenir -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-WPHMDM83ZX');
+    (function(){
+      var loaded=false;
+      function load(){
+        if(loaded) return; loaded=true;
+        var s=document.createElement('script');
+        s.async=true;
+        s.src='https://www.googletagmanager.com/gtag/js?id=G-WPHMDM83ZX';
+        document.head.appendChild(s);
+      }
+      var evs=['scroll','mousemove','touchstart','keydown','pointerdown'];
+      function trigger(){evs.forEach(function(e){window.removeEventListener(e,trigger)});load();}
+      evs.forEach(function(e){window.addEventListener(e,trigger,{passive:true})});
+      window.setTimeout(load,4000);
+    })();
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />

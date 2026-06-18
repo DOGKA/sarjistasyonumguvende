@@ -16,6 +16,24 @@ export const MAP_DEFAULT_ZOOM = 6;
 /** İletişim e-postası. */
 export const CONTACT_EMAIL = "info@sarjistasyonumguvende.com";
 
+/**
+ * Şirket / kurumsal bilgiler. Footer, yasal sayfalar ve (ileride) çerez
+ * metinleri buradan beslenir. Boş alanlar müşteri bilgisi gelince doldurulacak.
+ */
+export const COMPANY = {
+  /** Markanın görünen adı. */
+  brand: "Şarj İstasyonum Güvende",
+  /** Resmî ticaret ünvanı (TODO: müşteriden gelecek). */
+  legalName: "",
+  /** Açık adres (TODO: müşteriden gelecek). */
+  address: "",
+  /** Telefon — uluslararası ve görünen biçim (TODO: müşteriden gelecek). */
+  phone: "",
+  phoneHref: "",
+  /** İletişim e-postası. */
+  email: CONTACT_EMAIL,
+} as const;
+
 /* ----------------------------------------------------------------- SUPABASE */
 
 /** Supabase proje URL'i (.env: VITE_SUPABASE_URL). */

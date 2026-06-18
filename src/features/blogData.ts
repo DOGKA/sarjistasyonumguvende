@@ -71,7 +71,7 @@ const SELECT =
 export async function fetchPublishedPosts(
   limit = 12
 ): Promise<BlogPost[] | null> {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   if (!supabase) return null;
   try {
     const { data, error } = await supabase
@@ -89,7 +89,7 @@ export async function fetchPublishedPosts(
 
 /** Tek bir yayınlanmış yazıyı slug ile getirir. Bulunamazsa null. */
 export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   if (!supabase) return null;
   try {
     const { data, error } = await supabase

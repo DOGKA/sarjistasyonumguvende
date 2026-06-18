@@ -160,7 +160,7 @@ export function initContact(): void {
     }
 
     // 2) Geri düşüş: doğrudan Supabase (anon). RLS insert politikası gerekir.
-    const supabase = getSupabase();
+    const supabase = await getSupabase();
     if (!supabase) {
       // Yapılandırma yoksa eski davranış: kısa bir gecikmeyle başarı.
       await new Promise((r) => window.setTimeout(r, 700));
