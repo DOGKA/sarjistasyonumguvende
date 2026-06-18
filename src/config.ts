@@ -33,3 +33,13 @@ export const SUPABASE_ANON_KEY: string =
  * doğrudan Supabase'e (anon) yazmaya geri düşülür.
  */
 export const RISK_API_URL: string = import.meta.env.VITE_RISK_API_URL ?? "";
+
+/**
+ * İletişim formu gönderimlerini kaydeden sunucu API'si (admin paneli).
+ * Örn: http://localhost:8001/api/contact (dev) veya
+ * https://panel.alanadiniz.com/api/contact (prod).
+ * Tanımlıysa form buraya POST edilir (service role; RLS'ye takılmaz);
+ * tanımlı değilse doğrudan Supabase'e (anon) yazmaya geri düşülür.
+ */
+export const CONTACT_API_URL: string =
+  import.meta.env.VITE_CONTACT_API_URL ?? "";

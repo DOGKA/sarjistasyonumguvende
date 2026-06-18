@@ -1,5 +1,6 @@
 import { qsOpt } from "@/lib/dom";
 import { getSupabase } from "@/lib/supabase";
+import { CONTACT_API_URL } from "@/config";
 import { trackEvent } from "@/features/analytics";
 
 const MAX_FILE_BYTES = 2 * 1024 * 1024; // 2 MB
@@ -130,7 +131,7 @@ export function initContact(): void {
       });
   });
 
-  /** Formu Supabase'e gönderir (yapılandırılmamışsa simüle eder). */
+  /** Formu kaydeder: önce admin API, yoksa Supabase, o da yoksa simüle eder. */
   async function submitForm(): Promise<void> {
     const data = new FormData(form!);
     const name = String(data.get("name") ?? "").trim();
@@ -138,7 +139,27 @@ export function initContact(): void {
     const phone = String(data.get("phone") ?? "").trim();
     const subject = String(data.get("subject") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
+    const picked = file?.files?.[0];
 
+    // 1) Tercih: admin sunucu API'si (service role; RLS'ye takılmaz)
+    if (CONTACT_API_URL) {
+      const payload = new FormData();
+      payload.set("name", name);
+      payload.set("email", email);
+      payload.set("phone", phone);
+      payload.set("subject", subject);
+      payload.set("message", message);
+      if (picked) payload.set("file", picked);
+
+      const res = await fetch(CONTACT_API_URL, {
+        method: "POST",
+        body: payload,
+      });
+      if (!res.ok) throw new Error(`Sunucu hatası (${res.status})`);
+      return;
+    }
+
+    // 2) Geri düşüş: doğrudan Supabase (anon). RLS insert politikası gerekir.
     const supabase = getSupabase();
     if (!supabase) {
       // Yapılandırma yoksa eski davranış: kısa bir gecikmeyle başarı.
@@ -149,7 +170,6 @@ export function initContact(): void {
     // Belge eki varsa Storage'a yükle
     let fileUrl: string | null = null;
     let fileName: string | null = null;
-    const picked = file?.files?.[0];
     if (picked) {
       const safeName = picked.name.replace(/[^\w.\-]+/g, "_");
       const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}-${safeName}`;

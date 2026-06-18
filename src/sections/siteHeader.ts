@@ -36,7 +36,9 @@ export function renderSiteHeader(opts: SiteHeaderOptions = {}): string {
   return /* html */ `
   <header class="site-header site-header--${variant}" id="siteHeader">
     <div class="container site-header__row">
-      <a href="/" class="site-header__logo">Şarj İstasyonum Güvende</a>
+      <a href="/" class="site-header__logo" aria-label="Şarj İstasyonum Güvende — ana sayfa">
+        <img src="assets/logos/dogalogo-white.svg" alt="Şarj İstasyonum Güvende" />
+      </a>
       <nav class="site-header__menu" aria-label="Ana menü">
         ${links}
       </nav>

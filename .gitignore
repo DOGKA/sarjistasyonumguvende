@@ -5,6 +5,12 @@
 .env.*
 !.env.example
 
+# Google servis hesabı anahtarları (gizli — asla commit etme)
+*.iam.gserviceaccount.com.json
+awesome-flash-*.json
+service-account*.json
+*-service-account.json
+
 # Bağımlılıklar ve derleme çıktıları
 node_modules/
 dist/

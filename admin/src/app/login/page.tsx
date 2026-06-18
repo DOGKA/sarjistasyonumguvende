@@ -1,15 +1,17 @@
 import { Suspense } from "react";
 import LoginForm from "./LoginForm";
-import { IconBolt } from "@/components/icons";
 
 export default function LoginPage() {
   return (
     <main className="min-h-screen grid place-items-center px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-xl bg-[var(--accent)]/15 text-[var(--accent)]">
-            <IconBolt width={24} height={24} />
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/dogalogo-green.svg"
+            alt="Doğa Danışmanlık"
+            className="mx-auto mb-5 h-12 w-auto"
+          />
           <h1 className="text-xl font-semibold">Yönetim Paneli</h1>
           <p className="mt-1 text-sm text-[var(--muted)]">
             Şarj İstasyonum Güvende
