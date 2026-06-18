@@ -237,37 +237,97 @@ async function dismissBanners(page) {
   }
 }
 
-async function scrapeOperator(browser, op) {
-  const fetchedAt = nowIso();
+const MAX_ATTEMPTS = 3; // bot koruması / 429 için yeniden deneme sayısı
+
+/**
+ * Gerçek bir kullanıcı tarayıcısına benzeyen, headless tespitini zorlaştıran
+ * bir bağlam üretir (bazı operatörler — örn. Voltrun — otomasyonu 429/403 ile
+ * engeller; bu ayarlar engellenme olasılığını azaltır).
+ */
+async function newHardenedContext(browser) {
   const context = await browser.newContext({
     userAgent: USER_AGENT,
     locale: "tr-TR",
+    timezoneId: "Europe/Istanbul",
     viewport: { width: 1366, height: 900 },
+    bypassCSP: true,
+    extraHTTPHeaders: {
+      "Accept-Language": "tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7",
+      "Upgrade-Insecure-Requests": "1",
+    },
   });
+  // navigator.webdriver vb. otomasyon izlerini gizle
+  await context.addInitScript(() => {
+    Object.defineProperty(navigator, "webdriver", { get: () => undefined });
+    Object.defineProperty(navigator, "languages", { get: () => ["tr-TR", "tr", "en-US"] });
+    Object.defineProperty(navigator, "plugins", { get: () => [1, 2, 3, 4, 5] });
+  });
+  return context;
+}
+
+/** Sayfayı bir kez açar ve görünür metni döndürür (engel/zaman aşımında hata atar). */
+async function fetchPageText(browser, op) {
+  const context = await newHardenedContext(browser);
   const page = await context.newPage();
   try {
-    await page.goto(op.url, { waitUntil: "domcontentloaded", timeout: NAV_TIMEOUT_MS });
+    const resp = await page.goto(op.url, {
+      waitUntil: "domcontentloaded",
+      timeout: NAV_TIMEOUT_MS,
+    });
+    const status = resp?.status() ?? 0;
+    if (status === 429 || status === 403 || status >= 500) {
+      throw new Error(`HTTP ${status} (engellendi)`);
+    }
     await dismissBanners(page);
     await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => {});
+    // Fiyat benzeri metin (örn. "9,90 ₺" / "12.90 TL") belirene kadar bekle
+    await page
+      .waitForFunction(
+        () => /\d{1,2}[.,]\d{2}\s*(₺|tl)/i.test(document.body?.innerText || ""),
+        null,
+        { timeout: 10000 }
+      )
+      .catch(() => {});
     await page.waitForTimeout(SETTLE_MS);
-
-    const text = await page.evaluate(() => document.body?.innerText ?? "");
-    const flat = text.replace(/\s+/g, " ");
-    const tariffs = op.parse(flat) ?? genericFallback(flat);
-
-    if (tariffs && tariffs.length) {
-      console.log(
-        `✓ ${op.name.padEnd(22)} scraped → ` +
-          tariffs.map((t) => `${t.label} ${t.pricePerKwh}`).join(", ")
-      );
-      return { id: op.id, name: op.name, url: op.url, source: "scraped", fetchedAt, tariffs };
-    }
-    console.log(`• ${op.name.padEnd(22)} fiyat bulunamadı → manuel`);
-  } catch (err) {
-    console.log(`✗ ${op.name.padEnd(22)} ${String(err?.message || err).split("\n")[0]} → manuel`);
+    return await page.evaluate(() => document.body?.innerText ?? "");
   } finally {
     await context.close();
   }
+}
+
+async function scrapeOperator(browser, op) {
+  const fetchedAt = nowIso();
+  let lastErr = "fiyat bulunamadı";
+
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      const text = await fetchPageText(browser, op);
+      const flat = text.replace(/\s+/g, " ");
+      const tariffs = op.parse(flat) ?? genericFallback(flat);
+
+      if (tariffs && tariffs.length) {
+        console.log(
+          `✓ ${op.name.padEnd(22)} scraped → ` +
+            tariffs.map((t) => `${t.label} ${t.pricePerKwh}`).join(", ")
+        );
+        return { id: op.id, name: op.name, url: op.url, source: "scraped", fetchedAt, tariffs };
+      }
+      lastErr = "fiyat bulunamadı";
+    } catch (err) {
+      lastErr = String(err?.message || err).split("\n")[0];
+    }
+
+    if (attempt < MAX_ATTEMPTS) {
+      const waitMs = attempt * 5000; // artan bekleme (5s, 10s) — 429 için nazik
+      console.log(
+        `• ${op.name.padEnd(22)} deneme ${attempt}/${MAX_ATTEMPTS} başarısız (${lastErr}); ` +
+          `${waitMs / 1000}s sonra tekrar`
+      );
+      await new Promise((r) => setTimeout(r, waitMs));
+    }
+  }
+
+  console.log(`✗ ${op.name.padEnd(22)} ${lastErr} → yedek değerler`);
   return {
     id: op.id,
     name: op.name,
