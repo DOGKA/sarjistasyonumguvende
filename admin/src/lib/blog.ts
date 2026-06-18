@@ -36,7 +36,7 @@ export function estimateReadMin(html: string | null): number {
 }
 
 /** Site kök adresi (canonical/OG üretimi için). */
-export const SITE_ORIGIN = "https://www.sarjistasyonumguvende.com";
+export const SITE_ORIGIN = "https://sarjistasyonumguvende.com";
 
 /** Slug'dan public blog detay URL'i üretir. */
 export function postUrl(slug: string): string {

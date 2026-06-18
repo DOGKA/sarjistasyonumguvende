@@ -7,7 +7,7 @@
  * düşülür.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.sarjistasyonumguvende.com"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://sarjistasyonumguvende.com"
 ).replace(/\/$/, "");
 
 /** Public sitedeki bir yola tam URL üretir (örn. "/data/rates.json"). */

@@ -1,0 +1,77 @@
+# robots.txt — Şarj İstasyonum Güvende
+# https://sarjistasyonumguvende.com
+#
+# Bu site insanlar, arama motoru botları ve yapay zekâ ajanları için açıktır.
+# İnsanlar için: yapay zekâ dostu özet -> /llms.txt
+# Botlar için:   site haritası      -> /sitemap.xml
+
+# ----------------------------------------------------------------- Tüm botlar
+User-agent: *
+Allow: /
+
+# Teknik/araç dizinleri taranmasın (içerik değeri yok)
+Disallow: /assets/
+Disallow: /data/
+
+# ------------------------------------------------ Arama motorları (açıkça izin)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# ------------------------------------------- Yapay zekâ botları (açıkça izin)
+# İçeriğimizin AI yanıtlarında/atıflarında görünmesini istiyoruz.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# ------------------------------------------------------------------- Haritalar
+Sitemap: https://sarjistasyonumguvende.com/sitemap.xml

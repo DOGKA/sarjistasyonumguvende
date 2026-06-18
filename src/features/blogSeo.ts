@@ -1,7 +1,7 @@
 import type { BlogPost } from "@/types";
 
 const SITE_NAME = "Şarj İstasyonum Güvende";
-const SITE_ORIGIN = "https://www.sarjistasyonumguvende.com";
+const SITE_ORIGIN = "https://sarjistasyonumguvende.com";
 
 /** name veya property meta etiketini günceller/oluşturur. */
 function setMeta(attr: "name" | "property", key: string, content: string): void {
