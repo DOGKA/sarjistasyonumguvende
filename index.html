@@ -32,24 +32,16 @@
 <body>
   <div id="app"></div>
   <script type="module" src="/src/main.ts"></script>
-  <!--Start of Tawk.to Script — ilk etkileşimde/boştayken ertelenmiş yüklenir-->
+  <!--Start of Tawk.to Script-->
   <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
-      var loaded=false;
-      function load(){
-        if(loaded) return; loaded=true;
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/6a3273516667451d4612f859/1jrah4tfp';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','anonymous');
-        s0.parentNode.insertBefore(s1,s0);
-      }
-      var evs=['scroll','mousemove','touchstart','keydown','pointerdown'];
-      function trigger(){evs.forEach(function(e){window.removeEventListener(e,trigger)});load();}
-      evs.forEach(function(e){window.addEventListener(e,trigger,{passive:true})});
-      window.setTimeout(load,5000);
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/6a3273516667451d4612f859/1jrah4tfp';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
     })();
   </script>
   <!--End of Tawk.to Script-->
