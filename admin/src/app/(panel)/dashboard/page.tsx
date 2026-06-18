@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import StatCard from "@/components/StatCard";
 import SetupNotice from "@/components/SetupNotice";
 import TrendChart, { type TrendPoint } from "@/components/TrendChart";
+import StatusOverview from "@/components/StatusOverview";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
@@ -98,6 +99,8 @@ export default async function DashboardPage() {
       <PageHeader title="Dashboard" subtitle="Genel analiz ve performans" />
 
       <div className="space-y-6 p-8">
+        <StatusOverview />
+
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatCard
             label="Toplam İletişim"
