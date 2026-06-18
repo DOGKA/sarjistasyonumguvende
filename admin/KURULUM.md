@@ -114,6 +114,63 @@ VITE_RISK_API_URL=http://localhost:8001/api/risk-results   # dev
 yazmayı dener; bu durumda `risk_results` için `insert` RLS politikasının
 yüklü olması gerekir (`supabase/schema.sql`).
 
+## SEO & Analiz (Google Search Console + GA4 Data API)
+
+Panelde **SEO & Analiz** sekmesi; aranan kelimeleri, gösterim/tıklama/CTR/sıralamayı
+(Search Console) ve ziyaretçi sayısı, en çok ziyaret edilen sayfalar, blog
+performansı, cihaz/trafik kaynağını (GA4) gösterir. Veriler **sunucu tarafında**,
+bir **Google servis hesabıyla** çekilir; tarayıcıya anahtar gitmez.
+
+### 1) Google Cloud servis hesabı oluştur
+
+1. <https://console.cloud.google.com> → üstten bir proje seç/oluştur.
+2. **APIs & Services → Library**'den şu ikisini **Enable** et:
+   - **Google Analytics Data API**
+   - **Google Search Console API**
+3. **APIs & Services → Credentials → Create credentials → Service account**.
+   - İsim ver (örn. `panel-analytics`), oluştur.
+4. Oluşan servis hesabına gir → **Keys → Add key → Create new key → JSON**.
+   - İnen JSON dosyasında `client_email` ve `private_key` alanları var; bunları
+     kullanacağız.
+
+### 2) Servis hesabına erişim ver
+
+- **GA4:** Google Analytics → **Admin → Property Access Management → +** →
+  servis hesabı e-postasını **Viewer** olarak ekle. Ayrıca **Property ID**'yi not
+  al (Admin → Property Settings, sayısal değer, örn. `123456789`).
+- **Search Console:** <https://search.google.com/search-console> → ilgili mülk →
+  **Settings → Users and permissions → Add user** → servis hesabı e-postasını
+  **Full** (veya Restricted) olarak ekle.
+
+### 3) Ortam değişkenleri (admin projesi)
+
+`admin/.env.local` (lokal) ve **Vercel admin projesi → Settings → Environment
+Variables** (prod):
+
+```
+GOOGLE_CLIENT_EMAIL=panel-analytics@PROJE.iam.gserviceaccount.com
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+GA4_PROPERTY_ID=123456789
+GSC_SITE_URL=sc-domain:sarjistasyonumguvende.com
+```
+
+- `GOOGLE_PRIVATE_KEY`: JSON'daki `private_key` değerinin tamamı. Tek satırda
+  `\n` kaçışlı olarak yapıştırın (kod bunu otomatik gerçek satır sonuna çevirir).
+  Vercel'de değeri **çift tırnak** içinde yapıştırmak en güvenlisidir.
+- `GSC_SITE_URL`: Search Console'da mülkünüz **Domain** tipindeyse
+  `sc-domain:alanadi.com`, **URL prefix** tipindeyse tam adres
+  `https://sarjistasyonumguvende.com/` (sondaki `/` dahil).
+
+> Değişkenler tanımlı değilse sekme nazikçe “yapılandırılmadı” uyarısı gösterir;
+> site/panel çalışmaya devam eder. Sadece biri tanımlıysa (örn. yalnız GA4) o
+> bölüm gösterilir.
+
+### 4) Notlar
+
+- Search Console verisi **2-3 gün gecikmelidir**; en güncel günler boş gelebilir.
+- Servis hesabı anahtarı **gizlidir** (`SUPABASE_SERVICE_ROLE_KEY` gibi yalnız
+  admin/sunucu tarafında); public siteye **eklenmez**.
+
 ## Notlar
 
 - `service_role` / `sb_secret_` anahtarı **asla** tarayıcıya gönderilmez;

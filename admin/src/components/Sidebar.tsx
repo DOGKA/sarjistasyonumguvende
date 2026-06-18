@@ -11,6 +11,7 @@ import {
   IconImage,
   IconLogout,
   IconMail,
+  IconSearch,
   IconShield,
 } from "@/components/icons";
 
@@ -24,6 +25,7 @@ interface NavItem {
 
 const NAV: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", Icon: IconDashboard },
+  { href: "/seo", label: "SEO & Analiz", Icon: IconSearch },
   { href: "/blog", label: "Blog", Icon: IconBlog },
   { href: "/medya", label: "Media", Icon: IconImage },
   { href: "/iletisim", label: "İletişim", Icon: IconMail },

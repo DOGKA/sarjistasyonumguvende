@@ -1,3 +1,4 @@
+import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import StatCard from "@/components/StatCard";
 import SetupNotice from "@/components/SetupNotice";
@@ -5,9 +6,11 @@ import TrendChart, { type TrendPoint } from "@/components/TrendChart";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { isGoogleConfigured } from "@/lib/google/config";
 import {
   IconBell,
   IconMail,
+  IconSearch,
   IconShield,
   IconTrendingUp,
 } from "@/components/icons";
@@ -88,6 +91,7 @@ export default async function DashboardPage() {
   ).length;
 
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const googleConnected = isGoogleConfigured();
 
   return (
     <>
@@ -143,11 +147,17 @@ export default async function DashboardPage() {
             )}
           </div>
           <p className="mt-2 text-sm text-[var(--muted)]">
-            Google Analytics 4 etiketi sitede yüklü; ziyaretçi ve dönüşüm verileri
-            GA4&apos;te toplanıyor. Bu verilerin panel içinde gösterimi (gösterim,
-            tıklama, anahtar kelime, sıralama) Search Console + GA Data API
-            entegrasyonuyla sonraki fazda eklenecek.
+            {googleConnected
+              ? "Aranan kelimeler, en çok ziyaret edilen sayfalar, blog performansı ve trafik kaynakları artık SEO & Analiz sayfasında."
+              : "Google Search Console + GA4 Data API bağlandığında aranan kelimeler, gösterim, tıklama ve sıralama burada raporlanır. Kurulum için SEO & Analiz sayfasına gidin."}
           </p>
+          <Link
+            href="/seo"
+            className="mt-4 inline-flex items-center gap-2 rounded-lg border border-[var(--border)] px-3 py-2 text-sm font-medium transition hover:bg-[var(--surface-2)]"
+          >
+            <IconSearch width={16} height={16} />
+            SEO &amp; Analiz&apos;i aç
+          </Link>
         </div>
       </div>
     </>
