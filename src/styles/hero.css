@@ -90,9 +90,9 @@
 /* Parite + saat dikey yığın; her ekran boyutunda altlı üstlü aynı hizada. */
 .hero-hud{
   position:fixed;z-index:30;
-  top:49%;right:var(--pad);transform:translateY(-50%);
+  top:40%;right:calc(var(--pad) + 24px);transform:translateY(-50%);
   display:flex;flex-direction:column;align-items:center;gap:16px;
-  --hud-size:clamp(104px,11vw,140px);
+  --hud-size:clamp(62px,6.6vw,84px);
 }
 .hero-hud.is-hidden .rate-select,
 .hero-hud.is-hidden .hero-clock{
@@ -102,7 +102,7 @@
 /* Göster/gizle düğmesi */
 .hero-hud__toggle{
   display:inline-flex;align-items:center;justify-content:center;
-  width:34px;height:34px;border-radius:50%;
+  width:26px;height:26px;border-radius:50%;
   border:1px solid rgba(255,255,255,.4);
   background:rgba(0,0,0,.28);color:#fff;cursor:pointer;
   -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
@@ -110,7 +110,7 @@
 }
 .hero-hud__toggle:hover{background:rgba(0,0,0,.45);}
 .hero-hud__toggle:active{transform:translateY(1px);}
-.hero-hud__eye{width:18px;height:18px;}
+.hero-hud__eye{width:14px;height:14px;}
 .hero-hud.is-hidden .hero-hud__eye{opacity:.55;}
 
 /* ---------- Saat HUD'u (yuvarlak; tıkladıkça şehir değişir) ---------- */

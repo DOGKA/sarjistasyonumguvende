@@ -121,7 +121,7 @@ const OPERATORS = [
       { type: "AC", label: "AC 22 kW", pricePerKwh: 8.99 },
       { type: "DC", label: "DC 180 kW", pricePerKwh: 11.49 },
     ],
-    note: "Canlı sayfadan okunamadı; manuel referans değerler.",
+    note: "Canlı sayfadan okunamadı; yedek referans değerler.",
   },
   {
     id: "zes",
@@ -154,7 +154,7 @@ const OPERATORS = [
       { type: "AC", label: "AC 22 kW", pricePerKwh: 8.79 },
       { type: "DC", label: "DC 180+ kW", pricePerKwh: 11.79 },
     ],
-    note: "Canlı sayfadan okunamadı; manuel referans değerler.",
+    note: "Canlı sayfadan okunamadı; yedek referans değerler.",
   },
   {
     id: "voltrun",
@@ -164,10 +164,10 @@ const OPERATORS = [
     parse: (flat) =>
       assemble(...vals(collect(flat, /\b(AC|DC)\s+(\d{1,2}[.,]\d{2})\s*TL\s*\/\s*kw?h/gi))),
     manual: [
-      { type: "AC", label: "AC 22 kW", pricePerKwh: 8.49 },
-      { type: "DC", label: "DC 150 kW", pricePerKwh: 11.29 },
+      { type: "AC", label: "AC", pricePerKwh: 9.9 },
+      { type: "DC", label: "DC", pricePerKwh: 12.9 },
     ],
-    note: "Canlı sayfadan okunamadı; manuel referans değerler.",
+    note: "Canlı sayfadan okunamadı; yedek referans değerler.",
   },
   {
     id: "tesla",
@@ -180,7 +180,7 @@ const OPERATORS = [
       { type: "DC", label: "Supercharger (üye olmayan)", pricePerKwh: 11.5 },
       { type: "DC", label: "Supercharger (üyelik)", pricePerKwh: 9.9 },
     ],
-    note: "Supercharger kWh fiyatı lokasyona/zamana göre değişir; manuel referans değerler.",
+    note: "Supercharger kWh fiyatı lokasyona/zamana göre değişir; yedek referans değerler.",
   },
   {
     id: "shell",
@@ -193,7 +193,7 @@ const OPERATORS = [
       { type: "AC", label: "AC 22 kW", pricePerKwh: 8.69 },
       { type: "DC", label: "DC 180 kW", pricePerKwh: 11.39 },
     ],
-    note: "Canlı sayfadan okunamadı; manuel referans değerler.",
+    note: "Canlı sayfadan okunamadı; yedek referans değerler.",
   },
   {
     id: "wat",

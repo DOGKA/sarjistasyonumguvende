@@ -7,12 +7,14 @@ import {
   IconBolt,
   IconBlog,
   IconChat,
+  IconClock,
   IconDashboard,
   IconImage,
   IconLogout,
   IconMail,
   IconSearch,
   IconShield,
+  IconTag,
 } from "@/components/icons";
 
 type IconType = ComponentType<SVGProps<SVGSVGElement>>;
@@ -28,6 +30,8 @@ const NAV: NavItem[] = [
   { href: "/seo", label: "SEO & Analiz", Icon: IconSearch },
   { href: "/blog", label: "Blog", Icon: IconBlog },
   { href: "/medya", label: "Media", Icon: IconImage },
+  { href: "/tarifeler", label: "Şarj Tarifeleri", Icon: IconTag },
+  { href: "/kurlar", label: "Kur & Saat", Icon: IconClock },
   { href: "/iletisim", label: "İletişim", Icon: IconMail },
   { href: "/risk-testleri", label: "Risk Testleri", Icon: IconShield },
   { href: "/chat", label: "Chat", Icon: IconChat },

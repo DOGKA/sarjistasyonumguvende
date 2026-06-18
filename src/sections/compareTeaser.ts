@@ -29,15 +29,15 @@ export function renderCompareTeaser(): string {
 
         <a class="cmp-teaser__cards" href="/karsilastir.html" aria-label="Araç karşılaştırma sayfasını aç">
           <div class="cmp-teaser__card" style="--accent:#e31937">
-            <img class="cmp-teaser__car" src="assets/teslamodel.png" alt="Tesla Model 3" loading="lazy" />
+            <img class="cmp-teaser__car" src="assets/teslamodel.webp" alt="Tesla Model 3" width="700" height="700" loading="lazy" />
             <div class="cmp-teaser__meta"><span>Tesla</span><b>Model 3</b><i>513 km</i></div>
           </div>
           <div class="cmp-teaser__card cmp-teaser__card--mid" style="--accent:#f06b1f">
-            <img class="cmp-teaser__car" src="assets/toggmode.png" alt="Togg T10X" loading="lazy" />
+            <img class="cmp-teaser__car" src="assets/toggmode.webp" alt="Togg T10X" width="700" height="700" loading="lazy" />
             <div class="cmp-teaser__meta"><span>Togg</span><b>T10X</b><i>523 km</i></div>
           </div>
           <div class="cmp-teaser__card" style="--accent:#c9ccd1">
-            <img class="cmp-teaser__car" src="assets/tiggomodel.png" alt="Chery Tiggo 7" loading="lazy" />
+            <img class="cmp-teaser__car" src="assets/tiggomodel.webp" alt="Chery Tiggo 7" width="700" height="700" loading="lazy" />
             <div class="cmp-teaser__meta"><span>Chery</span><b>Tiggo 7</b><i>480 km</i></div>
           </div>
         </a>

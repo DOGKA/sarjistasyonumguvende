@@ -83,7 +83,7 @@ export function renderCalculator(): string {
                 <input type="checkbox" id="calcManualToggle" />
                 <span class="calc__switch-track" aria-hidden="true"></span>
               </label>
-              <span>Manuel giriş (özel batarya / fiyat)</span>
+              <span>Özel giriş (kendi batarya / fiyat değerleriniz)</span>
             </div>
           </div>
 

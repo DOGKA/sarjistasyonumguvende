@@ -97,16 +97,51 @@ function renderListItem(post: BlogPost): string {
 }
 
 /**
+ * Blog yerleşimi (öne çıkan + "Diğer Yazılar" listesi). Filtre/arama
+ * sonucu değiştiğinde yalnızca bu blok yeniden boyanır (#blogLayout).
+ */
+export function renderBlogLayout(posts: BlogPost[]): string {
+  if (!posts.length) {
+    return /* html */ `
+      <div class="blog__layout" id="blogLayout">
+        <p class="blog__empty">Bu seçime uygun yazı bulunamadı.</p>
+      </div>`;
+  }
+
+  const [featured, ...rest] = posts;
+  return /* html */ `
+      <div class="blog__layout" id="blogLayout">
+        <div class="blog__primary">
+          <p class="blog__kicker">Öne Çıkan Yazı</p>
+          ${renderFeatured(featured)}
+        </div>
+
+        <aside class="blog__aside">
+          <div class="blog__aside-head">
+            <h3>Diğer Yazılar</h3>
+            <a href="#blog" class="link-arrow link-arrow--sm">Tümü</a>
+          </div>
+          <div class="blog__list">
+            ${rest.length ? rest.map(renderListItem).join("\n") : '<p class="blog__empty">Başka yazı yok.</p>'}
+          </div>
+        </aside>
+      </div>`;
+}
+
+/**
  * 08 — BLOG. `posts` verilirse (Supabase) dinamik; verilmezse mockup içerik.
+ * Sekme etiketleri kanonik kategori listesinden (BLOG_CATEGORIES) gelir;
+ * filtreleme `src/features/blog.ts` tarafından yapılır.
  */
 export function renderBlog(posts: BlogPost[] = BLOG_POSTS): string {
   const list = posts.length ? posts : BLOG_POSTS;
-  const [featured, ...rest] = list;
   const tabs = BLOG_CATEGORIES.map(
     (c, i) =>
       `<button type="button" class="blog-tab${
         i === 0 ? " is-active" : ""
-      }">${esc(c)}</button>`
+      }" data-cat="${esc(c)}" role="tab" aria-selected="${i === 0}">${esc(
+        c
+      )}</button>`
   ).join("");
 
   return /* html */ `
@@ -130,22 +165,7 @@ export function renderBlog(posts: BlogPost[] = BLOG_POSTS): string {
         </form>
       </div>
 
-      <div class="blog__layout">
-        <div class="blog__primary">
-          <p class="blog__kicker">Öne Çıkan Yazı</p>
-          ${renderFeatured(featured)}
-        </div>
-
-        <aside class="blog__aside">
-          <div class="blog__aside-head">
-            <h3>Diğer Yazılar</h3>
-            <a href="#blog" class="link-arrow link-arrow--sm">Tümü</a>
-          </div>
-          <div class="blog__list">
-            ${rest.map(renderListItem).join("\n")}
-          </div>
-        </aside>
-      </div>
+      ${renderBlogLayout(list)}
     </div>
   </section>`;
 }

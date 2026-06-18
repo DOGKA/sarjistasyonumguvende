@@ -60,7 +60,6 @@ export function renderBlogDetail(
         <h1 class="blogd__title">${esc(post.title)}</h1>
         <div class="blogd__byline">
           <span class="blogd__author">
-            <span class="blogd__avatar mockup" data-dim="48×48" aria-hidden="true"></span>
             <span>
               <span class="blogd__author-name">${esc(author)}</span>
               <span class="blog-meta">${esc(post.date)} &nbsp;·&nbsp; ${

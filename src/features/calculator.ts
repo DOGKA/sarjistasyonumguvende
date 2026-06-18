@@ -168,7 +168,7 @@ export function initCalculator(): void {
     operators.forEach((o, i) => {
       const opt = document.createElement("option");
       opt.value = String(i);
-      opt.textContent = o.source === "manual" ? `${o.name} (manuel)` : o.name;
+      opt.textContent = o.name;
       els.operator!.appendChild(opt);
     });
   }
@@ -295,7 +295,7 @@ export function initCalculator(): void {
     if (els.costMeta) {
       els.costMeta.textContent =
         state.manual && price != null
-          ? `${num(energy)} kWh × ${num(price, 2)} ₺ (manuel)`
+          ? `${num(energy)} kWh × ${num(price, 2)} ₺ (özel)`
           : state.tariff && state.operator
             ? `${state.operator.name} · ${state.tariff.label}`
             : "Tarife seçin";
@@ -366,13 +366,12 @@ export function initCalculator(): void {
           i === 0
             ? '<span class="calc-row__tag calc-row__tag--best">En uygun</span>'
             : `<span class="calc-row__tag">+${tl.format(diff)}</span>`;
-        const manual = r.op.source === "manual" ? '<span class="calc-row__manual">manuel</span>' : "";
         const pct = maxCost > 0 ? Math.max(8, Math.round((r.cost / maxCost) * 100)) : 100;
         return /* html */ `
           <div class="calc-row${i === 0 ? " is-best" : ""}">
             <span class="calc-row__rank">${i + 1}</span>
             <div class="calc-row__main">
-              <span class="calc-row__name">${esc(r.op.name)}${manual}</span>
+              <span class="calc-row__name">${esc(r.op.name)}</span>
               <span class="calc-row__tariff">${esc(r.tariff.label)} · ${num(r.tariff.pricePerKwh, 2)} ₺/kWh</span>
               <span class="calc-row__bar"><i style="width:${pct}%"></i></span>
             </div>

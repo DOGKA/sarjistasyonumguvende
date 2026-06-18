@@ -158,6 +158,45 @@ export function IconSearch(props: IconProps) {
   );
 }
 
+export function IconClock(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </svg>
+  );
+}
+
+export function IconTag(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L3 13V3h10l7.59 7.59a2 2 0 0 1 0 2.82Z" />
+      <circle cx="7.5" cy="7.5" r="1.5" />
+    </svg>
+  );
+}
+
+export function IconCoins(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="8" cy="8" r="5" />
+      <path d="M15.5 4.2a5 5 0 0 1 0 15.6" />
+      <path d="M8 5.5v5l3 1.5" />
+    </svg>
+  );
+}
+
+export function IconRefresh(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-6.7-3" />
+      <path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 6.7 3" />
+      <path d="M21 3v5h-5" />
+      <path d="M3 21v-5h5" />
+    </svg>
+  );
+}
+
 export function IconLogout(props: IconProps) {
   return (
     <svg {...base} {...props}>

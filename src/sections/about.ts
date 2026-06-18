@@ -10,7 +10,7 @@ export function renderAbout(): string {
 
       <div class="about__grid">
         <div class="about__visual">
-          <img class="about__img" data-media="about_main" src="assets/hakkimizda.png" alt="Şarj istasyonu ve sigorta danışmanlığı" />
+          <img class="about__img" data-media="about_main" src="assets/hakkimizda.webp" alt="Şarj istasyonu ve sigorta danışmanlığı" width="480" height="360" />
           <div class="about__visual-labels">
             <span>Şarj Ünitesi</span>
             <span>Teminat</span>

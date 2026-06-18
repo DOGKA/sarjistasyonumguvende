@@ -47,7 +47,7 @@ export function renderMission(): string {
           </div>
         </div>
         <div class="mbox mbox--eco">
-          <img class="mbox__bg" src="assets/onleyici-tasarim.png" alt="" aria-hidden="true" />
+          <img class="mbox__bg" src="assets/onleyici-tasarim.webp" alt="" aria-hidden="true" width="470" height="230" />
           <div class="mbox__eco-head">
             <span class="mbox__icon mbox__icon--leaf" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M11 20A7 7 0 0 1 4 13C4 8 8 4 18 4c0 10-4 14-9 14Z"/><path d="M8 17c2-4 5-6 9-7"/></svg>

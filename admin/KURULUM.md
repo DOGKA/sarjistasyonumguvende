@@ -19,6 +19,10 @@ NEXT_PUBLIC_SUPABASE_URL=https://pkfvjdpuxlyjccumrhzc.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_...   # publishable key
 SUPABASE_SERVICE_ROLE_KEY=sb_secret_...            # secret key (yalnızca sunucu)
 NEXT_PUBLIC_GA_ID=G-WPHMDM83ZX
+# Public (tanıtım) sitesinin adresi — "Şarj Tarifeleri" ve "Kur & Saat"
+# sayfaları canlı çekme durumunu bu adresten okur. Tanımlanmazsa varsayılan
+# olarak https://www.sarjistasyonumguvende.com kullanılır.
+NEXT_PUBLIC_SITE_URL=https://www.sarjistasyonumguvende.com
 ```
 
 Public site (kök dizin) `.env` dosyası da aynı URL + publishable key'i `VITE_`

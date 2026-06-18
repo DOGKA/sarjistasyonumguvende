@@ -86,6 +86,7 @@
 /* Arka planda soluk mockup fiyat grafiği (haritanın muadili) */
 .rate-select--hud .rate-select__bg{
   position:absolute;inset:0;
+  transform:translateY(30%);
   pointer-events:none;user-select:none;
 }
 .rate-select--hud .rate-select__bg svg{

@@ -123,6 +123,26 @@ create trigger site_media_set_updated_at
   for each row execute function public.set_updated_at();
 
 -- ---------------------------------------------------------------------
+-- 4b) ŞARJ TARİFESİ DEĞERLERİ (admin panelinden elle ayarlanan)
+--     Operatör fiyatları normalde günlük olarak canlı sayfalardan çekilir
+--     (public/data/charging-prices.json). Çekme başarısız olursa veya admin
+--     bir değeri elle güncellemek isterse, ilgili operatörün tarifeleri burada
+--     saklanır ve site bu değerleri statik JSON'un ÜZERİNE uygular.
+--     Kayıt yoksa site, koda/JSON'a gömülü değerleri kullanır.
+-- ---------------------------------------------------------------------
+create table if not exists public.charging_overrides (
+  operator_id text primary key,                 -- örn. 'voltrun', 'trugo'
+  name        text,                              -- görünen ad (opsiyonel)
+  tariffs     jsonb not null default '[]'::jsonb, -- [{type, label, pricePerKwh}]
+  updated_at  timestamptz not null default now()
+);
+
+drop trigger if exists charging_overrides_set_updated_at on public.charging_overrides;
+create trigger charging_overrides_set_updated_at
+  before update on public.charging_overrides
+  for each row execute function public.set_updated_at();
+
+-- ---------------------------------------------------------------------
 -- 5) SAYFA / ETKİLEŞİM OLAYLARI (iç analitik)
 -- ---------------------------------------------------------------------
 create table if not exists public.page_events (
@@ -148,6 +168,7 @@ alter table public.risk_results        enable row level security;
 alter table public.blog_posts           enable row level security;
 alter table public.page_events          enable row level security;
 alter table public.site_media           enable row level security;
+alter table public.charging_overrides   enable row level security;
 
 -- --- İletişim: herkes ekleyebilir, sadece giriş yapmış admin görür/günceller
 drop policy if exists contact_insert_anon on public.contact_submissions;
@@ -192,6 +213,15 @@ create policy site_media_select_all on public.site_media
 
 drop policy if exists site_media_admin_all on public.site_media;
 create policy site_media_admin_all on public.site_media
+  for all to authenticated using (true) with check (true);
+
+-- --- Şarj tarifeleri: herkes OKUR (public site), admin yönetir
+drop policy if exists charging_overrides_select_all on public.charging_overrides;
+create policy charging_overrides_select_all on public.charging_overrides
+  for select to anon, authenticated using (true);
+
+drop policy if exists charging_overrides_admin_all on public.charging_overrides;
+create policy charging_overrides_admin_all on public.charging_overrides
   for all to authenticated using (true) with check (true);
 
 -- =====================================================================

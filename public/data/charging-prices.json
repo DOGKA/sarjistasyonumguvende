@@ -51,17 +51,17 @@
       "url": "https://www.voltrun.com/tr/tarifeler",
       "source": "manual",
       "fetchedAt": "2026-06-18T12:10:55+03:00",
-      "note": "Canlı sayfadan okunamadı; manuel referans değerler.",
+      "note": "Canlı sayfadan okunamadı; yedek referans değerler.",
       "tariffs": [
         {
           "type": "AC",
-          "label": "AC 22 kW",
-          "pricePerKwh": 8.49
+          "label": "AC",
+          "pricePerKwh": 9.9
         },
         {
           "type": "DC",
-          "label": "DC 150 kW",
-          "pricePerKwh": 11.29
+          "label": "DC",
+          "pricePerKwh": 12.9
         }
       ]
     },
@@ -71,7 +71,7 @@
       "url": "https://www.tesla.com/tr_tr/support/charging/supercharger/fees",
       "source": "manual",
       "fetchedAt": "2026-06-18T12:11:00+03:00",
-      "note": "Supercharger kWh fiyatı lokasyona/zamana göre değişir; manuel referans değerler.",
+      "note": "Supercharger kWh fiyatı lokasyona/zamana göre değişir; yedek referans değerler.",
       "tariffs": [
         {
           "type": "DC",

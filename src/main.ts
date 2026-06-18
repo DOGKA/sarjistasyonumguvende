@@ -89,9 +89,23 @@ function bootstrap(): void {
   initHeroClock();
   initHeroHud();
   initSiteHeader();
-  void initRates();
-  void initSiteMedia();
-  void initBlog();
+
+  // Kritik olmayan işler (kur verisi, admin görsel override'ları, blog verisi)
+  // boştayken çalışır; Supabase chunk'ı bu sırada yüklenir, LCP ile yarışmaz.
+  whenIdle(() => {
+    void initRates();
+    void initSiteMedia();
+    void initBlog();
+  });
+}
+
+/** Tarayıcı boştayken (yoksa kısa gecikmeyle) bir işi çalıştırır. */
+function whenIdle(cb: () => void): void {
+  const ric = (window as unknown as {
+    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+  }).requestIdleCallback;
+  if (typeof ric === "function") ric(cb, { timeout: 2000 });
+  else window.setTimeout(cb, 1);
 }
 
 bootstrap();

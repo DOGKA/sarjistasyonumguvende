@@ -1,13 +1,18 @@
 import type { BlogPost } from "@/types";
 
-/** Blog kategori sekmeleri (mockup). */
+/**
+ * Blog kategori sekmeleri. İlk sekme her zaman "Tümü" (filtre kapalı).
+ * Buradaki liste, admin panelindeki kategori listesi ve seed'lenen
+ * yazıların kategorileriyle aynı olmalıdır.
+ */
 export const BLOG_CATEGORIES: string[] = [
   "Tümü",
-  "Design",
-  "Lorem",
-  "Ipsum",
-  "Dolor",
-  "Amet",
+  "Risk Yönetimi",
+  "Sigorta Rehberleri",
+  "İşletmeciler İçin",
+  "Teknik Bilgiler",
+  "Güncel ve SEO Odaklı",
+  "Vaka Analizleri",
 ];
 
 /**

@@ -17,13 +17,16 @@ import {
 const META_TITLE_MAX = 60;
 const META_DESC_MAX = 160;
 
+// Public sitedeki kategori sekmeleriyle (src/data/blog.ts → BLOG_CATEGORIES)
+// aynı tutulmalıdır. Serbest metin alanıdır: listeden seçebilir veya yeni
+// bir kategori yazabilirsiniz.
 const CATEGORIES = [
-  "Rehber",
-  "Sigorta",
-  "Şarj İstasyonu",
-  "Elektrikli Araç",
-  "Mevzuat",
-  "Haberler",
+  "Risk Yönetimi",
+  "Sigorta Rehberleri",
+  "İşletmeciler İçin",
+  "Teknik Bilgiler",
+  "Güncel ve SEO Odaklı",
+  "Vaka Analizleri",
 ];
 
 /* --------------------------------------------------------------- yardımcılar */

@@ -21,13 +21,13 @@ export function renderReviews(): string {
           </div>
           <div class="rcard__bottom">
             <div class="avatars">
-              <img class="avatar" src="assets/av-9f2a.jpg" alt="" loading="lazy" />
-              <img class="avatar" src="assets/av-3b7c.jpg" alt="" loading="lazy" />
-              <img class="avatar" src="assets/av-c41d.jpg" alt="" loading="lazy" />
-              <img class="avatar" src="assets/av-7e08.jpg" alt="" loading="lazy" />
-              <img class="avatar" src="assets/av-1a55.jpg" alt="" loading="lazy" />
-              <img class="avatar" src="assets/av-b6f3.jpg" alt="" loading="lazy" />
-              <img class="avatar" src="assets/av-2d9e.jpg" alt="" loading="lazy" />
+              <img class="avatar" src="assets/av-9f2a.jpg" alt="" width="200" height="200" loading="lazy" />
+              <img class="avatar" src="assets/av-3b7c.jpg" alt="" width="200" height="200" loading="lazy" />
+              <img class="avatar" src="assets/av-c41d.jpg" alt="" width="200" height="200" loading="lazy" />
+              <img class="avatar" src="assets/av-7e08.jpg" alt="" width="200" height="200" loading="lazy" />
+              <img class="avatar" src="assets/av-1a55.jpg" alt="" width="200" height="200" loading="lazy" />
+              <img class="avatar" src="assets/av-b6f3.jpg" alt="" width="200" height="200" loading="lazy" />
+              <img class="avatar" src="assets/av-2d9e.jpg" alt="" width="200" height="200" loading="lazy" />
               <span class="avatars__count">10B+</span>
             </div>
           </div>

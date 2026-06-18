@@ -40,6 +40,7 @@
 }
 .blog__search input::placeholder{color:#a3a39e;}
 .blog__search input:focus{outline:none;border-color:var(--black);}
+.blog__empty{color:var(--muted);font-size:14px;padding:24px 0;}
 
 /* ---------- Ortak etiket / meta / beğeni ---------- */
 .blog-tag{
@@ -171,8 +172,6 @@
 .blogd__author{display:flex;align-items:center;gap:12px;}
 .blogd__author > span{display:flex;flex-direction:column;gap:2px;}
 .blogd__author-name{font-size:14px;font-weight:600;}
-.blogd__avatar{width:44px;height:44px;border-radius:50%;flex:0 0 auto;}
-.blogd__avatar.mockup[data-dim]::after{font-size:7px;}
 .blogd__save{
   width:42px;height:42px;border-radius:50%;cursor:pointer;flex:0 0 auto;
   display:flex;align-items:center;justify-content:center;
