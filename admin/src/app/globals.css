@@ -25,3 +25,146 @@ body {
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: -0.01em;
 }
+
+/* ============================================================
+   GLASSMORPHISM — yalnızca giriş (login) ekranı
+   Sınıflar login sayfasına özeldir; panel temasını etkilemez.
+   ============================================================ */
+.login-bg {
+  background:
+    radial-gradient(1200px 800px at 15% -10%, #0d3b29 0%, transparent 55%),
+    radial-gradient(1000px 700px at 110% 10%, #062a3a 0%, transparent 50%),
+    linear-gradient(160deg, #06140f 0%, #08231a 45%, #04100c 100%);
+  isolation: isolate;
+}
+
+/* arka plandaki yumuşak ışık küreleri (aurora) */
+.login-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+.login-orb--1 {
+  width: 460px;
+  height: 460px;
+  top: -120px;
+  left: -100px;
+  background: radial-gradient(circle, #22c55e 0%, rgba(34, 197, 94, 0) 70%);
+  animation: loginFloat1 14s ease-in-out infinite;
+}
+.login-orb--2 {
+  width: 420px;
+  height: 420px;
+  bottom: -140px;
+  right: -110px;
+  background: radial-gradient(circle, #2dd4bf 0%, rgba(45, 212, 191, 0) 70%);
+  animation: loginFloat2 17s ease-in-out infinite;
+}
+.login-orb--3 {
+  width: 360px;
+  height: 360px;
+  top: 40%;
+  left: 60%;
+  background: radial-gradient(circle, #0ea5e9 0%, rgba(14, 165, 233, 0) 70%);
+  opacity: 0.35;
+  animation: loginFloat1 20s ease-in-out infinite reverse;
+}
+
+@keyframes loginFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, 30px) scale(1.08); }
+}
+@keyframes loginFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-36px, -28px) scale(1.1); }
+}
+
+/* buzlu cam kart */
+.login-card {
+  position: relative;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+/* üst kenarda ince parlama */
+.login-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 255, 255, 0) 40%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* cam input'lar */
+.login-input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.07);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.875rem;
+  color: #f5fff9;
+  outline: none;
+  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+.login-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+.login-input:focus {
+  border-color: rgba(34, 197, 94, 0.7);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+}
+
+/* yeşil gradyan buton */
+.login-btn {
+  width: 100%;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #052e16;
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 60%, #16a34a 100%);
+  box-shadow: 0 10px 26px rgba(34, 197, 94, 0.35);
+  transition: transform 0.12s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+.login-btn:hover:not(:disabled) {
+  filter: brightness(1.05);
+  box-shadow: 0 14px 32px rgba(34, 197, 94, 0.45);
+}
+.login-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-orb {
+    animation: none;
+  }
+}

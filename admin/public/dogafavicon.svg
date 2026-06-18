@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1000 1000" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M500 58.1666C255.92 58.1666 58.1666 255.92 58.1666 500C58.1666 743.991 255.92 941.833 500 941.833C743.991 941.833 941.833 743.991 941.833 500C941.833 255.92 743.991 58.1666 500 58.1666Z" id="Fill"/>
+<path d="M500 58.1666C255.92 58.1666 58.1666 255.92 58.1666 500C58.1666 743.991 255.92 941.833 500 941.833C743.991 941.833 941.833 743.991 941.833 500C941.833 255.92 743.991 58.1666 500 58.1666Z" id="Fill_2"/>
+</defs>
+<g id="Katman-1" vectornator:layerName="Katman 1">
+<use fill="#135650" fill-opacity="0.121449" fill-rule="nonzero" opacity="0" stroke="#ffffff" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="85.3613" vectornator:layerName="path" xlink:href="#Fill"/>
+<clipPath clip-rule="nonzero" id="ClipPath">
+<use xlink:href="#Fill"/>
+</clipPath>
+<g clip-path="url(#ClipPath)">
+<use fill="none" opacity="1" stroke="#ffffff" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="85.3613" vectornator:layerName="path 1" xlink:href="#Fill_2"/>
+<clipPath clip-rule="nonzero" id="ClipPath_2">
+<use xlink:href="#Fill_2"/>
+</clipPath>
+<g clip-path="url(#ClipPath_2)">
+<path d="M603.501 252.186C361.733 392.32 298.334 580.915 423.975 820.816C425.576 823.839 421.397 826.507 419.262 823.839C363.867 753.861 325.187 683.171 309.182 611.414C256.098 374.626 484.084 205.948 693.663 167.98C704.067 166.113 712.336 176.161 708.513 186.12C637.112 372.758 827.841 656.407 425.398 720.783C383.251 531.477 430.377 371.336 603.501 252.186" fill="#ffffff" fill-rule="evenodd" opacity="1" stroke="none" vectornator:layerName="path 2"/>
+</g>
+</g>
+</g>
+</svg>

@@ -14,5 +14,8 @@ export function renderFooter(): string {
         <a href="#">Gizlilik Politikası</a>
       </div>
     </div>
+    <div class="container footer__credit">
+      <span>Developed by <a href="https://juststack.co/" target="_blank" rel="noopener noreferrer">Juststack Software and Technology LLC</a></span>
+    </div>
   </footer>`;
 }
