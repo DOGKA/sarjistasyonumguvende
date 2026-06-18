@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "scrape:prices": "node scripts/scrape-prices.mjs",
-    "fetch:rates": "node scripts/fetch-rates.mjs"
+    "fetch:rates": "node scripts/fetch-rates.mjs",
+    "seed:blog": "node scripts/seed-blog.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.78.0",
