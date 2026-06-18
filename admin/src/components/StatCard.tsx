@@ -12,7 +12,7 @@ export default function StatCard({
   icon?: ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5">
+    <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)]">
       <div className="flex items-center justify-between">
         <span className="text-sm text-[var(--muted)]">{label}</span>
         {icon && <span className="text-[var(--muted)]">{icon}</span>}

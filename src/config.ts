@@ -24,3 +24,12 @@ export const SUPABASE_URL: string = import.meta.env.VITE_SUPABASE_URL ?? "";
 /** Supabase anon (public) anahtarı (.env: VITE_SUPABASE_ANON_KEY). */
 export const SUPABASE_ANON_KEY: string =
   import.meta.env.VITE_SUPABASE_ANON_KEY ?? "";
+
+/**
+ * Risk testi sonuçlarını kaydeden sunucu API'si (admin paneli).
+ * Örn: http://localhost:8001/api/risk-results (dev) veya
+ * https://panel.alanadiniz.com/api/risk-results (prod).
+ * Tanımlıysa kayıt buraya POST edilir (RLS'ye takılmaz); tanımlı değilse
+ * doğrudan Supabase'e (anon) yazmaya geri düşülür.
+ */
+export const RISK_API_URL: string = import.meta.env.VITE_RISK_API_URL ?? "";

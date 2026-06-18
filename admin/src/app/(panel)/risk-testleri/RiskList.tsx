@@ -19,9 +19,9 @@ function formatDate(iso: string): string {
 }
 
 function scoreColor(score: number): string {
-  if (score >= 70) return "text-emerald-300";
-  if (score >= 40) return "text-amber-300";
-  return "text-red-300";
+  if (score >= 70) return "text-emerald-600";
+  if (score >= 40) return "text-amber-600";
+  return "text-red-600";
 }
 
 function toCsv(items: RiskResult[]): string {

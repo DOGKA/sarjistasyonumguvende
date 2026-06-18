@@ -3,7 +3,7 @@ import SetupNotice from "@/components/SetupNotice";
 import EmptyState from "@/components/EmptyState";
 import { IconShield } from "@/components/icons";
 import RiskList from "./RiskList";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import type { RiskResult } from "@/lib/types";
 
@@ -19,7 +19,7 @@ export default async function RiskPage() {
     );
   }
 
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { data } = await supabase
     .from("risk_results")
     .select("*")

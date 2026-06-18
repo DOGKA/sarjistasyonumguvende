@@ -14,9 +14,14 @@ export interface Review {
   q: string;
 }
 
-/** Blog yazısı (Blog bölümü — mockup içerik). */
+/**
+ * Blog yazısı.
+ * Hem statik mockup (src/data/blog.ts) hem de Supabase'ten gelen
+ * dinamik yazılar için kullanılır. Dinamik alanlar opsiyoneldir;
+ * gerçek kapak görseli (`coverUrl`) yoksa `dim` ile mockup gösterilir.
+ */
 export interface BlogPost {
-  /** Kategori etiketi (örn. "Design"). */
+  /** Kategori etiketi (örn. "Rehber"). */
   category: string;
   /** Yazı başlığı. */
   title: string;
@@ -26,10 +31,34 @@ export interface BlogPost {
   date: string;
   /** Tahmini okuma süresi (dakika). */
   readMin: number;
-  /** Kapak görseli mockup ölçüsü (örn. "1200 × 720"). */
-  dim: string;
+  /** Kapak görseli mockup ölçüsü (örn. "1200 × 720"). Gerçek görsel yoksa. */
+  dim?: string;
   /** Beğeni/etkileşim sayısı (More Articles listesi rozeti). */
   likes: number;
+
+  /* ----------------------------- Dinamik (Supabase) alanları ----------------------------- */
+  /** Kayıt kimliği. */
+  id?: string;
+  /** URL slug'ı (blog.html?p=SLUG). */
+  slug?: string;
+  /** Zengin HTML gövde. */
+  content?: string;
+  /** Kapak görseli URL'i. */
+  coverUrl?: string;
+  /** Kapak görseli alt metni. */
+  coverAlt?: string;
+  /** Yazar (byline). */
+  author?: string;
+  /** Etiketler. */
+  tags?: string[];
+
+  /* ----------------------------- SEO alanları ----------------------------- */
+  metaTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
+  canonicalUrl?: string;
+  ogImageUrl?: string;
+  noindex?: boolean;
 }
 
 /** Risk testi seçeneği: [etiket, puan]. */

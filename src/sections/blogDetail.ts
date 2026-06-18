@@ -1,21 +1,54 @@
 import { esc } from "@/lib/dom";
 import { BLOG_POSTS } from "@/data/blog";
 import { renderBlogCard } from "@/sections/blog";
+import type { BlogPost } from "@/types";
 
-/** Gövde paragrafları (lorem ipsum mockup içerik). */
+/** Gövde paragrafları (yalnızca mockup/içeriksiz yazılar için yedek). */
 const BODY_PARAGRAPHS: string[] = [
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-  "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.",
 ];
 
-/** BLOG DETAY — tek yazı görünümü + altında "Diğer Yazılar". */
-export function renderBlogDetail(): string {
-  const post = BLOG_POSTS[0];
-  const others = BLOG_POSTS.slice(1);
+/** Yedek (mockup) gövde — gerçek HTML içerik yoksa kullanılır. */
+function fallbackBody(): string {
+  return /* html */ `
+    ${BODY_PARAGRAPHS.map((p) => `<p>${esc(p)}</p>`).join("\n")}
+    <h2>Ut enim ad minim veniam</h2>
+    <p>${esc(BODY_PARAGRAPHS[0])}</p>
+    <blockquote>"Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, quis nostrud exercitation ullamco."</blockquote>`;
+}
 
-  const body = BODY_PARAGRAPHS.map((p) => `<p>${esc(p)}</p>`).join("\n");
+/** Kapak görseli bloğu: gerçek görsel varsa <img>, yoksa mockup. */
+function cover(post: BlogPost): string {
+  if (post.coverUrl) {
+    return `<div class="blogd__cover"><img src="${esc(
+      post.coverUrl
+    )}" alt="${esc(post.coverAlt || post.title)}" /></div>`;
+  }
+  return `<div class="blogd__cover mockup" data-dim="${esc(
+    post.dim ?? "1200 × 720"
+  )}" aria-hidden="true"></div>`;
+}
+
+/** Etiket rozetleri (varsa). */
+function tags(post: BlogPost): string {
+  if (!post.tags?.length) return "";
+  return `<div class="blogd__tags">${post.tags
+    .map((t) => `<span class="blog-tag">#${esc(t)}</span>`)
+    .join("")}</div>`;
+}
+
+/**
+ * BLOG DETAY — tek yazı görünümü + altında "Diğer Yazılar".
+ * `post` verilirse (Supabase) dinamik; verilmezse ilk mockup yazı gösterilir.
+ */
+export function renderBlogDetail(
+  post: BlogPost = BLOG_POSTS[0],
+  others: BlogPost[] = BLOG_POSTS.slice(1)
+): string {
+  const body = post.content?.trim() ? post.content : fallbackBody();
+  const author = post.author || "Şarj İstasyonum Ekibi";
 
   return /* html */ `
   <main class="blogd">
@@ -29,8 +62,10 @@ export function renderBlogDetail(): string {
           <span class="blogd__author">
             <span class="blogd__avatar mockup" data-dim="48×48" aria-hidden="true"></span>
             <span>
-              <span class="blogd__author-name">Lorem Yazar</span>
-              <span class="blog-meta">${esc(post.date)} &nbsp;·&nbsp; ${post.readMin} dk okuma</span>
+              <span class="blogd__author-name">${esc(author)}</span>
+              <span class="blog-meta">${esc(post.date)} &nbsp;·&nbsp; ${
+    post.readMin
+  } dk okuma</span>
             </span>
           </span>
           <button type="button" class="blogd__save" aria-label="Yazıyı kaydet">
@@ -39,19 +74,15 @@ export function renderBlogDetail(): string {
         </div>
       </header>
 
-      <div class="blogd__cover mockup" data-dim="1200 × 720" aria-hidden="true"></div>
+      ${cover(post)}
+
+      ${post.excerpt ? `<p class="blog-feature__excerpt" style="font-size:18px;margin-bottom:24px;">${esc(post.excerpt)}</p>` : ""}
 
       <div class="blogd__body">
         ${body}
-        <figure class="blogd__figure">
-          <div class="blogd__figure-media mockup" data-dim="960 × 540" aria-hidden="true"></div>
-          <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-        </figure>
-        <h2>Ut enim ad minim veniam</h2>
-        <p>${esc(BODY_PARAGRAPHS[0])}</p>
-        <blockquote>"Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, quis nostrud exercitation ullamco."</blockquote>
-        <p>${esc(BODY_PARAGRAPHS[1])}</p>
       </div>
+
+      ${tags(post)}
 
       <div
         class="blogd__share"
@@ -59,7 +90,6 @@ export function renderBlogDetail(): string {
         data-title="${esc(post.title)}"
         data-category="${esc(post.category)}"
         data-date="${esc(post.date)}"
-        data-dim="${esc(post.dim)}"
       >
         <span class="blogd__share-label">Bu yazıyı paylaş</span>
         <div class="blogd__share-btns">
@@ -75,7 +105,9 @@ export function renderBlogDetail(): string {
       </div>
     </article>
 
-    <section class="blogd__more">
+    ${
+      others.length
+        ? `<section class="blogd__more">
       <div class="container">
         <div class="blogd__more-head">
           <h2>Diğer Yazılar</h2>
@@ -85,6 +117,8 @@ export function renderBlogDetail(): string {
           ${others.map(renderBlogCard).join("\n")}
         </div>
       </div>
-    </section>
+    </section>`
+        : ""
+    }
   </main>`;
 }

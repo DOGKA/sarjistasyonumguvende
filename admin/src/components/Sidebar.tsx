@@ -8,6 +8,7 @@ import {
   IconBlog,
   IconChat,
   IconDashboard,
+  IconImage,
   IconLogout,
   IconMail,
   IconShield,
@@ -24,6 +25,7 @@ interface NavItem {
 const NAV: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", Icon: IconDashboard },
   { href: "/blog", label: "Blog", Icon: IconBlog },
+  { href: "/medya", label: "Media", Icon: IconImage },
   { href: "/iletisim", label: "İletişim", Icon: IconMail },
   { href: "/risk-testleri", label: "Risk Testleri", Icon: IconShield },
   { href: "/chat", label: "Chat", Icon: IconChat },

@@ -3,6 +3,7 @@ import StatCard from "@/components/StatCard";
 import SetupNotice from "@/components/SetupNotice";
 import TrendChart, { type TrendPoint } from "@/components/TrendChart";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import {
   IconBell,
@@ -30,6 +31,7 @@ export default async function DashboardPage() {
   }
 
   const supabase = await createClient();
+  const admin = createAdminClient();
   const since = new Date();
   since.setDate(since.getDate() - (DAYS - 1));
   const sinceIso = new Date(since.toISOString().slice(0, 10)).toISOString();
@@ -42,7 +44,7 @@ export default async function DashboardPage() {
       .from("contact_submissions")
       .select("id", { count: "exact", head: true })
       .eq("status", "new"),
-    supabase.from("risk_results").select("created_at, score"),
+    admin.from("risk_results").select("created_at, score"),
   ]);
 
   const contacts = contactsRes.data ?? [];
@@ -119,23 +121,23 @@ export default async function DashboardPage() {
           />
         </div>
 
-        <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5">
+        <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)]">
           <h2 className="mb-4 text-sm font-medium text-[var(--muted)]">
             Son {DAYS} gün — günlük aktivite
           </h2>
           <TrendChart data={trend} />
         </div>
 
-        <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5">
+        <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)]">
           <div className="flex items-center justify-between gap-3">
             <h2 className="text-sm font-medium">SEO / Google Analytics</h2>
             {gaId ? (
-              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1 text-xs text-emerald-300">
-                <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs text-emerald-700">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
                 Etiket bağlı · {gaId}
               </span>
             ) : (
-              <span className="rounded-full bg-amber-500/15 px-3 py-1 text-xs text-amber-300">
+              <span className="rounded-full bg-amber-50 px-3 py-1 text-xs text-amber-700">
                 Etiket bağlı değil
               </span>
             )}

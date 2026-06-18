@@ -9,25 +9,6 @@ export function renderMission(): string {
         <span class="eyebrow">07 &nbsp;·&nbsp; Misyonumuz</span>
       </div>
 
-      <div class="stats">
-        <div class="stat">
-          <span class="stat__num">10B+</span>
-          <p>Güvence altına alınan şarj ünitesi</p>
-        </div>
-        <div class="stat">
-          <span class="stat__num">30+</span>
-          <p>Şarj istasyonuna özel teminat çözümü</p>
-        </div>
-        <div class="stat">
-          <span class="stat__num">%98</span>
-          <p>Hasar süreçlerinde müşteri memnuniyeti</p>
-        </div>
-        <div class="stat">
-          <span class="stat__num">7/24</span>
-          <p>Kesintisiz hasar ve danışmanlık desteği</p>
-        </div>
-      </div>
-
       <div class="mission__boxes">
         <div class="mbox mbox--icon">
           <span class="mbox__icon" aria-hidden="true">
@@ -44,7 +25,25 @@ export function renderMission(): string {
           </span>
           <div class="mbox__foot">
             <span class="stat__num">30+</span>
-            <p>Anlaşmalı sigorta ve teminat çözümü</p>
+            <p>Şarj istasyonuna özel teminat çözümü</p>
+          </div>
+        </div>
+        <div class="mbox mbox--icon">
+          <span class="mbox__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+          </span>
+          <div class="mbox__foot">
+            <span class="stat__num">%98</span>
+            <p>Hasar süreçlerinde müşteri memnuniyeti</p>
+          </div>
+        </div>
+        <div class="mbox mbox--icon">
+          <span class="mbox__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </span>
+          <div class="mbox__foot">
+            <span class="stat__num">7/24</span>
+            <p>Kesintisiz hasar ve danışmanlık desteği</p>
           </div>
         </div>
         <div class="mbox mbox--eco">

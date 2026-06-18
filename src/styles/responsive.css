@@ -25,6 +25,8 @@
   .reviews__grid{gap:16px;}
   .reviewer--v{writing-mode:horizontal-tb;flex-direction:row;align-items:center;}
   .stats{gap:30px 20px;grid-template-columns:1fr 1fr;}
+  .mission__boxes{grid-template-rows:none;}
+  .mbox--eco{grid-column:auto;grid-row:auto;}
   .mbox__media{width:100%;}
 
   .risk{padding:64px 0;}

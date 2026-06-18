@@ -10,10 +10,10 @@ import {
 import { getContactFileUrl, updateContactStatus } from "./actions";
 
 const STATUS_META: Record<ContactStatus, { label: string; cls: string }> = {
-  new: { label: "Yeni", cls: "bg-sky-500/15 text-sky-300" },
-  read: { label: "Okundu", cls: "bg-slate-500/15 text-slate-300" },
-  answered: { label: "Yanıtlandı", cls: "bg-emerald-500/15 text-emerald-300" },
-  archived: { label: "Arşiv", cls: "bg-zinc-500/15 text-zinc-400" },
+  new: { label: "Yeni", cls: "bg-sky-50 text-sky-700" },
+  read: { label: "Okundu", cls: "bg-slate-100 text-slate-600" },
+  answered: { label: "Yanıtlandı", cls: "bg-emerald-50 text-emerald-700" },
+  archived: { label: "Arşiv", cls: "bg-zinc-100 text-zinc-500" },
 };
 
 const SUBJECT_FALLBACK = "—";

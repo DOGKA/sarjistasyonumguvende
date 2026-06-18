@@ -48,10 +48,42 @@ export interface BlogPost {
   excerpt: string | null;
   content: string | null;
   cover_url: string | null;
+  cover_alt: string | null;
+  author: string | null;
+  tags: string[];
   status: BlogStatus;
   published_at: string | null;
   read_min: number | null;
   likes: number;
+
+  /* SEO */
+  meta_title: string | null;
+  meta_description: string | null;
+  meta_keywords: string | null;
+  canonical_url: string | null;
+  og_image_url: string | null;
+  noindex: boolean;
+}
+
+/** Editör formundan gelen, kaydedilebilir blog alanları. */
+export interface BlogPostInput {
+  title: string;
+  slug: string;
+  category: string | null;
+  excerpt: string | null;
+  content: string | null;
+  cover_url: string | null;
+  cover_alt: string | null;
+  author: string | null;
+  tags: string[];
+  status: BlogStatus;
+  read_min: number | null;
+  meta_title: string | null;
+  meta_description: string | null;
+  meta_keywords: string | null;
+  canonical_url: string | null;
+  og_image_url: string | null;
+  noindex: boolean;
 }
 
 export interface PageEvent {

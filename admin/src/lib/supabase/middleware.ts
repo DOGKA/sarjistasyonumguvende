@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 
 /** Korumasız (girişe ihtiyaç duymayan) yollar. */
-const PUBLIC_PATHS = ["/login", "/auth"];
+const PUBLIC_PATHS = ["/login", "/auth", "/api/risk-results"];
 
 /**
  * Her istekte oturumu yeniler ve giriş yapmamış kullanıcıyı /login'e yönlendirir.

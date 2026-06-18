@@ -14,7 +14,7 @@ export function renderSolutions(): string {
       <div class="solutions__cards">
         <article class="scard">
           <div class="scard__media">
-            <img src="assets/riskmuh1.jpg" alt="Risk mühendisliği ve analizi" />
+            <img data-media="solutions_risk" src="assets/riskmuh1.jpg" alt="Risk mühendisliği ve analizi" />
             <span class="scard__pill">Risk Analizi</span>
           </div>
           <div class="scard__foot">
@@ -24,7 +24,7 @@ export function renderSolutions(): string {
         </article>
         <article class="scard">
           <div class="scard__media">
-            <img src="assets/hatahasar1.jpg" alt="Hızlı hasar yönetimi" />
+            <img data-media="solutions_damage" src="assets/hatahasar1.jpg" alt="Hızlı hasar yönetimi" />
             <span class="scard__pill">Hasar</span>
           </div>
           <div class="scard__foot">

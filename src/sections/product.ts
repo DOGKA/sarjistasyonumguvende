@@ -5,7 +5,7 @@ export function renderProduct(): string {
     <div class="container">
       <div class="product__top">
         <div class="product__intro">
-          <div class="product__intro-frame" id="introFrame"><img src="assets/kapsamlikoruma.jpg" alt="Kapsamlı Koruma" /></div>
+          <div class="product__intro-frame" id="introFrame"><img data-media="product_intro" src="assets/kapsamlikoruma.jpg" alt="Kapsamlı Koruma" /></div>
           <span class="product__intro-label">Kapsamlı Koruma</span>
         </div>
         <div class="product__title">
@@ -26,35 +26,35 @@ export function renderProduct(): string {
         <div class="product__carousel">
           <div class="pcards" id="pcards">
             <article class="pcard">
-              <div class="pcard__media"><img src="assets/yanginteminati.jpg" alt="Yangın Teminatı" /></div>
+              <div class="pcard__media"><img data-media="product_fire" src="assets/yanginteminati.jpg" alt="Yangın Teminatı" /></div>
               <div class="pcard__foot">
                 <span>Yangın Teminatı</span>
                 <a href="#iletisim">Teminat Detayı →</a>
               </div>
             </article>
             <article class="pcard">
-              <div class="pcard__media"><img src="assets/makinakirilmasi.jpg" alt="Makine Kırılması" /></div>
+              <div class="pcard__media"><img data-media="product_machine" src="assets/makinakirilmasi.jpg" alt="Makine Kırılması" /></div>
               <div class="pcard__foot">
                 <span>Makine Kırılması</span>
                 <a href="#iletisim">Teminat Detayı →</a>
               </div>
             </article>
             <article class="pcard">
-              <div class="pcard__media"><img src="assets/dogalafet.jpg" alt="Doğal Afet" /></div>
+              <div class="pcard__media"><img data-media="product_disaster" src="assets/dogalafet.jpg" alt="Doğal Afet" /></div>
               <div class="pcard__foot">
                 <span>Doğal Afet</span>
                 <a href="#iletisim">Teminat Detayı →</a>
               </div>
             </article>
             <article class="pcard">
-              <div class="pcard__media"><img src="assets/siberrisk.jpg" alt="Siber Risk" /></div>
+              <div class="pcard__media"><img data-media="product_cyber" src="assets/siberrisk.jpg" alt="Siber Risk" /></div>
               <div class="pcard__foot">
                 <span>Siber Risk</span>
                 <a href="#iletisim">Teminat Detayı →</a>
               </div>
             </article>
             <article class="pcard">
-              <div class="pcard__media"><img src="assets/elektronikcihaz.jpg" alt="Elektronik Cihaz" /></div>
+              <div class="pcard__media"><img data-media="product_electronic" src="assets/elektronikcihaz.jpg" alt="Elektronik Cihaz" /></div>
               <div class="pcard__foot">
                 <span>Elektronik Cihaz</span>
                 <a href="#iletisim">Teminat Detayı →</a>

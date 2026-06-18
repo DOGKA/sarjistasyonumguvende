@@ -7,7 +7,7 @@ export function renderCta(): string {
     <div class="container">
       <div class="cta__row">
         <div class="cta__visual">
-          <div class="cta__visual-frame"><img src="assets/footer1-dahafazla.jpg" alt="Daha Fazla" /></div>
+          <div class="cta__visual-frame"><img data-media="cta_visual" src="assets/footer1-dahafazla.jpg" alt="Daha Fazla" /></div>
           <span class="cta__visual-label">Daha Fazla</span>
         </div>
         <div class="cta__headline">
@@ -18,7 +18,7 @@ export function renderCta(): string {
 
       <div class="cta__bottom">
         <div class="cta__graphic">
-          <img src="assets/footer2.jpg" alt="EV şarj konnektörü" />
+          <img data-media="cta_graphic" src="assets/footer2.jpg" alt="EV şarj konnektörü" />
         </div>
         <div class="cta__actions">
           <p class="cta__slogan">Hızlı. Güvenilir. Eksiksiz Teminat.</p>

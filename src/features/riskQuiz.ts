@@ -3,6 +3,7 @@ import { quizSections, quizIntroLines, quizResultTiers } from "@/data/quiz";
 import type { QuizOption, QuizResultTier } from "@/types";
 import { createRiskBackground } from "./riskBackground";
 import { getSupabase } from "@/lib/supabase";
+import { RISK_API_URL } from "@/config";
 import { trackEvent } from "@/features/analytics";
 
 interface FlatQuestion {
@@ -207,11 +208,8 @@ export function initRiskQuiz(): void {
     return quizResultTiers[quizResultTiers.length - 1];
   }
 
-  /** Sonucu (skor + cevap dökümü + lead) Supabase'e kaydeder. */
+  /** Sonucu (skor + cevap dökümü + lead) sunucuya / Supabase'e kaydeder. */
   function saveResult(score: number, tier: QuizResultTier): void {
-    const supabase = getSupabase();
-    if (!supabase) return;
-
     const breakdown = flat.map((item, i) => {
       const oi = answers[i];
       const opt = typeof oi === "number" ? item.o[oi] : undefined;
@@ -223,17 +221,36 @@ export function initRiskQuiz(): void {
       };
     });
 
+    const payload = {
+      name: lead.name || null,
+      email: lead.email || null,
+      score,
+      tier: tier.cls,
+      tier_label: tier.label,
+      answers: breakdown,
+      total_questions: TOTAL,
+    };
+
+    // 1) Tercih: admin sunucu API'si (service role; RLS'ye takılmaz)
+    if (RISK_API_URL) {
+      void fetch(RISK_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      }).catch(() => {
+        /* sessizce yut — sonuç ekranı zaten gösterildi */
+      });
+      return;
+    }
+
+    // 2) Geri düşüş: doğrudan Supabase (anon). RLS insert politikası gerekir.
+    const supabase = getSupabase();
+    if (!supabase) return;
+
     void supabase
       .from("risk_results")
-      .insert({
-        name: lead.name || null,
-        email: lead.email || null,
-        score,
-        tier: tier.cls,
-        tier_label: tier.label,
-        answers: breakdown,
-        total_questions: TOTAL,
-      })
+      .insert(payload)
       .then(() => {
         void supabase
           .from("page_events")

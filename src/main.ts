@@ -24,6 +24,8 @@ import { initHeroClock } from "@/features/heroClock";
 import { initHeroHud } from "@/features/heroHud";
 import { initRates } from "@/features/rates";
 import { initSiteHeader } from "@/features/siteHeader";
+import { initSiteMedia } from "@/features/siteMedia";
+import { initBlog } from "@/features/blog";
 
 import { qs } from "@/lib/dom";
 
@@ -60,6 +62,8 @@ function bootstrap(): void {
   initHeroHud();
   initSiteHeader();
   void initRates();
+  void initSiteMedia();
+  void initBlog();
 }
 
 bootstrap();

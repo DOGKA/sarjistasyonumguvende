@@ -31,16 +31,17 @@ export default function TrendChart({ data }: { data: TrendPoint[] }) {
               <stop offset="100%" stopColor="#22c55e" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#233149" />
-          <XAxis dataKey="label" stroke="#93a4bf" fontSize={11} tickLine={false} />
-          <YAxis stroke="#93a4bf" fontSize={11} tickLine={false} allowDecimals={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e3e3e8" />
+          <XAxis dataKey="label" stroke="#6e6e73" fontSize={11} tickLine={false} />
+          <YAxis stroke="#6e6e73" fontSize={11} tickLine={false} allowDecimals={false} />
           <Tooltip
             contentStyle={{
-              background: "#16233d",
-              border: "1px solid #233149",
-              borderRadius: 8,
-              color: "#e6edf6",
+              background: "#ffffff",
+              border: "1px solid #e3e3e8",
+              borderRadius: 12,
+              color: "#1d1d1f",
               fontSize: 12,
+              boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
             }}
           />
           <Area

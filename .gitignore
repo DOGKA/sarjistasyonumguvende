@@ -8,6 +8,7 @@
 # Bağımlılıklar ve derleme çıktıları
 node_modules/
 dist/
+.next/
 *.tsbuildinfo
 
 # Yerel kaynak materyaller (sitede kullanılmıyor)
