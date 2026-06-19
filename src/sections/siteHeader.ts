@@ -20,14 +20,11 @@ const NAV_LINKS: NavLink[] = [
   { key: "cozumler", href: "/#cozumler", label: "Çözümler" },
   { key: "harita", href: "/#harita", label: "Harita" },
   { key: "risk", href: "/#risk-testi", label: "Risk Testi" },
+  { key: "hesaplayici", href: "/hesaplayici.html", label: "Maliyet Hesaplama" },
   { key: "iletisim", href: "/iletisim.html", label: "İletişim" },
 ];
 
-const MOBILE_NAV_LINKS: NavLink[] = [
-  ...NAV_LINKS.slice(0, 5),
-  { key: "hesaplayici", href: "/hesaplayici.html", label: "Maliyet Hesaplama" },
-  ...NAV_LINKS.slice(5),
-];
+const MOBILE_NAV_LINKS: NavLink[] = NAV_LINKS;
 
 /**
  * Tüm sayfalarda ortak, sabit (sticky) üst başlık.
