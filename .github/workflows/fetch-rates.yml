@@ -1,0 +1,37 @@
+name: Günlük döviz & altın kuru güncelle
+
+on:
+  schedule:
+    # Her gün 13:00 UTC (Türkiye saati ~16:00) — TCMB ~15:30'da yayınlar
+    - cron: "0 13 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  rates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Depoyu çek
+        uses: actions/checkout@v4
+
+      - name: Node kurulumu
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Kurları topla
+        run: node scripts/fetch-rates.mjs
+
+      - name: Değişiklikleri commit'le
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ -n "$(git status --porcelain public/data/rates.json)" ]]; then
+            git add public/data/rates.json
+            git commit -m "chore: günlük döviz & altın kurları güncellendi"
+            git push
+          else
+            echo "Değişiklik yok."
+          fi
