@@ -368,7 +368,7 @@
   /* Marka chip'leri mobilde tek satır yatay carousel olarak kalır. */
   .calc__brands{
     flex-wrap:nowrap;gap:6px;overflow-x:auto;overflow-y:hidden;
-    margin:0 -14px;padding:0 14px 8px;
+    margin:0 -14px;padding:0 14px 8px;scroll-padding-inline:14px;
     scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
     scrollbar-width:none;
   }

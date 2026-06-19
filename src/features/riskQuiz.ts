@@ -374,6 +374,17 @@ export function initRiskQuiz(): void {
   }
 
   startBtn.addEventListener("click", openQuiz);
+
+  // Menüdeki (masaüstü + mobil) "Risk Testi" bağlantısı testi doğrudan başlatır.
+  document
+    .querySelectorAll<HTMLAnchorElement>('a[href$="#risk-testi"]')
+    .forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        openQuiz();
+      });
+    });
+
   if (closeBtn) closeBtn.addEventListener("click", closeQuiz);
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && overlay!.classList.contains("is-open")) closeQuiz();

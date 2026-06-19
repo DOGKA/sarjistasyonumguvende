@@ -23,8 +23,9 @@ export function renderQuizOverlay(): string {
   <div class="quiz" id="quizOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Şarj İstasyonu Risk Testi">
     <canvas class="quiz__bg" id="quizBg" aria-hidden="true"></canvas>
     <div class="quiz__topbar">
-      <span class="quiz__brand">Şarj İstasyonum Güvende</span>
-      <span class="quiz__progress-label" id="quizProgressLabel"></span>
+      <a class="quiz__brand" href="/" aria-label="Doğa Danışmanlık — ana sayfa">
+        <img src="/assets/logos/dogalogo-white.svg" alt="Doğa Danışmanlık" />
+      </a>
       <button type="button" class="quiz__close" id="quizClose" aria-label="Kapat">×</button>
     </div>
     <div class="quiz__stage" id="quizStage"></div>

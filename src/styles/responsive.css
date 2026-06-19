@@ -53,9 +53,9 @@
 
   .risk{padding:64px 0;}
   .risk__card{padding:48px 24px 44px;}
-  .quiz__stage{align-items:flex-start;padding-top:20px;}
+  .quiz__stage{align-items:center;padding-top:20px;padding-bottom:32px;}
+  .quiz__topbar{padding:16px var(--pad);}
   .quiz-panel{grid-template-columns:1fr;gap:22px;padding:26px 20px;}
   .quiz-steps{flex-direction:row;}
   .quiz-body{min-height:0;}
-  .quiz-progress-label{display:none;}
 }
