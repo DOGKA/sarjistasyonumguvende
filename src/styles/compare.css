@@ -209,8 +209,81 @@
 }
 
 @media (max-width:760px){
-  .cmp__head{grid-template-columns:1fr;gap:18px;align-items:flex-start;}
+  .cmp{padding-bottom:46px;}
+  .cmp .section-head{padding-top:22px;}
+  .cmp__head{
+    grid-template-columns:1fr;gap:14px;align-items:flex-start;
+    margin-bottom:18px;padding-top:18px;
+  }
+  .cmp__head h1{font-size:clamp(30px,11vw,42px);}
+  .cmp__head-sub{gap:10px;padding-bottom:0;}
+  .cmp__head-sub p{font-size:13px;line-height:1.45;}
+  .cmp__updated{font-size:11px;padding:6px 11px;}
   .cmp-nav__links{display:none;}
+
+  .cmp__board-wrap{
+    overflow:visible;
+    border-radius:10px;
+  }
+  .cmp__board{min-width:0;width:100%;}
+  .cmp__row{
+    grid-template-columns:minmax(86px,.72fr) repeat(2,minmax(0,1fr));
+  }
+  .cmp__row--head{
+    position:relative;
+    top:auto;
+    z-index:1;
+  }
+  .cmp__corner{
+    padding:10px 8px;
+    justify-content:center;
+  }
+  .cmp__corner-title{font-size:11px;line-height:1.2;}
+  .cmp__corner-sub{font-size:9.5px;line-height:1.25;}
+
+  .cmp-col{
+    min-width:0;
+    padding:10px 7px 9px;
+    gap:8px;
+  }
+  .cmp-col__stage{padding:8px 4px 5px;border-radius:10px;}
+  .cmp-col__stage::after{bottom:2px;width:68%;height:8px;filter:blur(2px);}
+  .cmp-col__logo{height:38px;max-width:82%;}
+  .cmp-col__title{min-height:34px;gap:1px;}
+  .cmp-col__brand{font-size:9px;letter-spacing:.04em;}
+  .cmp-col__model{font-size:11px;line-height:1.18;}
+  .cmp-col__model--empty{font-size:10px;}
+  .cmp-col__selects{gap:6px;}
+  .cmp-col__select::after{right:8px;width:5px;height:5px;}
+  .cmp-col__select select{
+    min-width:0;
+    border-radius:7px;
+    padding:7px 20px 7px 7px;
+    font-size:11px;
+  }
+
+  .cmp__group{padding:7px 9px;}
+  .cmp__group span{font-size:9.5px;letter-spacing:.06em;}
+  .cmp__label{padding:10px 8px;gap:1px;}
+  .cmp__label-text{font-size:11px;line-height:1.2;}
+  .cmp__label-hint,
+  .cmp__label-unit{font-size:9.5px;line-height:1.2;}
+  .cmp__cell{
+    min-width:0;
+    padding:10px 7px;
+    gap:4px;
+  }
+  .cmp__val{font-size:15px;}
+  .cmp__unit{font-size:9.5px;}
+  .cmp__text{font-size:11px;line-height:1.25;}
+  .cmp__na{font-size:15px;}
+  .cmp__legend{
+    align-items:flex-start;
+    margin-top:12px;
+    font-size:11px;
+    line-height:1.4;
+  }
+  .cmp__legend-dot{width:11px;height:11px;margin-top:2px;}
 }
 
 /* ============================== KARŞILAŞTIRMA YÖNLENDİRME (ana sayfa) */

@@ -2,7 +2,9 @@ import { esc, qsOpt } from "@/lib/dom";
 import { loadEvModels } from "@/data/evModels";
 import type { EvBrand, EvModel, EvModelsData } from "@/types";
 
-const SLOT_COUNT = 3;
+const DESKTOP_SLOT_COUNT = 3;
+const MOBILE_SLOT_COUNT = 2;
+const MOBILE_QUERY = "(max-width: 760px)";
 
 const num = (v: number, d = 1) =>
   new Intl.NumberFormat("tr-TR", { maximumFractionDigits: d }).format(v);
@@ -227,10 +229,11 @@ export function initCompare(): void {
   const boardEl = qsOpt<HTMLElement>("#cmpBoard");
   if (!boardEl) return;
   const board: HTMLElement = boardEl;
+  const mobileQuery = window.matchMedia(MOBILE_QUERY);
 
   const updated = qsOpt<HTMLElement>("#cmpUpdated");
   let brands: EvBrand[] = [];
-  const slots: Slot[] = Array.from({ length: SLOT_COUNT }, () => ({
+  const slots: Slot[] = Array.from({ length: DESKTOP_SLOT_COUNT }, () => ({
     brandId: null,
     modelIdx: 0,
   }));
@@ -259,11 +262,16 @@ export function initCompare(): void {
 
     board.addEventListener("change", onChange);
     board.addEventListener("click", onClick);
+    mobileQuery.addEventListener("change", render);
     render();
   }
 
+  function activeSlotCount(): number {
+    return mobileQuery.matches ? MOBILE_SLOT_COUNT : DESKTOP_SLOT_COUNT;
+  }
+
   function prefillSlots(): void {
-    for (let i = 0; i < SLOT_COUNT && i < brands.length; i++) {
+    for (let i = 0; i < DESKTOP_SLOT_COUNT && i < brands.length; i++) {
       slots[i] = { brandId: brands[i].id, modelIdx: 0 };
     }
   }
@@ -311,15 +319,16 @@ export function initCompare(): void {
 
   /* -------------------------------------------------------------- render */
   function render(): void {
-    const models = slots.map(slotModel);
+    const visibleSlots = slots.slice(0, activeSlotCount());
+    const models = visibleSlots.map(slotModel);
 
     board.innerHTML =
-      renderPickerRow() +
+      renderPickerRow(visibleSlots) +
       ROWS.map((r) => (isGroup(r) ? renderGroupRow(r.group) : renderSpecRow(r, models))).join("");
   }
 
-  function renderPickerRow(): string {
-    const cells = slots
+  function renderPickerRow(visibleSlots: Slot[]): string {
+    const cells = visibleSlots
       .map((slot, i) => {
         const brand = findBrand(slot.brandId);
         const model = slotModel(slot);
@@ -385,7 +394,7 @@ export function initCompare(): void {
       <div class="cmp__row cmp__row--head" role="row">
         <div class="cmp__corner" role="rowheader">
           <span class="cmp__corner-title">Teknik Özellik</span>
-          <span class="cmp__corner-sub">${SLOT_COUNT} araca kadar kıyaslayın</span>
+          <span class="cmp__corner-sub">${visibleSlots.length} araca kadar kıyaslayın</span>
         </div>
         ${cells}
       </div>`;
