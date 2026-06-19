@@ -76,7 +76,7 @@
   overflow:hidden;
 }
 .blog-feature__media{
-  display:block;aspect-ratio:16/9;border:0;border-radius:0;position:relative;
+  display:block;aspect-ratio:var(--blog-cover-ratio);border:0;border-radius:0;position:relative;
 }
 .blog-bookmark{
   position:absolute;top:14px;right:14px;z-index:1;
@@ -113,7 +113,8 @@
 }
 .blog-li:hover{border-color:var(--ink);transform:translateY(-1px);}
 .blog-li__thumb{
-  flex:0 0 auto;width:64px;height:64px;border-radius:10px;
+  flex:0 0 auto;width:96px;aspect-ratio:var(--blog-cover-ratio);height:auto;border-radius:10px;
+  overflow:hidden;
 }
 .blog-li__thumb.mockup[data-dim]::after{font-size:8px;}
 .blog-li__info{display:flex;flex-direction:column;gap:5px;min-width:0;}
@@ -133,7 +134,7 @@
 }
 .blog-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,0,0,.08);}
 .blog-card__media{
-  display:block;aspect-ratio:3/2;border:0;border-radius:0;position:relative;
+  display:block;aspect-ratio:var(--blog-cover-ratio);border:0;border-radius:0;position:relative;
 }
 .blog-card__arrow{
   position:absolute;top:12px;right:12px;
@@ -181,7 +182,7 @@
 .blogd__save svg{width:17px;height:17px;}
 
 .blogd__cover{
-  aspect-ratio:16/9;border-radius:18px;margin-bottom:34px;
+  aspect-ratio:var(--blog-cover-ratio);border-radius:18px;margin-bottom:34px;
 }
 
 /* ---------- Gövde tipografisi ---------- */
@@ -279,8 +280,16 @@
     padding:26px 0 22px;
   }
   .blog__head p{max-width:none;justify-self:start;}
-  .blog__toolbar{flex-direction:column;align-items:stretch;gap:14px;}
-  .blog__tabs{margin:0 calc(var(--pad) * -1);padding:0 var(--pad);}
+  .blog__toolbar{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:14px;}
+  /* Sekmeler yatay carousel gibi kayar (kenarlara taşar) */
+  .blog__tabs{
+    min-width:0;
+    margin:0 calc(var(--pad) * -1);
+    padding:2px var(--pad);
+    scroll-snap-type:x proximity;
+    scroll-padding-left:var(--pad);
+  }
+  .blog-tab{flex:0 0 auto;scroll-snap-align:start;}
   .blog__search{min-width:0;width:100%;}
   .blog__grid{grid-template-columns:1fr;gap:18px;}
   .blog-feature__body{padding:18px 18px 22px;}

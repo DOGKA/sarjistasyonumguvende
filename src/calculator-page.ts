@@ -13,7 +13,7 @@ function bootstrap(): void {
   const app = qs<HTMLDivElement>("#app");
 
   app.innerHTML = [
-    renderSiteHeader({ variant: "solid" }),
+    renderSiteHeader({ variant: "solid", active: "hesaplayici" }),
     renderCalculator(),
     renderFooter(),
   ].join("\n");

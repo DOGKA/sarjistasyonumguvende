@@ -41,3 +41,29 @@
 .btn--light .btn__dot{background:var(--black);color:#fff;}
 .btn__dot svg{width:13px;height:13px;}
 .btn__dot--ghost{background:#fff;color:var(--black);}
+
+/* ---------------------------------------------------------------- Mobil */
+@media (max-width:760px){
+  .cta .container{padding-top:38px;}
+  .cta__visual{padding:0 0 22px;gap:12px;}
+  .cta__visual-frame{aspect-ratio:16/10;}
+  .cta__headline{
+    border-left:none;border-top:1px solid var(--line-dark);
+    padding:30px 0 6px;
+  }
+  .cta__headline h2{font-size:clamp(38px,12vw,56px);line-height:.96;}
+  .cta__headline p{font-size:14px;}
+  .cta__bottom{gap:0;}
+  .cta__graphic{aspect-ratio:16/10;margin:26px 0 0;}
+  .cta__actions{
+    border-left:none;border-top:1px solid var(--line-dark);
+    padding:30px 0 8px;
+  }
+  .cta__btns{gap:10px;}
+  .cta__btns .btn{
+    flex:1 1 0;min-width:0;justify-content:center;gap:7px;
+    padding:12px 10px;font-size:12.5px;line-height:1.2;text-align:center;
+  }
+  .cta__btns .btn__dot{width:18px;height:18px;flex:0 0 auto;}
+  .cta__btns .btn__dot svg{width:11px;height:11px;}
+}

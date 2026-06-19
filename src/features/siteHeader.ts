@@ -1,4 +1,5 @@
 import { qsOpt } from "@/lib/dom";
+import { initMobileMenu } from "@/features/mobileMenu";
 
 /**
  * Ortak üst başlık davranışı.
@@ -6,6 +7,8 @@ import { qsOpt } from "@/lib/dom";
  * şeffaf (overlay) başlık dolu (solid) bir sticky çubuğa dönüşür.
  */
 export function initSiteHeader(): void {
+  initMobileMenu();
+
   const header = qsOpt<HTMLElement>("#siteHeader");
   if (!header) return;
 

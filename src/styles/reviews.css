@@ -77,3 +77,23 @@ img.avatar{object-fit:cover;}
 .reviews__next{margin:26px 0 0 auto;display:flex;width:fit-content;color:var(--muted);}
 .rcard--review,.rcard--mini{transition:opacity .35s ease;cursor:pointer;}
 .rcard--review.is-fading,.rcard--mini.is-fading{opacity:0;}
+
+/* ---------- Mobil: tek satır yatay carousel ---------- */
+@media(max-width:760px){
+  .reviews{padding:54px 0;}
+  .reviews__head{padding:10px 0 32px;}
+  .rcard--rate{min-height:0;}
+  .reviews__viewport{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+    margin:0 calc(var(--pad) * -1);padding:0 var(--pad);scroll-snap-type:x mandatory;}
+  .reviews__viewport::-webkit-scrollbar{display:none;}
+  .reviews__track--mobile{display:flex;gap:14px;transform:none !important;}
+  .reviews__track--mobile .rcard--review{
+    flex:0 0 80%;scroll-snap-align:center;
+    -webkit-line-clamp:none;line-clamp:none;height:auto;
+  }
+  .reviews__track--mobile .rcard--review .rcard__quote{
+    -webkit-line-clamp:6;line-clamp:6;
+  }
+  .reviews__fade{display:none;}
+  .reviews__next{display:none;}
+}

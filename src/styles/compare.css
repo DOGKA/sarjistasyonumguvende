@@ -344,3 +344,12 @@
 @media (max-width:860px){
   .cmp-teaser__inner{grid-template-columns:1fr;gap:34px;}
 }
+@media (max-width:560px){
+  .cmp-teaser__btns{flex-wrap:nowrap;gap:10px;}
+  .cmp-teaser__btns .btn{
+    flex:1 1 0;min-width:0;justify-content:center;gap:7px;
+    padding:11px 10px;font-size:12.5px;line-height:1.2;text-align:center;
+  }
+  .cmp-teaser__btns .btn__dot{width:18px;height:18px;flex:0 0 auto;}
+  .cmp-teaser__btns .btn__dot svg{width:11px;height:11px;}
+}

@@ -12,19 +12,6 @@ Bu dosya yapay zekâ ajanları ve LLM tabanlı arama araçları içindir (llmstx
 - [Blog](https://sarjistasyonumguvende.com/blog.html): EV şarj istasyonu sigortası, riskler ve mevzuat üzerine rehber yazılar.
 - [İletişim](https://sarjistasyonumguvende.com/iletisim.html): Teklif ve danışmanlık için iletişim.
 
-## Blog Yazıları
-
-- [Şarj İstasyonları Neden Sigortalanmalı? En Sık Karşılaşılan 7 Risk](https://sarjistasyonumguvende.com/blog.html?p=sarj-istasyonlari-neden-sigortalanmali-7-risk): Bir elektrikli araç şarj istasyonu, yüksek güçle çalışan ve dış etkenlere açık pahalı bir yatırımdır. İşletmeleri en çok zorlayan 7 riski ve bunlara karşı sigortanın neden zorunlu hale geldiğini açıklıyoruz.
-- [Şarj İstasyonu Sigortası Neleri Kapsar?](https://sarjistasyonumguvende.com/blog.html?p=sarj-istasyonu-sigortasi-neleri-kapsar): Yangın, makine kırılması, elektronik cihaz ve sorumluluk teminatları… Bir şarj istasyonu poliçesinin gerçekte neyi koruduğunu, hangi teminatların olmazsa olmaz olduğunu madde madde açıklıyoruz.
-- [Şarj İstasyonu Sigortası Fiyatı Nasıl Hesaplanır?](https://sarjistasyonumguvende.com/blog.html?p=sarj-istasyonu-sigortasi-fiyati-nasil-hesaplanir): AC mi DC mi, kaç kW, hangi lokasyonda, kaç adet? Şarj istasyonu sigorta primini belirleyen başlıca faktörleri ve maliyeti aşağı çekmenin yollarını anlatıyoruz.
-- [Elektrikli Araç Şarj İstasyonlarında Yangın Riski Nasıl Azaltılır?](https://sarjistasyonumguvende.com/blog.html?p=sarj-istasyonlarinda-yangin-riski-nasil-azaltilir): Kablo sıcaklıkları, termal kamera kontrolleri, doğru topraklama ve SPD kullanımı… Şarj istasyonlarında yangın riskini ölçülebilir biçimde azaltan teknik önlemleri sıralıyoruz.
-- [AC ve DC Şarj İstasyonları Arasındaki Farklar](https://sarjistasyonumguvende.com/blog.html?p=ac-ve-dc-sarj-istasyonlari-arasindaki-farklar): AC ve DC şarj arasındaki teknik fark nedir, hangi yatırım hangi lokasyona uygundur ve bu seçim sigorta riskini nasıl değiştirir? Yatırımcılar için net bir karşılaştırma.
-- [Şarj İstasyonlarında En Sık Görülen Elektronik Arızalar](https://sarjistasyonumguvende.com/blog.html?p=sarj-istasyonlarinda-en-sik-gorulen-elektronik-arizalar): Güç modülü, ana kart, haberleşme modülü, ekran ve ödeme sistemleri… Şarj istasyonlarını en çok devre dışı bırakan elektronik arızaları ve bunların sigorta açısından anlamını açıklıyoruz.
-- [Site ve Rezidanslarda Şarj İstasyonu Sigortası Rehberi](https://sarjistasyonumguvende.com/blog.html?p=site-ve-rezidanslarda-sarj-istasyonu-sigortasi-rehberi): Ortak kullanım alanındaki şarj üniteleri kimin sorumluluğunda? Site yönetimleri ve apartmanlar için şarj istasyonu sigortasında dikkat edilmesi gereken her şey.
-- [Oteller İçin EV Şarj İstasyonu Sigortası](https://sarjistasyonumguvende.com/blog.html?p=oteller-icin-ev-sarj-istasyonu-sigortasi): Şarj imkânı sunan oteller hem misafir çekiyor hem de yeni bir sorumluluk üstleniyor. Turizm tesislerinde şarj istasyonu sigortasının neden ayrı bir önem taşıdığını anlatıyoruz.
-- [Şarj İstasyonu Hasarlarının %80'i Nasıl Önlenebilir?](https://sarjistasyonumguvende.com/blog.html?p=sarj-istasyonu-hasarlarinin-80-i-nasil-onlenebilir): Periyodik bakım, yazılım güncellemeleri ve uzaktan izleme ile şarj istasyonu hasarlarının büyük bölümü daha oluşmadan önlenebilir. İşte kanıtlanmış bir koruma yaklaşımı.
-- [EV Şarj İstasyonu Yatırımı Yaparken Dikkat Edilmesi Gerekenler](https://sarjistasyonumguvende.com/blog.html?p=ev-sarj-istasyonu-yatirimi-dikkat-edilmesi-gerekenler): Lokasyon, güç kapasitesi, geri ödeme süresi ve risk yönetimi… Elektrikli araç şarj istasyonu yatırımında kâr ile zarar arasındaki farkı belirleyen kritik kararları özetliyoruz.
-
 ## İletişim
 
 - E-posta: info@sarjistasyonumguvende.com

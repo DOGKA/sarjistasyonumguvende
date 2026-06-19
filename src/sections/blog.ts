@@ -129,12 +129,12 @@ export function renderBlogLayout(posts: BlogPost[]): string {
 }
 
 /**
- * 08 — BLOG. `posts` verilirse (Supabase) dinamik; verilmezse mockup içerik.
+ * Kategori sekmeleri + arama kutusu araç çubuğu. Ana sayfadan kaldırıldı;
+ * blog detay sayfasında "Diğer Yazılar" listesini filtrelemek için kullanılır.
  * Sekme etiketleri kanonik kategori listesinden (BLOG_CATEGORIES) gelir;
  * filtreleme `src/features/blog.ts` tarafından yapılır.
  */
-export function renderBlog(posts: BlogPost[] = BLOG_POSTS): string {
-  const list = posts.length ? posts : BLOG_POSTS;
+export function renderBlogToolbar(): string {
   const tabs = BLOG_CATEGORIES.map(
     (c, i) =>
       `<button type="button" class="blog-tab${
@@ -143,6 +143,22 @@ export function renderBlog(posts: BlogPost[] = BLOG_POSTS): string {
         c
       )}</button>`
   ).join("");
+
+  return /* html */ `
+      <div class="blog__toolbar">
+        <div class="blog__tabs" role="tablist" aria-label="Blog kategorileri">${tabs}</div>
+        <form class="blog__search" role="search" onsubmit="return false">
+          <svg class="blog__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" placeholder="Konu ara..." aria-label="Blogda ara" />
+        </form>
+      </div>`;
+}
+
+/**
+ * 08 — BLOG. `posts` verilirse (Supabase) dinamik; verilmezse mockup içerik.
+ */
+export function renderBlog(posts: BlogPost[] = BLOG_POSTS): string {
+  const list = posts.length ? posts : BLOG_POSTS;
 
   return /* html */ `
   <section class="blog" id="blog">
@@ -155,14 +171,6 @@ export function renderBlog(posts: BlogPost[] = BLOG_POSTS): string {
       <div class="blog__head">
         <h2>Blog &amp; Haberler</h2>
         <p>Elektrikli araç şarjı ve sigortası hakkında güncel yazılar, rehberler ve ipuçları.</p>
-      </div>
-
-      <div class="blog__toolbar">
-        <div class="blog__tabs" role="tablist" aria-label="Blog kategorileri">${tabs}</div>
-        <form class="blog__search" role="search" onsubmit="return false">
-          <svg class="blog__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input type="search" placeholder="Konu ara..." aria-label="Blogda ara" />
-        </form>
       </div>
 
       ${renderBlogLayout(list)}

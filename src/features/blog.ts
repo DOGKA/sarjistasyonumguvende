@@ -1,6 +1,6 @@
 import { qsOpt, qsa } from "@/lib/dom";
 import { fetchPublishedPosts } from "@/features/blogData";
-import { renderBlog, renderBlogLayout } from "@/sections/blog";
+import { renderBlog, renderBlogCard } from "@/sections/blog";
 import type { BlogPost } from "@/types";
 
 /** Türkçe-duyarlı küçük harfe çevirme (arama karşılaştırması için). */
@@ -12,9 +12,6 @@ function lower(s: string): string {
  * Ana sayfa blog bölümünü Supabase'teki yayınlanmış yazılarla günceller.
  * İlk boyamada mockup içerik gösterilir (hızlı), ardından gerçek yazılar
  * varsa bölüm yerinde değiştirilir. Yazı yoksa/yapılandırma yoksa mockup kalır.
- *
- * Ayrıca kategori sekmelerini ve arama kutusunu işlevsel hale getirir:
- * tıklama/yazma sırasında yalnızca #blogLayout yeniden boyanır.
  */
 export async function initBlog(): Promise<void> {
   const section = qsOpt<HTMLElement>("#blog");
@@ -24,22 +21,25 @@ export async function initBlog(): Promise<void> {
   if (!posts || posts.length === 0) return;
 
   section.outerHTML = renderBlog(posts);
-  bindBlogControls(posts);
 }
 
-/** Sekme (kategori) ve arama kutusu etkileşimlerini bağlar. */
-function bindBlogControls(all: BlogPost[]): void {
-  const section = qsOpt<HTMLElement>("#blog");
-  if (!section) return;
+/**
+ * Blog detay sayfasındaki kategori sekmelerini ve arama kutusunu işlevsel
+ * hale getirir: tıklama/yazma sırasında yalnızca #blogdMoreGrid (Diğer
+ * Yazılar ızgarası) yeniden boyanır.
+ */
+export function initBlogDetailFilter(others: BlogPost[]): void {
+  const grid = qsOpt<HTMLElement>("#blogdMoreGrid");
+  if (!grid) return;
 
-  const tabs = qsa<HTMLButtonElement>(".blog-tab", section);
-  const search = qsOpt<HTMLInputElement>(".blog__search input", section);
+  const tabs = qsa<HTMLButtonElement>(".blog-tab");
+  const search = qsOpt<HTMLInputElement>(".blog__search input");
 
   let activeCat = "Tümü";
 
   const apply = (): void => {
     const q = lower((search?.value ?? "").trim());
-    const filtered = all.filter((p) => {
+    const filtered = others.filter((p) => {
       const catOk = activeCat === "Tümü" || (p.category ?? "") === activeCat;
       if (!catOk) return false;
       if (!q) return true;
@@ -47,8 +47,9 @@ function bindBlogControls(all: BlogPost[]): void {
       return hay.includes(q);
     });
 
-    const layout = qsOpt("#blogLayout", section);
-    if (layout) layout.outerHTML = renderBlogLayout(filtered);
+    grid.innerHTML = filtered.length
+      ? filtered.map(renderBlogCard).join("\n")
+      : '<p class="blog__empty">Bu seçime uygun yazı bulunamadı.</p>';
   };
 
   tabs.forEach((btn) => {

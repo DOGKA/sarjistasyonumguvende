@@ -14,16 +14,22 @@
   --maxw:1280px;
   --pad:48px;
   --quiz-accent:#c7f24a;
+  /* Tüm blog kapak görselleri tek 1200×720 kaynaktan gelir (5:3). */
+  --blog-cover-ratio:5 / 3;
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+/* overflow-x:clip yatay taşmayı kırpar; scroll konteyneri OLUŞTURMAZ, böylece
+   sticky başlık ve dikey kaydırma etkilenmez (tam-genişlik mobil carousel'ler
+   kazara yatay kaymaya ve sabit tawk widget'ının kaymasına yol açmasın). */
+html{scroll-behavior:smooth;overflow-x:clip;}
 body{
   font-family:"Inter",system-ui,-apple-system,Segoe UI,sans-serif;
   color:var(--ink);
   background:var(--paper);
   -webkit-font-smoothing:antialiased;
   line-height:1.5;
+  overflow-x:clip;
 }
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}

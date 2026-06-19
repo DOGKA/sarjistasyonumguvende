@@ -3,30 +3,52 @@
   :root{--pad:22px;}
   .nav__menu{display:none;}
   .hero__device{width:110px;height:150px;}
-  .about__grid,.about__features,.solutions__head,.solutions__cards,
+  .about__grid,.solutions__head,.solutions__cards,
   .product__top,.product__body,.reviews__head,.reviews__grid,
-  .stats,.mission__boxes,.cta__row,.cta__bottom,
+  .stats,.cta__row,.cta__bottom,
   .stations__head,.stations__search,.stations__layout{
     grid-template-columns:1fr;
   }
   .stations__head p{justify-self:start;}
   .stations__list{border-left:none;border-top:1px solid var(--line);max-height:280px;}
   .stations__map{height:360px;}
-  .feature{border-right:none;border-bottom:1px solid var(--line);padding:26px 0;}
-  .feature:not(:first-child){padding-left:0;}
+  /* Hakkımızda kartları — yatay scroll-snap carousel + ortalı ikon */
+  .about__features{
+    display:flex;flex-wrap:nowrap;border-top:1px solid var(--line);
+    gap:0;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+    margin:0 calc(var(--pad) * -1);padding:0 var(--pad);
+  }
+  .about__features::-webkit-scrollbar{display:none;}
+  .feature{
+    flex:0 0 82%;scroll-snap-align:center;
+    border-right:1px solid var(--line);border-bottom:none;
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    padding:30px 22px;
+  }
+  .feature:last-child{border-right:none;}
+  .feature:not(:first-child){padding-left:22px;}
+  .feature__icon{margin:0 auto 20px;}
+  .feature p{max-width:280px;}
+
   .mission__head{flex-direction:column;align-items:flex-start;}
   .product__intro{border-right:none;border-bottom:1px solid var(--line-dark);}
   .product__title{padding:40px 0;}
   .product__title .eyebrow{position:static;display:block;margin-top:16px;}
-  .product__menu{flex-direction:row;flex-wrap:wrap;border-right:none;border-bottom:1px solid var(--line-dark);padding:30px 0;}
-  .pmenu{width:auto;}
+  /* Teminat menüsü mobilde gizli (kaydırıcı nokta + sürükleme ile yönetilir) */
+  .product__menu{display:none;}
   .product__carousel{padding:30px 0 0;}
   .pcard{flex:0 0 80%;}
   .reviews__grid{gap:16px;}
   .reviewer--v{writing-mode:horizontal-tb;flex-direction:row;align-items:center;}
   .stats{gap:30px 20px;grid-template-columns:1fr 1fr;}
-  .mission__boxes{grid-template-rows:none;}
-  .mbox--eco{grid-column:auto;grid-row:auto;}
+  /* Misyon rakamları — satır başına 2 grid */
+  .mission__boxes{grid-template-columns:1fr 1fr;grid-template-rows:none;gap:14px;}
+  .mbox{min-height:170px;padding:18px;}
+  .mbox--icon .mbox__icon{width:46px;height:46px;}
+  .mbox--icon .mbox__icon svg{width:22px;height:22px;}
+  .mbox__foot .stat__num{font-size:30px;}
+  .mbox--eco{grid-column:1 / -1;grid-row:auto;min-height:220px;}
   .mbox__media{width:100%;}
 
   .risk{padding:64px 0;}

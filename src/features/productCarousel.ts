@@ -1,6 +1,6 @@
 import { qsOpt, qsa } from "@/lib/dom";
 
-/** Teminat kart kaydırıcısı (04) — kesintisiz otomatik akış + menü senkronu. */
+/** Teminat kart kaydırıcısı (04) — otomatik akış + el/mouse ile sürükleme + menü senkronu. */
 export function initProductCarousel(): void {
   const track = qsOpt<HTMLDivElement>("#pcards");
   if (!track) return;
@@ -24,9 +24,20 @@ export function initProductCarousel(): void {
   let animating = false;
   let timer: number | null = null;
 
+  // Sürükleme durumu
+  let dragging = false;
+  let pointerId: number | null = null;
+  let startX = 0;
+  let startOffset = 0;
+  let dragDelta = 0;
+
   function stepWidth(): number {
     const card = track!.querySelector<HTMLElement>(".pcard");
     return card ? card.getBoundingClientRect().width + GAP : 0;
+  }
+
+  function realIndex(i: number): number {
+    return ((i % total) + total) % total;
   }
 
   function move(i: number, animate: boolean): void {
@@ -42,11 +53,11 @@ export function initProductCarousel(): void {
   }
 
   function go(target: number): void {
-    if (animating) return;
+    if (animating || dragging) return;
     animating = true;
     index = target;
     move(index, true);
-    syncUI(((index % total) + total) % total);
+    syncUI(realIndex(index));
   }
 
   track.addEventListener("transitionend", () => {
@@ -74,7 +85,61 @@ export function initProductCarousel(): void {
     });
   });
 
+  // ---- El / mouse ile sürükleme (Pointer Events) ----
+  function onPointerDown(e: PointerEvent): void {
+    if (animating) return;
+    dragging = true;
+    pointerId = e.pointerId;
+    startX = e.clientX;
+    startOffset = -stepWidth() * index;
+    dragDelta = 0;
+    track!.style.transition = "none";
+    track!.setPointerCapture?.(e.pointerId);
+    stop();
+  }
+
+  function onPointerMove(e: PointerEvent): void {
+    if (!dragging || e.pointerId !== pointerId) return;
+    dragDelta = e.clientX - startX;
+    track!.style.transform = `translateX(${startOffset + dragDelta}px)`;
+
+    // Sürüklerken üstteki CTA'ları (menü + noktalar) en yakın karta göre güncelle
+    const sw = stepWidth();
+    if (sw) {
+      const approx = Math.round(-(startOffset + dragDelta) / sw);
+      syncUI(realIndex(approx));
+    }
+  }
+
+  function onPointerUp(e: PointerEvent): void {
+    if (!dragging || e.pointerId !== pointerId) return;
+    dragging = false;
+    pointerId = null;
+
+    const sw = stepWidth();
+    let target = index;
+    if (sw) {
+      target = Math.round(-(startOffset + dragDelta) / sw);
+      // Küçük ama belirgin bir kaydırma da bir kart ilerletsin
+      if (target === index && Math.abs(dragDelta) > 40) {
+        target = index + (dragDelta < 0 ? 1 : -1);
+      }
+    }
+
+    animating = true;
+    index = target;
+    move(index, true);
+    syncUI(realIndex(index));
+    restart();
+  }
+
+  track.addEventListener("pointerdown", onPointerDown);
+  window.addEventListener("pointermove", onPointerMove);
+  window.addEventListener("pointerup", onPointerUp);
+  window.addEventListener("pointercancel", onPointerUp);
+
   function start(): void {
+    if (dragging) return;
     timer = window.setInterval(() => go(index + 1), 3800);
   }
   function stop(): void {

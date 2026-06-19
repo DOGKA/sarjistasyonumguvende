@@ -5,8 +5,11 @@ import { renderBlogDetail } from "@/sections/blogDetail";
 import { renderFooter } from "@/sections/footer";
 import { initSiteHeader } from "@/features/siteHeader";
 import { initBlogShare } from "@/features/blogShare";
+import { initBlogDetailFilter } from "@/features/blog";
 import { fetchPostBySlug, fetchPublishedPosts } from "@/features/blogData";
 import { applyBlogSeo } from "@/features/blogSeo";
+import { BLOG_POSTS } from "@/data/blog";
+import type { BlogPost } from "@/types";
 
 import { qs } from "@/lib/dom";
 
@@ -17,11 +20,12 @@ async function bootstrap(): Promise<void> {
   const slug = new URLSearchParams(window.location.search).get("p");
 
   let detail: string;
+  let others: BlogPost[] = BLOG_POSTS.slice(1);
   if (slug) {
     const post = await fetchPostBySlug(slug);
     if (post) {
-      const all = (await fetchPublishedPosts(7)) ?? [];
-      const others = all.filter((p) => p.slug !== post.slug).slice(0, 3);
+      const all = (await fetchPublishedPosts(12)) ?? [];
+      others = all.filter((p) => p.slug !== post.slug);
       detail = renderBlogDetail(post, others);
       applyBlogSeo(post);
     } else {
@@ -41,6 +45,7 @@ async function bootstrap(): Promise<void> {
 
   initSiteHeader();
   initBlogShare();
+  initBlogDetailFilter(others);
 }
 
 void bootstrap();

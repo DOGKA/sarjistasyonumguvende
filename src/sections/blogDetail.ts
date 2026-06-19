@@ -1,6 +1,6 @@
 import { esc } from "@/lib/dom";
 import { BLOG_POSTS } from "@/data/blog";
-import { renderBlogCard } from "@/sections/blog";
+import { renderBlogCard, renderBlogToolbar } from "@/sections/blog";
 import type { BlogPost } from "@/types";
 
 /** Gövde paragrafları (yalnızca mockup/içeriksiz yazılar için yedek). */
@@ -108,11 +108,12 @@ export function renderBlogDetail(
       others.length
         ? `<section class="blogd__more">
       <div class="container">
+        ${renderBlogToolbar()}
         <div class="blogd__more-head">
           <h2>Diğer Yazılar</h2>
           <a href="/#blog" class="link-arrow">Tümünü Gör</a>
         </div>
-        <div class="blog__grid">
+        <div class="blog__grid" id="blogdMoreGrid">
           ${others.map(renderBlogCard).join("\n")}
         </div>
       </div>

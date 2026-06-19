@@ -4,8 +4,9 @@ import type { Review } from "@/types";
 
 const GAP = 22; // .reviews__track gap (px) — CSS ile eşleşmeli
 const VISIBLE = 2; // aynı anda görünen sütun (her sütun 2 kart)
+const MOBILE_MQ = "(max-width:760px)";
 
-/** Müşteri yorumları — 2'li (2×2) kayan carousel (05 — Referanslar). */
+/** Müşteri yorumları — masaüstünde 2×2 kayan carousel, mobilde tek satır yatay. */
 export function initReviewsCarousel(): void {
   const grid = qsOpt<HTMLDivElement>("#reviewsGrid");
   const track = qsOpt<HTMLDivElement>("#reviewsTrack");
@@ -62,98 +63,128 @@ export function initReviewsCarousel(): void {
     return pair;
   }
 
-  // Yorumları 2'şerli sütunlara böl
-  const pairs: HTMLElement[] = [];
-  for (let i = 0; i < reviews.length; i += 2) {
-    pairs.push(makePair(reviews[i], reviews[i + 1]));
-  }
-  const realCount = pairs.length;
-  if (!realCount) return;
-
-  pairs.forEach((p) => track.appendChild(p));
-  // Sonsuz döngü için baştaki sütunları sona klonla
-  for (let i = 0; i < Math.min(VISIBLE, realCount); i++) {
-    track.appendChild(pairs[i].cloneNode(true));
+  /** Mobil: tek satır yatay scroll-snap (native kaydırma). Animasyon/klon yok. */
+  function buildMobile(): () => void {
+    track!.classList.add("reviews__track--mobile");
+    for (const r of reviews) track!.appendChild(makeCard(r));
+    return () => track!.classList.remove("reviews__track--mobile");
   }
 
-  const DURATION = 550; // .55s — apply() içindeki transition ile eşleşmeli
+  /** Masaüstü: 2'şerli sütunlu sonsuz kayan carousel. Temizleyici döndürür. */
+  function buildDesktop(): () => void {
+    const pairs: HTMLElement[] = [];
+    for (let i = 0; i < reviews.length; i += 2) {
+      pairs.push(makePair(reviews[i], reviews[i + 1]));
+    }
+    const realCount = pairs.length;
+    if (!realCount) return () => {};
 
-  let index = 0;
-  let step = 0; // bir sütunun kayma mesafesi (genişlik + gap)
-  let timer: number | null = null;
-  let animating = false; // tek seferde bir kaydırma — hızlı tıklamada taşmayı önler
-  let safety: number | null = null;
+    pairs.forEach((p) => track!.appendChild(p));
+    for (let i = 0; i < Math.min(VISIBLE, realCount); i++) {
+      track!.appendChild(pairs[i].cloneNode(true));
+    }
 
-  function measure(): void {
-    const first = track!.firstElementChild as HTMLElement | null;
-    step = first ? first.getBoundingClientRect().width + GAP : 0;
-  }
+    const DURATION = 550;
+    const ac = new AbortController();
+    const opts = { signal: ac.signal };
 
-  function apply(animate: boolean): void {
-    track!.style.transition = animate
-      ? "transform .55s cubic-bezier(.22,.61,.36,1)"
-      : "none";
-    track!.style.transform = `translate3d(${-index * step}px,0,0)`;
-  }
+    let index = 0;
+    let step = 0;
+    let timer: number | null = null;
+    let animating = false;
+    let safety: number | null = null;
 
-  // Kaydırma bittiğinde: klon bölgesine ulaşıldıysa sıçramadan başa sar.
-  function settle(): void {
-    animating = false;
-    if (index >= realCount) {
-      index -= realCount;
+    function measure(): void {
+      const first = track!.firstElementChild as HTMLElement | null;
+      step = first ? first.getBoundingClientRect().width + GAP : 0;
+    }
+    function apply(animate: boolean): void {
+      track!.style.transition = animate
+        ? "transform .55s cubic-bezier(.22,.61,.36,1)"
+        : "none";
+      track!.style.transform = `translate3d(${-index * step}px,0,0)`;
+    }
+    function settle(): void {
+      animating = false;
+      if (index >= realCount) {
+        index -= realCount;
+        apply(false);
+      }
+    }
+    function next(): void {
+      if (animating) return;
+      index += 1;
+      animating = true;
+      apply(true);
+      if (safety !== null) clearTimeout(safety);
+      safety = window.setTimeout(settle, DURATION + 60);
+    }
+    function start(): void {
+      if (timer === null) timer = window.setInterval(next, 5000);
+    }
+    function stop(): void {
+      if (timer !== null) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+    function advance(): void {
+      next();
+      stop();
+      start();
+    }
+
+    track!.addEventListener(
+      "transitionend",
+      (e: TransitionEvent) => {
+        if (e.target !== track || e.propertyName !== "transform") return;
+        if (safety !== null) {
+          clearTimeout(safety);
+          safety = null;
+        }
+        settle();
+      },
+      opts
+    );
+    if (nextBtn) nextBtn.addEventListener("click", advance, opts);
+    grid!.addEventListener("mouseenter", stop, opts);
+    grid!.addEventListener("mouseleave", start, opts);
+    window.addEventListener(
+      "resize",
+      () => {
+        measure();
+        apply(false);
+      },
+      opts
+    );
+
+    measure();
+    apply(false);
+    window.requestAnimationFrame(() => {
+      measure();
       apply(false);
-    }
-  }
-
-  function next(): void {
-    if (animating) return; // animasyon sürerken yeni tıklamayı yok say
-    index += 1;
-    animating = true;
-    apply(true);
-    // transitionend kaçırılırsa (sekme arka planı vb.) güvenlik ağı
-    if (safety !== null) clearTimeout(safety);
-    safety = window.setTimeout(settle, DURATION + 60);
-  }
-
-  track.addEventListener("transitionend", (e: TransitionEvent) => {
-    if (e.target !== track || e.propertyName !== "transform") return;
-    if (safety !== null) {
-      clearTimeout(safety);
-      safety = null;
-    }
-    settle();
-  });
-
-  function start(): void {
-    timer = window.setInterval(next, 5000);
-  }
-  function stop(): void {
-    if (timer !== null) {
-      clearInterval(timer);
-      timer = null;
-    }
-  }
-  function advance(): void {
-    next();
-    stop();
+    });
     start();
+
+    return () => {
+      stop();
+      if (safety !== null) clearTimeout(safety);
+      ac.abort();
+    };
   }
 
-  if (nextBtn) nextBtn.addEventListener("click", advance);
-  grid.addEventListener("mouseenter", stop);
-  grid.addEventListener("mouseleave", start);
-  window.addEventListener("resize", () => {
-    measure();
-    apply(false);
-  });
+  // Kırılım noktası (mobil/masaüstü) değiştikçe carousel'i yeniden kur.
+  const mql = window.matchMedia(MOBILE_MQ);
+  let teardown: (() => void) | null = null;
 
-  // Görseller yüklendikçe ölçüyü tazele (yükseklik/oturma değişebilir)
-  measure();
-  apply(false);
-  window.requestAnimationFrame(() => {
-    measure();
-    apply(false);
-  });
+  function render(): void {
+    if (teardown) teardown();
+    track!.innerHTML = "";
+    track!.style.transform = "";
+    track!.style.transition = "";
+    teardown = mql.matches ? buildMobile() : buildDesktop();
+  }
 
-  start();
+  mql.addEventListener("change", render);
+  render();
 }
