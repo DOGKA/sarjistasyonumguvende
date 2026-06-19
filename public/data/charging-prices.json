@@ -1,13 +1,13 @@
 {
   "currency": "TRY",
-  "lastUpdated": "2026-06-18T14:06:44+03:00",
+  "lastUpdated": "2026-06-19T12:27:25+03:00",
   "operators": [
     {
       "id": "trugo",
       "name": "Trugo",
       "url": "https://trugo.com.tr/price",
       "source": "scraped",
-      "fetchedAt": "2026-06-18T14:05:53+03:00",
+      "fetchedAt": "2026-06-19T12:26:23+03:00",
       "tariffs": [
         {
           "type": "AC",
@@ -26,7 +26,7 @@
       "name": "ZES",
       "url": "https://zes.net/tr/fiyatlandirma",
       "source": "scraped",
-      "fetchedAt": "2026-06-18T14:06:00+03:00",
+      "fetchedAt": "2026-06-19T12:26:29+03:00",
       "tariffs": [
         {
           "type": "AC",
@@ -49,8 +49,9 @@
       "id": "voltrun",
       "name": "Voltrun",
       "url": "https://www.voltrun.com/tr/tarifeler",
-      "source": "scraped",
-      "fetchedAt": "2026-06-18T14:06:06+03:00",
+      "source": "manual",
+      "fetchedAt": "2026-06-19T12:26:40+03:00",
+      "note": "Canlı sayfadan okunamadı; yedek referans değerler.",
       "tariffs": [
         {
           "type": "AC",
@@ -69,7 +70,7 @@
       "name": "Tesla Supercharger",
       "url": "https://www.tesla.com/tr_tr/support/charging/supercharger/fees",
       "source": "manual",
-      "fetchedAt": "2026-06-18T14:06:13+03:00",
+      "fetchedAt": "2026-06-19T12:26:56+03:00",
       "note": "Supercharger kWh fiyatı lokasyona/zamana göre değişir; yedek referans değerler.",
       "tariffs": [
         {
@@ -89,7 +90,7 @@
       "name": "Shell Recharge",
       "url": "https://www.shell.com.tr/suruculer/shell-recharge-turkiye/fiyat-tarifesi.html",
       "source": "scraped",
-      "fetchedAt": "2026-06-18T14:06:29+03:00",
+      "fetchedAt": "2026-06-19T12:27:11+03:00",
       "tariffs": [
         {
           "type": "AC",
@@ -113,7 +114,7 @@
       "name": "Wat Mobilite",
       "url": "https://www.watmobilite.com/cozumler/kamusal-alanlar#guncel-fiyat-ve-tarifeler",
       "source": "scraped",
-      "fetchedAt": "2026-06-18T14:06:36+03:00",
+      "fetchedAt": "2026-06-19T12:27:18+03:00",
       "tariffs": [
         {
           "type": "AC",
