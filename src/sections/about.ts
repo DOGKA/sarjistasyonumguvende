@@ -17,8 +17,8 @@ export function renderAbout(): string {
           </div>
         </div>
         <div class="about__text">
-          <h2>Şarj Altyapısında<br />Güvenin Öncüsü</h2>
-          <p>Şarj istasyonları yalnızca bir elektrik ekipmanı değil; elektronik, haberleşme, yazılım ve enerji sistemlerinin birlikte çalıştığı kompleks tesislerdir. Bu kritik enerji yatırımlarını sürdürülebilir şekilde güvence altına alan çözümler sunuyoruz.</p>
+          <h2>Şarj İstasyonunuzu Beklenmedik<br />Risklere Karşı Koruyun</h2>
+          <p>Elektrikli araç şarj istasyonları; yangın, yıldırım, araç çarpması, hırsızlık, vandalizm ve elektronik arızalar nedeniyle ciddi mali kayıplarla karşılaşabilir. Şarj istasyonlarına özel sigorta çözümlerimizle ekipmanlarınızı, gelirlerinizi ve işletmenizi güvence altına alıyoruz.</p>
         </div>
       </div>
 
@@ -27,22 +27,22 @@ export function renderAbout(): string {
           <span class="feature__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
           </span>
-          <h3>Kanıtlanmış Tecrübe</h3>
-          <p>8 yılı aşkın sektör tecrübesi ve binlerce sigortalanan şarj ünitesi ile elektrikli araç altyapısı sigortacılığında güvenilir bir referans noktasıyız.</p>
+          <h3>Gerçek Riskler</h3>
+          <p>Yangın, araç çarpması, hırsızlık ve elektronik arızalar gibi şarj altyapısına özel risklere karşı koruma.</p>
         </article>
         <article class="feature">
           <span class="feature__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="m7 14 3-4 3 3 5-7"/></svg>
           </span>
-          <h3>Uzman Risk Yönetimi</h3>
-          <p>Lokasyon, cihaz gücü, bakım geçmişi ve çevresel riskleri analiz ederek her istasyona özel, doğru kurgulanmış risk değerlendirmesi sağlıyoruz.</p>
+          <h3>Özelleştirilmiş Teminatlar</h3>
+          <p>AC ve DC şarj üniteleri, enerji depolama sistemleri ve yardımcı ekipmanlar için özel çözümler.</p>
         </article>
         <article class="feature">
           <span class="feature__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="M5 9h14l-2 11H7L5 9Z"/></svg>
           </span>
-          <h3>Kapsamlı Teminatlar</h3>
-          <p>Yangından elektronik cihaza, makine kırılmasından siber riske kadar şarj istasyonunun her bileşenini kapsayan eksiksiz teminat yapıları kuruyoruz.</p>
+          <h3>Hızlı Teklif ve Destek</h3>
+          <p>Uzman ekibimiz risk analizi yaparak kısa sürede teklif sunar ve hasar süreçlerinde yanınızda olur.</p>
         </article>
       </div>
     </div>

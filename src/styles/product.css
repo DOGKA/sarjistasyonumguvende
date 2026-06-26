@@ -28,11 +28,12 @@
   border-right:1px solid var(--line-dark);
 }
 .pmenu{
-  display:flex;align-items:center;justify-content:space-between;
-  width:230px;max-width:100%;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  width:260px;max-width:100%;
+  text-align:left;
   background:transparent;color:#fff;
   border:1px solid var(--line-dark);border-radius:30px;
-  padding:13px 20px;font-size:13px;font-weight:500;font-family:inherit;
+  padding:13px 20px;font-size:13px;font-weight:500;font-family:inherit;line-height:1.3;
   cursor:pointer;transition:.2s;
 }
 .pmenu .pmenu__arrow{
@@ -71,3 +72,52 @@
 .dot{width:8px;height:8px;border-radius:50%;background:#4a4a4a;cursor:pointer;transition:.2s;}
 .dot.is-active{background:#fff;width:18px;border-radius:6px;}
 .product__year{font-size:13px;color:var(--muted-dark);}
+
+/* ---- Kritik / eksik teminat detayları ---- */
+.product__details{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  margin-top:56px;
+}
+.tcard{
+  position:relative;
+  background:#1a1a1a;border:1px solid var(--line-dark);border-radius:14px;
+  padding:24px 22px;display:flex;flex-direction:column;gap:10px;
+}
+.tcard__tag{
+  align-self:flex-start;
+  font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--black);background:var(--quiz-accent);
+  padding:4px 10px;border-radius:20px;
+}
+.tcard__title{font-size:16.5px;font-weight:600;line-height:1.3;}
+.tcard__desc{font-size:13px;line-height:1.6;color:var(--muted-dark);}
+
+/* ---- Neden sigortalanmalı kutusu ---- */
+.product__why{
+  margin-top:24px;
+  background:#1a1a1a;border:1px solid var(--line-dark);border-radius:16px;
+  padding:34px 32px;
+}
+.product__why-title{font-size:clamp(20px,2.4vw,26px);font-weight:600;margin-bottom:24px;}
+.product__why-list{
+  list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:16px 36px;
+}
+.product__why-item{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:14.5px;font-weight:500;line-height:1.45;
+}
+.product__why-check{
+  flex:none;margin-top:1px;
+  width:22px;height:22px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--quiz-accent);color:var(--black);
+}
+.product__why-check svg{width:13px;height:13px;}
+
+@media(max-width:900px){
+  .product__details{grid-template-columns:1fr 1fr;margin-top:40px;}
+  .product__why-list{grid-template-columns:1fr;}
+}
+@media(max-width:560px){
+  .product__details{grid-template-columns:1fr;}
+}

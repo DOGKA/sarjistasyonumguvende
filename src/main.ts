@@ -2,6 +2,7 @@ import "./styles/main.css";
 
 import { renderSiteHeader } from "@/sections/siteHeader";
 import { renderHero } from "@/sections/hero";
+import { renderWhyInsure } from "@/sections/whyInsure";
 import { renderAbout } from "@/sections/about";
 import { renderStations } from "@/sections/stations";
 import { renderSolutions } from "@/sections/solutions";
@@ -16,6 +17,7 @@ import { renderCta } from "@/sections/cta";
 import { renderFooter } from "@/sections/footer";
 
 import { initHeroVideo } from "@/features/heroVideo";
+import { initHeroTrust } from "@/features/heroTrust";
 import { initProductCarousel } from "@/features/productCarousel";
 import { initReviewsCarousel } from "@/features/reviewsCarousel";
 import { initRiskQuiz } from "@/features/riskQuiz";
@@ -64,6 +66,7 @@ function bootstrap(): void {
   app.innerHTML = [
     renderSiteHeader({ variant: "overlay", active: "hakkimizda" }),
     renderHero(),
+    renderWhyInsure(),
     renderAbout(),
     renderProduct(),
     renderSolutions(),
@@ -82,6 +85,7 @@ function bootstrap(): void {
   document.body.insertAdjacentHTML("beforeend", renderQuizOverlay());
 
   initHeroVideo();
+  initHeroTrust();
   initProductCarousel();
   initReviewsCarousel();
   initRiskQuiz();

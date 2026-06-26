@@ -27,15 +27,38 @@ export function renderHero(): string {
       </button>
     </div>
 
-    <div class="hero__top">
-      <p class="hero__lead">Elektrikli araç şarj istasyonlarınız için güvenilir, kapsamlı ve uzman sigorta çözümleri; ev, işyeri ve kamusal alanlar için.</p>
-    </div>
+    <div class="hero__content">
+      <div class="hero__copy">
+        <span class="hero__eyebrow">EV Şarj İstasyonu Sigortası</span>
+        <h1 class="hero__title">Elektrikli Araç Şarj<br />İstasyonu Sigortası</h1>
+        <p class="hero__desc">DC ve AC şarj ünitelerinizi; yangın, hırsızlık, araç çarpması, elektriksel arızalar ve üçüncü şahıs sorumluluk risklerine karşı güvence altına alın. Hızlı teklif alın, yatırımınızı koruyun.</p>
+        <div class="hero__actions">
+          <a href="#iletisim" class="hero-btn hero-btn--primary">Hemen Teklif Al</a>
+          <a href="#teminatlar" class="hero-btn hero-btn--ghost">Teminatları İncele</a>
+        </div>
+      </div>
 
-    <div class="hero__headline">
-      <h1>SİGORTA</h1>
-      <div class="hero__tags">
-        <span>[ Çevre Dostu ]</span>
-        <span>[ ©2025 ]</span>
+      <div class="hero__trust" id="heroTrust" aria-label="Teminat kapsamı">
+        <ul class="hero__trust-track">
+          ${[
+            "Yangın ve Patlama",
+            "Hırsızlık ve Vandalizm",
+            "Araç Çarpması Hasarları",
+            "Elektronik Devre Arızaları",
+            "Kablo ve Ekipman Hasarları",
+            "Üçüncü Şahıs Mali Sorumluluk",
+          ]
+            .map(
+              (item) => /* html */ `
+          <li class="hero__trust-item">
+            <span class="hero__trust-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4.5 4.5L19 7"/></svg>
+            </span>
+            ${item}
+          </li>`,
+            )
+            .join("")}
+        </ul>
       </div>
     </div>
   </header>`;
