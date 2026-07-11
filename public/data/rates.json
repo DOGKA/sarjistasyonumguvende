@@ -1,6 +1,6 @@
 {
   "date": "10.07.2026",
-  "lastUpdated": "2026-07-10T18:35:50+03:00",
+  "lastUpdated": "2026-07-11T17:24:29+03:00",
   "source": "TCMB · gold-api.com",
   "items": [
     {
@@ -29,7 +29,7 @@
       "name": "Gram Altın",
       "symbol": "gr",
       "buy": null,
-      "sell": 6187.94
+      "sell": 6213.57
     }
   ]
 }
