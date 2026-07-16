@@ -1,13 +1,13 @@
 {
   "currency": "TRY",
-  "lastUpdated": "2026-07-15T10:09:56+03:00",
+  "lastUpdated": "2026-07-16T10:19:35+03:00",
   "operators": [
     {
       "id": "trugo",
       "name": "Trugo",
       "url": "https://trugo.com.tr/price",
       "source": "scraped",
-      "fetchedAt": "2026-07-15T10:08:58+03:00",
+      "fetchedAt": "2026-07-16T10:18:31+03:00",
       "tariffs": [
         {
           "type": "AC",
@@ -26,7 +26,7 @@
       "name": "ZES",
       "url": "https://zes.net/tr/fiyatlandirma",
       "source": "scraped",
-      "fetchedAt": "2026-07-15T10:09:05+03:00",
+      "fetchedAt": "2026-07-16T10:18:40+03:00",
       "tariffs": [
         {
           "type": "AC",
@@ -50,7 +50,7 @@
       "name": "Voltrun",
       "url": "https://www.voltrun.com/tr/tarifeler",
       "source": "manual",
-      "fetchedAt": "2026-07-15T10:09:11+03:00",
+      "fetchedAt": "2026-07-16T10:18:49+03:00",
       "note": "Canlı sayfadan okunamadı; yedek referans değerler.",
       "tariffs": [
         {
@@ -70,7 +70,7 @@
       "name": "Tesla Supercharger",
       "url": "https://www.tesla.com/tr_tr/support/charging/supercharger/fees",
       "source": "manual",
-      "fetchedAt": "2026-07-15T10:09:26+03:00",
+      "fetchedAt": "2026-07-16T10:19:05+03:00",
       "note": "Supercharger kWh fiyatı lokasyona/zamana göre değişir; yedek referans değerler.",
       "tariffs": [
         {
@@ -90,7 +90,7 @@
       "name": "Shell Recharge",
       "url": "https://www.shell.com.tr/suruculer/shell-recharge-turkiye/fiyat-tarifesi.html",
       "source": "scraped",
-      "fetchedAt": "2026-07-15T10:09:42+03:00",
+      "fetchedAt": "2026-07-16T10:19:20+03:00",
       "tariffs": [
         {
           "type": "AC",
@@ -114,7 +114,7 @@
       "name": "Wat Mobilite",
       "url": "https://www.watmobilite.com/cozumler/kamusal-alanlar#guncel-fiyat-ve-tarifeler",
       "source": "scraped",
-      "fetchedAt": "2026-07-15T10:09:50+03:00",
+      "fetchedAt": "2026-07-16T10:19:26+03:00",
       "tariffs": [
         {
           "type": "AC",
