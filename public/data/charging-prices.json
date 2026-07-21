@@ -1,13 +1,13 @@
 {
   "currency": "TRY",
-  "lastUpdated": "2026-07-20T10:55:31+03:00",
+  "lastUpdated": "2026-07-21T10:29:56+03:00",
   "operators": [
     {
       "id": "trugo",
       "name": "Trugo",
       "url": "https://trugo.com.tr/price",
       "source": "scraped",
-      "fetchedAt": "2026-07-20T10:53:27+03:00",
+      "fetchedAt": "2026-07-21T10:28:59+03:00",
       "tariffs": [
         {
           "type": "AC",
@@ -26,7 +26,7 @@
       "name": "ZES",
       "url": "https://zes.net/tr/fiyatlandirma",
       "source": "scraped",
-      "fetchedAt": "2026-07-20T10:53:34+03:00",
+      "fetchedAt": "2026-07-21T10:29:06+03:00",
       "tariffs": [
         {
           "type": "AC",
@@ -50,7 +50,7 @@
       "name": "Voltrun",
       "url": "https://www.voltrun.com/tr/tarifeler",
       "source": "manual",
-      "fetchedAt": "2026-07-20T10:53:41+03:00",
+      "fetchedAt": "2026-07-21T10:29:12+03:00",
       "note": "Canlı sayfadan okunamadı; yedek referans değerler.",
       "tariffs": [
         {
@@ -70,7 +70,7 @@
       "name": "Tesla Supercharger",
       "url": "https://www.tesla.com/tr_tr/support/charging/supercharger/fees",
       "source": "manual",
-      "fetchedAt": "2026-07-20T10:53:56+03:00",
+      "fetchedAt": "2026-07-21T10:29:28+03:00",
       "note": "Supercharger kWh fiyatı lokasyona/zamana göre değişir; yedek referans değerler.",
       "tariffs": [
         {
@@ -90,7 +90,7 @@
       "name": "Shell Recharge",
       "url": "https://www.shell.com.tr/suruculer/shell-recharge-turkiye/fiyat-tarifesi.html",
       "source": "scraped",
-      "fetchedAt": "2026-07-20T10:54:11+03:00",
+      "fetchedAt": "2026-07-21T10:29:43+03:00",
       "tariffs": [
         {
           "type": "AC",
@@ -113,19 +113,18 @@
       "id": "wat",
       "name": "Wat Mobilite",
       "url": "https://www.watmobilite.com/cozumler/kamusal-alanlar#guncel-fiyat-ve-tarifeler",
-      "source": "manual",
-      "fetchedAt": "2026-07-20T10:54:17+03:00",
-      "note": "Canlı sayfadan okunamadı; manuel referans değerler.",
+      "source": "scraped",
+      "fetchedAt": "2026-07-21T10:29:50+03:00",
       "tariffs": [
         {
           "type": "AC",
-          "label": "AC 22 kW",
-          "pricePerKwh": 8.59
+          "label": "AC",
+          "pricePerKwh": 10.99
         },
         {
           "type": "DC",
-          "label": "DC 150 kW",
-          "pricePerKwh": 11.19
+          "label": "DC",
+          "pricePerKwh": 14.49
         }
       ]
     }
