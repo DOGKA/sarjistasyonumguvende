@@ -1,13 +1,13 @@
 {
   "currency": "TRY",
-  "lastUpdated": "2026-08-10T09:09:53+03:00",
+  "lastUpdated": "2026-08-11T08:51:48+03:00",
   "operators": [
     {
       "id": "trugo",
       "name": "Trugo",
       "url": "https://trugo.com.tr/price",
       "source": "scraped",
-      "fetchedAt": "2026-08-10T09:07:18+03:00",
+      "fetchedAt": "2026-08-11T08:49:09+03:00",
       "tariffs": [
         {
           "type": "AC",
@@ -26,7 +26,7 @@
       "name": "ZES",
       "url": "https://zes.net/tr/fiyatlandirma",
       "source": "scraped",
-      "fetchedAt": "2026-08-10T09:07:25+03:00",
+      "fetchedAt": "2026-08-11T08:49:16+03:00",
       "tariffs": [
         {
           "type": "AC",
@@ -50,7 +50,7 @@
       "name": "Voltrun",
       "url": "https://www.voltrun.com/tr/tarifeler",
       "source": "manual",
-      "fetchedAt": "2026-08-10T09:07:32+03:00",
+      "fetchedAt": "2026-08-11T08:49:27+03:00",
       "note": "Canlı sayfadan okunamadı; yedek referans değerler.",
       "tariffs": [
         {
@@ -70,7 +70,7 @@
       "name": "Tesla Supercharger",
       "url": "https://www.tesla.com/tr_tr/support/charging/supercharger/fees",
       "source": "manual",
-      "fetchedAt": "2026-08-10T09:07:47+03:00",
+      "fetchedAt": "2026-08-11T08:49:42+03:00",
       "note": "Supercharger kWh fiyatı lokasyona/zamana göre değişir; yedek referans değerler.",
       "tariffs": [
         {
@@ -90,7 +90,7 @@
       "name": "Shell Recharge",
       "url": "https://www.shell.com.tr/suruculer/shell-recharge-turkiye/fiyat-tarifesi.html",
       "source": "manual",
-      "fetchedAt": "2026-08-10T09:08:03+03:00",
+      "fetchedAt": "2026-08-11T08:49:58+03:00",
       "note": "Canlı sayfadan okunamadı; yedek referans değerler.",
       "tariffs": [
         {
@@ -110,7 +110,7 @@
       "name": "Wat Mobilite",
       "url": "https://www.watmobilite.com/cozumler/kamusal-alanlar#guncel-fiyat-ve-tarifeler",
       "source": "scraped",
-      "fetchedAt": "2026-08-10T09:09:46+03:00",
+      "fetchedAt": "2026-08-11T08:51:42+03:00",
       "tariffs": [
         {
           "type": "AC",
