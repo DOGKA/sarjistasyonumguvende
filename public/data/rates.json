@@ -1,6 +1,6 @@
 {
   "date": "21.08.2026",
-  "lastUpdated": "2026-08-21T16:50:21+03:00",
+  "lastUpdated": "2026-08-22T16:36:31+03:00",
   "source": "TCMB · gold-api.com",
   "items": [
     {
@@ -23,6 +23,13 @@
       "symbol": "£",
       "buy": 65.2584,
       "sell": 65.5987
+    },
+    {
+      "code": "GRAM_ALTIN",
+      "name": "Gram Altın",
+      "symbol": "gr",
+      "buy": null,
+      "sell": 7100.67
     }
   ]
 }
