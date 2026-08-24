@@ -1,35 +1,35 @@
 {
-  "date": "21.08.2026",
-  "lastUpdated": "2026-08-23T16:37:09+03:00",
+  "date": "24.08.2026",
+  "lastUpdated": "2026-08-24T16:55:42+03:00",
   "source": "TCMB · gold-api.com",
   "items": [
     {
       "code": "USD",
       "name": "Dolar",
       "symbol": "$",
-      "buy": 47.8799,
-      "sell": 47.9662
+      "buy": 47.9924,
+      "sell": 48.0788
     },
     {
       "code": "EUR",
       "name": "Euro",
       "symbol": "€",
-      "buy": 56.0159,
-      "sell": 56.1169
+      "buy": 55.9939,
+      "sell": 56.0948
     },
     {
       "code": "GBP",
       "name": "Sterlin",
       "symbol": "£",
-      "buy": 65.2584,
-      "sell": 65.5987
+      "buy": 65.3151,
+      "sell": 65.6556
     },
     {
       "code": "GRAM_ALTIN",
       "name": "Gram Altın",
       "symbol": "gr",
       "buy": null,
-      "sell": 7100.67
+      "sell": 7215.65
     }
   ]
 }
